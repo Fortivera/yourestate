@@ -1,0 +1,29 @@
+
+async function fet() {
+    const response = await fetch("https://localhost:7227/api/Properties")
+    if (!response.ok) {
+        // This will activate the closest `error.js` Error Boundary
+        throw new Error('Failed to fetch data');
+    }
+    return response.json()
+}
+
+export default async function ProductsPage() {
+    {/* @ts-expect-error Server Component */ }
+    const a: any = await fet()
+
+    return <div>
+        {
+            a.map((prosp: any) =>
+
+                <div key={prosp.City}>
+                    {prosp.Province}
+                </div>
+            )
+
+        }
+    </div>
+
+
+}
+
