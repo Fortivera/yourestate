@@ -2,9 +2,10 @@ import { create } from "zustand"
 import Property from "./components/Property"
 
 interface PropertyState {
-    property: Property[]
+    allProperties: Property[]
 }
 
 
 //play around the type with this zustand
-export const useProperties = create<PropertyState>((set) => ())
+export const useProperties = create<PropertyState>((set) =>({allProperties:[]})
+)

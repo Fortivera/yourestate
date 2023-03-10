@@ -2,33 +2,35 @@ import { Suspense } from "react"
 import Property from "../components/Property"
 import Link from "next/link"
 import { useProperties } from "../usePropertiesStore"
+const allProperties:Property[] = require("../../../tempdata.json")
 
 
+// async function getData(): Promise<any> {
 
-async function getData(): Promise<any> {
+//     try {
+//         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROPERTY_ENDPOINT}`)
+//         if (!response.ok) {
 
-    try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROPERTY_ENDPOINT}`)
+//             throw new Error('Failed to fetch data');
+//         }
 
-        if (!response.ok) {
+//         const propertyCollection = await response.json()
 
-            throw new Error('Failed to fetch data');
-        }
+//         return propertyCollection
+//     } catch (err) {
 
-        const propertyCollection = await response.json()
-
-        return propertyCollection
-    } catch (err) {
-
-        console.log(err);
-    }
-}
+//         console.log(err);
+//     }
+// }
 
 export default async function PropertiesList() {
 
-    const allPropertiesPromise: Promise<Property[]> = await getData()
-    const allProperties = await allPropertiesPromise
-    useProperties.setState({ allProperties })
+    // const allPropertiesPromise: Promise<Property[]> = await getData()
+    // const allProperties = await allPropertiesPromise
+    console.log(allProperties)
+    useProperties.setState({allProperties:allProperties} )
+    useProperties.getState()
+    
     return (
         <>
             <div className="w-[350px] pt-1 border-b-2 border-r-2 bg-gray-50 border-gray-200   shadow-neutral-400 shadow-sm overflow-auto">
