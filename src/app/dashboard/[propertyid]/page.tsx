@@ -1,4 +1,4 @@
-"use client"
+"use clint"
 
 import Link from "next/link"
 import React, { FormEvent } from "react"
@@ -15,7 +15,7 @@ type Params = {
   
 
 
-export default async function ShowProperty({ params: { propertyid } }: Params) {
+export default function ShowProperty({ params: { propertyid } }: Params) {
     const {allProperties} = useProperties.getState()
     // console.log(pproperty)
 
@@ -36,24 +36,24 @@ export default async function ShowProperty({ params: { propertyid } }: Params) {
     const property = handleSpecificIdFilter(allProperties, propertyid) as Property
 
     // const property: Property = await getProperty(propertyid)
-    const router = useRouter()
+    // const router = useRouter()
 
-    async function handlePut(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault()
-        const dataCollected = event.target as HTMLFormElement
-        const formData = new FormData(dataCollected) as Iterable<[Property, FormDataEntryValue]>
-        const requestData: Property = Object.fromEntries(formData);
-        console.log(requestData);
-        updateProperty(requestData, propertyid)
-        router.refresh()
-        router.push("/dashboard")
-    }
+    // async function handlePut(event: FormEvent<HTMLFormElement>) {
+    //     event.preventDefault()
+    //     const dataCollected = event.target as HTMLFormElement
+    //     const formData = new FormData(dataCollected) as Iterable<[Property, FormDataEntryValue]>
+    //     const requestData: Property = Object.fromEntries(formData);
+    //     console.log(requestData);
+    //     updateProperty(requestData, propertyid)
+    //     router.refresh()
+    //     router.push("/dashboard")
+    // }
 
-    function handleDelete() {
-        deleteProperty(propertyid)
-        router.refresh()
-        router.push("/dashboard")
-    }
+    // function handleDelete() {
+    //     deleteProperty(propertyid)
+    //     router.refresh()
+    //     router.push("/dashboard")
+    // }
 
 
     return (
@@ -145,44 +145,44 @@ export default async function ShowProperty({ params: { propertyid } }: Params) {
 
 
 
-async function deleteProperty(userInput: number) {
+// async function deleteProperty(userInput: number) {
 
-    const url = `${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROPERTY_ENDPOINT}${userInput}`
-    console.log(url)
-    try {
-        const response = await fetch(url, {
-            method: "DELETE",
-            body: JSON.stringify(userInput),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        if (!response.ok) {
-            throw new Error(`Invalid response: ${response.status}`);
-        }
-    } catch (err) {
-        console.error(err);
-        alert("We can't submit the form, try again later?");
-    }
-}
+//     const url = `${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROPERTY_ENDPOINT}${userInput}`
+//     console.log(url)
+//     try {
+//         const response = await fetch(url, {
+//             method: "DELETE",
+//             body: JSON.stringify(userInput),
+//             headers: {
+//                 "Content-Type": "application/json"
+//             }
+//         });
+//         if (!response.ok) {
+//             throw new Error(`Invalid response: ${response.status}`);
+//         }
+//     } catch (err) {
+//         console.error(err);
+//         alert("We can't submit the form, try again later?");
+//     }
+// }
 
-async function updateProperty(userInput: Property, id: number) {
+// async function updateProperty(userInput: Property, id: number) {
 
-    const url = `${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROPERTY_ENDPOINT}${id}`
-    console.log(url)
-    try {
-        const response = await fetch(url, {
-            method: "PUT",
-            body: JSON.stringify(userInput),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        if (!response.ok) {
-            throw new Error(`Invalid response: ${response.status}`);
-        }
-    } catch (err) {
-        console.error(err);
-        alert("We can't submit the form, try again later?");
-    }
-}
+//     const url = `${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROPERTY_ENDPOINT}${id}`
+//     console.log(url)
+//     try {
+//         const response = await fetch(url, {
+//             method: "PUT",
+//             body: JSON.stringify(userInput),
+//             headers: {
+//                 "Content-Type": "application/json"
+//             }
+//         });
+//         if (!response.ok) {
+//             throw new Error(`Invalid response: ${response.status}`);
+//         }
+//     } catch (err) {
+//         console.error(err);
+//         alert("We can't submit the form, try again later?");
+//     }
+// }
