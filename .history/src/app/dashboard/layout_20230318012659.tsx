@@ -1,0 +1,47 @@
+
+import { Analytics } from "../components/Analytics"
+import Navbar from "../components/Navbar"
+import PropertiesList from "../components/PropertiesList"
+
+
+async function getData(): Promise<any> {
+
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROPERTY_ENDPOINT}`)
+    if (!response.ok) {
+
+      throw new Error('Failed to fetch data');
+    }
+
+    const propertyCollection = await response.json()
+
+    return propertyCollection
+  } catch (err) {
+
+    console.log(err);
+  }
+}
+
+export default function Layout({ children, }: { children: React.ReactNode }) {
+  return (
+    <>
+      <header>
+        <Navbar />
+      </header>
+      <div>
+        {children}
+      </div>
+      <main>
+        <div className="flex h-screen">
+
+          {/* @ts-expect-error Async Server Component */}
+          <PropertiesList />
+          <Analytics />
+
+        </div>
+      </main>
+
+    </>
+  )
+
+}

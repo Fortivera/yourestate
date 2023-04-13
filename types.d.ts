@@ -1,5 +1,3 @@
-
-
 interface Property {
     id: number,
     type: string,
