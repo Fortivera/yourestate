@@ -1,40 +1,37 @@
-
-import { getData } from "lib/useRequestFunctions"
+/* eslint-disable no-unused-vars */
+import { getProperty } from "lib/useRequestFunctions"
 import { create } from "zustand"
 
-
-
 interface PropertyState {
-    allProperties: Property[],
-    fetchAllProperties: () => void,
-    addProperty: (property: Property) => void,
-    deleteProperty: (id: number) => void
-    // updateProperty: (property: Property) => void,
-    // deleteProperty: (property: Property) => void,
+  allProperties: Property[]
+  fetchAllProperties: () => void
+  addProperty: (property: Property) => void
+  deleteProperty: (id: number) => void
 }
 
-//play around the type with this zustand
 export const usePropertyStore = create<PropertyState>((set) => ({
-    allProperties: [],
+  allProperties: [],
 
-    fetchAllProperties: async () => {
-        const allPropertiesPromise: Promise<Property[]> = await getData()
-        const allProperties = await allPropertiesPromise
-        usePropertyStore.setState({ allProperties })
-    },
+  fetchAllProperties: async () => {
+    try {
+      const allProperties = await getProperty()
+      set({ allProperties })
+    } catch (error) {
+      console.error("Error fetching properties:", error)
+    }
+    // const allPropertiesPromise: Promise<Property[]> = await getProperty()
+    // const allProperties = await allPropertiesPromise
+    // usePropertyStore.setState({ allProperties })
+  },
 
-    addProperty: (property) => {
-        set((state) => ({
-            allProperties: [...state.allProperties, property]
-        }))
-    },
-    deleteProperty: (id) => {
-        set((state) => ({
-            allProperties: state.allProperties.filter(property => property.id != id)
-        }))
-    },
-
-    // updateProperty(property) => { set(() => ({})) },
-    // deleteProperty(property) => { set(() => ({})) },
-
+  addProperty: (property) => {
+    set((state) => ({
+      allProperties: [...state.allProperties, property],
+    }))
+  },
+  deleteProperty: (id) => {
+    set((state) => ({
+      allProperties: state.allProperties.filter((property) => property.id != id),
+    }))
+  },
 }))

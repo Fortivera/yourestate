@@ -12,9 +12,9 @@ module.exports = () => {
         source: "/cats",
         destination: "https://localhost:7227/api/Properties",
       },
-    ];
-  };
+    ]
+  }
   return {
     rewrites,
-  };
-};
+  }
+}

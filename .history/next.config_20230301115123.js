@@ -12,9 +12,9 @@ module.exports = () => {
         source: "/cats",
         destination: "https://meowfacts.herokuapp.com",
       },
-    ];
-  };
+    ]
+  }
   return {
     rewrites,
-  };
-};
+  }
+}

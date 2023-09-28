@@ -1,15 +1,15 @@
 "use client"
 
 type textInput = {
-    input: string
+  input: string
 }
 
 export default function Button({ input }: textInput) {
-    return (
-        <>
-            <button className="w-28 rounded-md py-1  shadow-md " type="button" >
-                <span>{input}</span>
-            </button>
-        </>
-    )
+  return (
+    <>
+      <button className="w-28 rounded-md py-1  shadow-md " type="button">
+        <span>{input}</span>
+      </button>
+    </>
+  )
 }

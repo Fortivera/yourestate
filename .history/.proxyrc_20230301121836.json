@@ -1,7 +1,7 @@
 {
-    "/api": {
-        "target": "",
-        "pathRewrite": {},
-        "secure": false
-    }
+  "/api": {
+    "target": "",
+    "pathRewrite": {},
+    "secure": false
+  }
 }

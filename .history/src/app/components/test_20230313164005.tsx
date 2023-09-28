@@ -1,1 +1,1 @@
-export default function kek() { }
+export default function kek() {}

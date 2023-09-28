@@ -1,3 +1,3 @@
 const ClientOnly = () => {
-    const [hasMounted]
+  const [hasMounted]
 }

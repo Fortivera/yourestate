@@ -4,24 +4,20 @@ import { useRef } from "react"
 import { useProperties } from "../usePropertiesStore"
 
 interface Props {
-    allProperties: Property[],
+  allProperties: Property[]
 }
 
-
-
 export default function StoreInitializer(data: Props) {
+  const initialized = useRef(false)
+  if (!initialized.current) {
+    //Zustand causes strange object enclosure, so it is required to destructure after this step
+    const allProperties = data.allProperties
+    useProperties.setState({ allProperties })
 
-    const initialized = useRef(false)
-    if (!initialized.current) {
+    console.log(useProperties((state) => state.allProperties))
+    console.log("perchik")
 
-        //Zustand causes strange object enclosure, so it is required to destructure after this step
-        const allProperties = data.allProperties
-        useProperties.setState({ allProperties })
-
-        console.log(useProperties(state => state.allProperties))
-        console.log("perchik")
-
-        initialized.current = true
-    }
-    return null
+    initialized.current = true
+  }
+  return null
 }

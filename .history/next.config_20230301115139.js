@@ -12,9 +12,9 @@ module.exports = () => {
         source: "/cats",
         destination: "https://jsonplaceholder.typicode.com/users",
       },
-    ];
-  };
+    ]
+  }
   return {
     rewrites,
-  };
-};
+  }
+}

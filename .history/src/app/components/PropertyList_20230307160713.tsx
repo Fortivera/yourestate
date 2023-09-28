@@ -3,8 +3,6 @@ import Property from "../components/Property"
 import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
 
-
-
 // async function getData(): Promise<any> {
 
 //     try {
@@ -25,29 +23,28 @@ import { useQuery } from "@tanstack/react-query"
 // }
 
 export default async function PropertiesList() {
-    const { data } = Properties
-    // const allPropertiesData: Promise<Property[]> = await getData()
-    // const allProperties = await allPropertiesData
-    return (
-        <>
-            <div className="w-[350px] pt-1 border-b-2 border-r-2 bg-gray-50 border-gray-200   shadow-neutral-400 shadow-sm overflow-auto">
-                <ul>
-                    <Suspense fallback={<h1>Loading...</h1>}>
-                        {data.map((property: Property) => {
-                            return (
-                                <>
-                                    <li>
-                                        <Link href={`/dashboard/${property.id}`}>
-                                            <Property property={property} />
-                                        </Link>
-                                    </li>
-                                </>
-                            )
-                        }
-                        )}
-                    </Suspense>
-                </ul>
-            </div>
-        </>
-    )
+  const { data } = Properties
+  // const allPropertiesData: Promise<Property[]> = await getData()
+  // const allProperties = await allPropertiesData
+  return (
+    <>
+      <div className="w-[350px] pt-1 border-b-2 border-r-2 bg-gray-50 border-gray-200   shadow-neutral-400 shadow-sm overflow-auto">
+        <ul>
+          <Suspense fallback={<h1>Loading...</h1>}>
+            {data.map((property: Property) => {
+              return (
+                <>
+                  <li>
+                    <Link href={`/dashboard/${property.id}`}>
+                      <Property property={property} />
+                    </Link>
+                  </li>
+                </>
+              )
+            })}
+          </Suspense>
+        </ul>
+      </div>
+    </>
+  )
 }

@@ -1,9 +1,9 @@
 {
-    "/api": {
-        "target": "https://localhost:7227",
-        "pathRewrite": {
-            "^/api": ""
-        },
-        "secure": false
-    }
+  "/api": {
+    "target": "https://localhost:7227",
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "secure": false
+  }
 }

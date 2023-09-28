@@ -1,0 +1,40 @@
+"use client"
+import { createContext, useState } from "react";
+import { ReactNode, useEffect } from 'react';
+
+interface ComponentProps {
+    children: ReactNode
+}
+
+
+
+export const ThemeContext = createContext<{ theme: string; toggle: () => void }>({
+    theme: "light",
+    toggle: () => { },
+});
+
+function getFormLocalStorage() {
+    if (typeof window !== "undefined") {
+        const value = localStorage.getItem("theme");
+        return value || "light";
+    }
+}
+
+export const ThemeContextProvider = ({ children }: ComponentProps) => {
+    const [theme, setTheme] = useState(() => {
+        return getFormLocalStorage()
+    })
+    // since next.js uses server side rendering, we must specify if the transition to client only is completed
+    const toggle = () => {
+        setTheme(theme === "light" ? "dark" : "light");
+    };
+
+    useEffect(() => {
+        localStorage.setItem("theme", theme);
+    }, [theme]);
+    return (
+        <ThemeContext.Provider value={{ theme, toggle }}
+            {children}
+        </ThemeContext.Provider >
+    );
+} 

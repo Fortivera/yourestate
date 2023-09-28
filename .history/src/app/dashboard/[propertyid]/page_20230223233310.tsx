@@ -1,3 +1,3 @@
 export default function ProductsPage() {
-    return <h1>Clicked Property</h1>
+  return <h1>Clicked Property</h1>
 }

@@ -1,11 +1,11 @@
 "use client"
 
 export default function Button({ textInput }: any) {
-    return (
-        <>
-            <button className="w-28 rounded-md py-1  shadow-md " type="button" >
-                <span>{textInput}</span>
-            </button>
-        </>
-    )
+  return (
+    <>
+      <button className="w-28 rounded-md py-1  shadow-md " type="button">
+        <span>{textInput}</span>
+      </button>
+    </>
+  )
 }

@@ -1,6 +1,6 @@
 {
-    "/api": {
-        "target": "",
-        "pathRewrite": {}
-    }
+  "/api": {
+    "target": "",
+    "pathRewrite": {}
+  }
 }
