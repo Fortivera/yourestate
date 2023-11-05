@@ -10,7 +10,7 @@ interface ThemeContextType {
   toggle: () => void
 }
 
-// this component is responsible to registering and remembering what theme was chosen by the user
+// This component is responsible to registering and remembering what theme was chosen by the user
 // we use local storage for that
 export const ThemeContext = createContext<ThemeContextType>({
   theme: "light",
@@ -18,13 +18,16 @@ export const ThemeContext = createContext<ThemeContextType>({
 })
 
 function getFormLocalStorage() {
+  if (typeof window === "undefined") {
+    return "light" // Use a default theme on the server-side
+  }
   return localStorage.getItem("theme") || "light"
 }
 
 export const ThemeContextProvider = ({ children }: ChildrenProps) => {
   const [theme, setTheme] = useState<string>(getFormLocalStorage)
 
-  // since next.js uses server side rendering, we must specify if the transition to client only is completed
+  // since next.js uses server side rendering, we must specify if the transition to client is completed
   const toggle = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"))
   }
