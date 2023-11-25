@@ -2,7 +2,7 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Dashboard | Yourestate Dashboard",
-  description: "Property list of user's real estate",
+  description: ""
 }
 
 export default function ProductsPage() {

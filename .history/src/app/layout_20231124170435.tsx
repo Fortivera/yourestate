@@ -2,10 +2,8 @@ import "./globals.css"
 import { Analytics } from "@vercel/analytics/react"
 import { Metadata } from "next"
 export const metadata: Metadata = {
-  title: {
-    template: "%s | Your Estate Login",
-    default: "Your Estate Login",
-  },
+  title: "Your Estate Login",
+  template: '%s | Acme Dashboard',
   description: "Home page for the real estate web application",
 }
 
