@@ -54,26 +54,24 @@ export default function Navbar() {
         </button>
       </nav>
       {/* Mobilie Navbar */}
-      <div className={`md:hidden ${menuOpen ? "flex" : "hidden"} relative w-full z-50 transition-all duration-500 ease-in-out`}>
-        <div className={`flex flex-col absolute right-0 border border-t-[#dddddda4] shadow-lg rounded-b-lg overflow-hidden backdrop-filter backdrop-blur-md ${theme === "light" ? "bg-gray-50 bg-opacity-50 text-gray-700" : "bg-gray-600 bg-opacity-50 text-gray-300"} p-1`}>
-          <div className="px-3">
-            <ThemeToggle />
-          </div>
+      <div className={`md:hidden ${menuOpen ? "flex" : "hidden"} relative w-full z-20 transition-all duration-500 ease-in-out`}>
+        <div className="flex flex-col bg-white bg-opacity-60 absolute right-0 border shadow-lg rounded-lg overflow-hidden backdrop-filter backdrop-blur-md">
+          <ThemeToggle />
           <Link href={"dashboard/createproperty"}>
-            <div className={`h-10 flex items-center px-3 ${theme === "light" ? "text-blue-500 hover:bg-slate-200 " : "text-blue-300 hover:bg-slate-500"}`}>
-              <SvgAddProperty className="m-1" strokeWidth={1.5} />
-              <div>Add Property</div>
+            <div className="h-10 flex items-center px-3 hover:bg-gray-100 transition-colors duration-200">
+              <SvgAddProperty className="m-1 text-blue-500" strokeWidth={1.5} />
+              <div className="text-gray-700">Add Property</div>
             </div>
           </Link>
           <Link href={"/"}>
-            <div className={`h-10 flex items-center px-3 ${theme === "light" ? "text-red-500 hover:bg-slate-200" : "text-red-300 hover:bg-slate-500"}`}>
-              <SvgLogout strokeWidth={2} className="m-1" />
-              <div>Logout</div>
+            <div className="h-10 flex items-center px-3 hover:bg-gray-100 transition-colors duration-200">
+              <SvgLogout strokeWidth={2} className="m-1 text-red-500" />
+              <div className="text-gray-700">Logout</div>
             </div>
           </Link>
-          <div className={`h-10 flex items-center px-3 ${theme === "light" ? "text-gray-500 hover:bg-slate-200" : "text-gray-300 hover:bg-slate-500"}`}>
-            <SvgUser />
-            <div className="ml-1">Admin</div>
+          <div className="h-10 flex items-center px-3 bg-gray-100">
+            <SvgUser className="text-gray-500" />
+            <div className="ml-1 text-gray-700">Admin</div>
           </div>
         </div>
       </div>

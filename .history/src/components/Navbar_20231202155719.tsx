@@ -60,18 +60,18 @@ export default function Navbar() {
             <ThemeToggle />
           </div>
           <Link href={"dashboard/createproperty"}>
-            <div className={`h-10 flex items-center px-3 ${theme === "light" ? "text-blue-500 hover:bg-slate-200 " : "text-blue-300 hover:bg-slate-500"}`}>
+            <div className={`h-10 flex items-center px-3 ${theme === "light" ? "text-blue-500 hover:bg-gray-200 " : "text-blue-300 hover:bg-slate-600"}`}>
               <SvgAddProperty className="m-1" strokeWidth={1.5} />
               <div>Add Property</div>
             </div>
           </Link>
           <Link href={"/"}>
-            <div className={`h-10 flex items-center px-3 ${theme === "light" ? "text-red-500 hover:bg-slate-200" : "text-red-300 hover:bg-slate-500"}`}>
+            <div className={`h-10 flex items-center px-3 ${theme === "light" ? "text-red-500" : "text-red-300"}`}>
               <SvgLogout strokeWidth={2} className="m-1" />
               <div>Logout</div>
             </div>
           </Link>
-          <div className={`h-10 flex items-center px-3 ${theme === "light" ? "text-gray-500 hover:bg-slate-200" : "text-gray-300 hover:bg-slate-500"}`}>
+          <div className={`h-10 flex items-center px-3 ${theme === "light" ? "text-gray-500" : "text-gray-300"}`}>
             <SvgUser />
             <div className="ml-1">Admin</div>
           </div>
