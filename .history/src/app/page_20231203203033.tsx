@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation"
 
 export default function Login() {
   const router = useRouter()
-  const handleLogin = () => {
+  const handleLogin = (event: Event) => {
     // event.preventDefault()
 
     // fetch()

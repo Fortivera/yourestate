@@ -9,13 +9,7 @@ import { useRouter } from "next/navigation"
 
 export default function Login() {
   const router = useRouter()
-  const handleLogin = () => {
-    // event.preventDefault()
-
-    // fetch()
-    // if (good) {
-    // }
-    // else{}
+  const handleLogin = (event:) => {
     router.push("/dashboard")
   }
   return (

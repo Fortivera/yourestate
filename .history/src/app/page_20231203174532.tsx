@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 import Image from "next/image"
 import SvgNewUser from "public/static/SvgNewUser"
@@ -10,12 +8,6 @@ import { useRouter } from "next/navigation"
 export default function Login() {
   const router = useRouter()
   const handleLogin = () => {
-    // event.preventDefault()
-
-    // fetch()
-    // if (good) {
-    // }
-    // else{}
     router.push("/dashboard")
   }
   return (
@@ -44,9 +36,9 @@ export default function Login() {
             <input defaultValue="admin" id="Password" type="password" name="Password" placeholder="Password" required className="block w-full border rounded-lg py-2 pl-9 mt-1 focus:ring focus:ring-blue-300" />
           </div>
 
-          <button type="button" onClick={handleLogin} aria-label="Sign-in button" className="flex justify-center bg-[#5392f7] text-white rounded-lg w-1/3 py-2 mb-4 hover:bg-[#3b83f6]">
+          <div onClick={handleLogin} aria-label="Sign-in button" className="flex justify-center bg-[#5392f7] text-white rounded-lg w-1/3 py-2 mb-4 hover:bg-[#3b83f6]">
             <p>Login</p>
-          </button>
+          </div>
           <div className="w-full mb-2 ">
             <hr className="border-1 " />
           </div>
