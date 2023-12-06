@@ -25,17 +25,16 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
     }, [allProperties]);
 
     const createPieChart = (data: Property[]) => {
-        const typeCount = new Map<string, number>([
-            ["Farm", 0],
-            ["Parking", 0],
-            ["Land", 0],
-            ["House", 0],
-        ]);
+        const typeCount = new Map<string, number>()
 
         data.forEach((property) => {
-            if (typeCount.has(property.type)) {
+            if (!typeCount.has(property.type)) {
+                typeCount.set(property.type, 1);
+            }
+            else {
                 typeCount.set(property.type, typeCount.get(property.type)! + 1);
             }
+
         });
 
         const typeTuples: [string, number][] = Array.from(typeCount.entries());
@@ -64,6 +63,7 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             .append('g')
             .classed('cursor-pointer', true);
 
+        // eslint-disable-next-line no-unused-vars
         let activeSlice: SVGPathElement | null;
 
         slice.append('path')
@@ -71,14 +71,10 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             .attr('fill', (d, i) => String(color(i.toString())))
             .style('opacity', 1) // Set initial opacity to 1
             .on('click', function () {
-                if (activeSlice === this) {
-                    d3.selectAll('path').style('opacity', 1);
-                    activeSlice = null;
-                } else {
-                    d3.selectAll('path').style('opacity', 0.5);
-                    d3.select(this).style('opacity', 1);
-                    activeSlice = this;
-                }
+                const isActive = d3.select(this).style('opacity') === '1';
+                g.selectAll('path').style('opacity', 0.5);
+                d3.select(this).style('opacity', isActive ? 0.5 : 1);
+                activeSlice = isActive ? null : this;
             });
 
         slice.append('text')

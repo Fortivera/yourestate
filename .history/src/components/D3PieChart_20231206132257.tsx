@@ -25,16 +25,15 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
     }, [allProperties]);
 
     const createPieChart = (data: Property[]) => {
-        const typeCount = new Map<string, number>([
-            ["Farm", 0],
-            ["Parking", 0],
-            ["Land", 0],
-            ["House", 0],
-        ]);
+        const typeCount = new Map<string, number>()
 
         data.forEach((property) => {
-            if (typeCount.has(property.type)) {
-                typeCount.set(property.type, typeCount.get(property.type)! + 1);
+            const { type } = property;
+
+            if (typeCount.has(type)) {
+                typeCount.set(type, typeCount.get(type)! + 1);
+            } else {
+                typeCount.set(type, 1);
             }
         });
 

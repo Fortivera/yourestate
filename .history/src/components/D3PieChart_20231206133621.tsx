@@ -25,17 +25,16 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
     }, [allProperties]);
 
     const createPieChart = (data: Property[]) => {
-        const typeCount = new Map<string, number>([
-            ["Farm", 0],
-            ["Parking", 0],
-            ["Land", 0],
-            ["House", 0],
-        ]);
+        const typeCount = new Map<string, number>()
 
         data.forEach((property) => {
-            if (typeCount.has(property.type)) {
+            if (!typeCount.has(property.type)) {
+                typeCount.set(property.type, 1);
+            }
+            else {
                 typeCount.set(property.type, typeCount.get(property.type)! + 1);
             }
+
         });
 
         const typeTuples: [string, number][] = Array.from(typeCount.entries());
@@ -62,24 +61,18 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             .data(pieData)
             .enter()
             .append('g')
-            .classed('cursor-pointer', true);
-
-        let activeSlice: SVGPathElement | null;
+            .classed('cursor-pointer', true)
+            .on('click', function () {
+                const isActive = d3.select(this).classed('active-slice');
+                g.selectAll('path').style('opacity', 0.5);
+                d3.select(this).select('path').style('opacity', isActive ? 0.5 : 1);
+                d3.select(this).classed('active-slice', !isActive);
+            });
 
         slice.append('path')
             .attr('d', arcGenerator as any)
             .attr('fill', (d, i) => String(color(i.toString())))
-            .style('opacity', 1) // Set initial opacity to 1
-            .on('click', function () {
-                if (activeSlice === this) {
-                    d3.selectAll('path').style('opacity', 1);
-                    activeSlice = null;
-                } else {
-                    d3.selectAll('path').style('opacity', 0.5);
-                    d3.select(this).style('opacity', 1);
-                    activeSlice = this;
-                }
-            });
+            .style('opacity', 1) // Set initial opacity to 1;
 
         slice.append('text')
             .text((d) => `${d.data[0]}: ${((d.data[1] / data.length) * 100).toFixed(2)}%`)
