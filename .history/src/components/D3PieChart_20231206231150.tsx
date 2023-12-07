@@ -24,10 +24,10 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
         svg.selectAll('*').remove();
 
         // Create a new pie chart
-        createPieChart(allProperties, theme);
-    }, [allProperties, theme]);
+        createPieChart(allProperties);
+    }, [allProperties]);
 
-    const createPieChart = (data: Property[], theme: string) => {
+    const createPieChart = (data: Property[]) => {
         const typeCount = new Map<string, number>()
 
         data.forEach((property) => {
@@ -68,15 +68,34 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             .append('g')
             .classed('cursor-pointer', true);
 
-        let activeIndex: number | null = null;
+        let activeSlice: SVGPathElement | null = null;
 
         slice.append('path')
             .attr('d', arcGenerator as any)
             .attr('fill', (d, i) => String(color(i.toString())))
             .style('opacity', 1) // Set initial opacity to 1
-            .on('click', function (event, d) {
-                activeIndex = activeIndex === d.index ? null : d.index;
-                updateChart();
+            .on('click', function () {
+                const clickedSlice = this;
+
+                if (activeSlice === clickedSlice) {
+                    // If the clicked slice is the same as the active one, reset opacity for all slices
+                    g.selectAll('path')
+                        .transition()
+                        .duration(50) // Set the duration of the transition in milliseconds
+                        .style('opacity', 1);
+                    activeSlice = null;
+                } else {
+                    // Otherwise, update the active slice and set opacity accordingly with a smooth transition
+                    g.selectAll('path')
+                        .transition()
+                        .duration(50)
+                        .style('opacity', 0.5);
+                    d3.select(clickedSlice)
+                        .transition()
+                        .duration(50)
+                        .style('opacity', 1);
+                    activeSlice = clickedSlice;
+                }
             });
 
         slice.append('text')
@@ -94,10 +113,47 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             .append('g')
             .attr('transform', (d, i) => `translate(0, ${i * 25})`)
             .classed('cursor-pointer', true)
-            .on('click', function (event, d) {
-                activeIndex = activeIndex === d.index ? null : d.index;
-                updateChart();
+            .on('click', function (event, d: any) {
+                const clickedIndex = d.index;
+
+                // Toggle the active class on the legend item
+                const clickedLegend = d3.select(this);
+                clickedLegend.classed('active', !clickedLegend.classed('active'));
+
+                // Update opacity based on the active class for both legend and pie chart
+                updateOpacity();
             });
+
+        legend.append('rect')
+            .attr('width', 20)
+            .attr('height', 20)
+            .attr('fill', (d, i) => String(color(i.toString())));
+
+        legend.append('text')
+            .text((d: any) => d.data[0])
+            .attr('x', 25)
+            .attr('y', 15)
+            .style('font-size', '14px')
+            .style('opacity', 1); // Set initial opacity to 1 for all legend items
+
+        // Function to update opacity for both legend and pie chart
+        const updateOpacity = () => {
+            legend.selectAll('text')
+                .style('opacity', (legendData, i, nodes) => {
+                    const isActive = d3.select(nodes[i]).classed('active');
+                    return isActive ? 1 : 0.5;
+                });
+
+            slice.selectAll('path')
+                .transition()
+                .duration(500)
+                .style('opacity', (sliceData: any) =>
+                    (sliceData.index === clickedIndex || d3.select(`#legend-${sliceData.index}`).classed('active') ? 1 : 0.5)
+                );
+        };
+
+        // Call updateOpacity initially to set the initial state
+        updateOpacity();
 
         legend.append('rect')
             .attr('width', 20)
@@ -111,33 +167,10 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             .style('font-size', '14px')
             .style('opacity', 1); // Set initial opacity to 1 for all legend items
 
-        function updateChart() {
-            slice.selectAll('path')
-                .transition()
-                .duration(500)
-                .style('opacity', (d: any) => (activeIndex === null || d.index === activeIndex ? 1 : 0.5));
-
-            // legend.selectAll('text')
-            //     .transition()
-            //     .duration(500)
-            //     .style('opacity', (d: any) => (activeIndex === null || d.index === activeIndex ? 1 : 0.4));
-            legend.selectAll('rect')
-                .transition()
-                .duration(500)
-                .style('opacity', (d: any) => (activeIndex === null || d.index === activeIndex ? 1 : 0.4));
-            legend.selectAll('text')
-                .transition()
-                .duration(500)
-                .style('fill', `${theme === 'light' ? "black" : "white"}`);
-        }
-
-        // Call updateChart initially to set the correct opacities
-        updateChart();
-
     };
 
     return (
-        <div className={`${theme === 'light' ? 'bg-slate-50' : 'bg-[#515F73]'} w-full h-screen`}>
+        <div className={`${theme === 'light' ? 'bg-slate-200' : 'bg-slate-500'} w-full h-screen`}>
             <div className="max-w-[42.5rem] mx-auto p-2">
                 <svg ref={ref} style={{ width: '100%', height: 'auto' }} />
             </div>

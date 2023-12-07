@@ -24,10 +24,10 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
         svg.selectAll('*').remove();
 
         // Create a new pie chart
-        createPieChart(allProperties, theme);
-    }, [allProperties, theme]);
+        createPieChart(allProperties);
+    }, [allProperties]);
 
-    const createPieChart = (data: Property[], theme: string) => {
+    const createPieChart = (data: Property[]) => {
         const typeCount = new Map<string, number>()
 
         data.forEach((property) => {
@@ -45,10 +45,8 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
         const pieGenerator = d3.pie<[string, number]>().value((d) => d[1]);
         const pieData = pieGenerator(typeTuples);
 
-
-
-        const width = 700
-        const height = 500
+        const width = 700;
+        const height = 500;
         const svg = d3.select(ref.current)
             .attr('viewBox', `0 0 ${width} ${height}`)
             .attr('preserveAspectRatio', 'xMidYMid meet');
@@ -68,15 +66,16 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             .append('g')
             .classed('cursor-pointer', true);
 
-        let activeIndex: number | null = null;
+        let clickedIndex: number | null = null; // Track the clicked index
 
         slice.append('path')
             .attr('d', arcGenerator as any)
             .attr('fill', (d, i) => String(color(i.toString())))
             .style('opacity', 1) // Set initial opacity to 1
             .on('click', function (event, d) {
-                activeIndex = activeIndex === d.index ? null : d.index;
-                updateChart();
+                console.log('Pie Chart Slice Clicked:', d.index);
+                clickedIndex = d.index;
+                updateOpacity();
             });
 
         slice.append('text')
@@ -85,18 +84,20 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             .style('font-size', '14px')
             .style('text-anchor', 'middle');
 
+        const legendData = pieData; // Use the same data for legend and pie chart
+
         const legend = svg
             .append('g')
             .attr('transform', `translate(630, 50)`)
             .selectAll('g')
-            .data(pieData)
+            .data(legendData)
             .enter()
             .append('g')
             .attr('transform', (d, i) => `translate(0, ${i * 25})`)
             .classed('cursor-pointer', true)
             .on('click', function (event, d) {
-                activeIndex = activeIndex === d.index ? null : d.index;
-                updateChart();
+                clickedIndex = d.index;
+                updateOpacity();
             });
 
         legend.append('rect')
@@ -109,35 +110,33 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             .attr('x', 25)
             .attr('y', 15)
             .style('font-size', '14px')
-            .style('opacity', 1); // Set initial opacity to 1 for all legend items
-
-        function updateChart() {
+            .style('opacity', 1) // Set initial opacity to 1 for all legend items
+            .on('click', function (event, d) {
+                console.log('Legend Item Clicked:', d.index);
+                clickedIndex = d.index;
+                updateOpacity();
+            });
+        // Function to update opacity for both legend and pie chart
+        const updateOpacity = () => {
             slice.selectAll('path')
                 .transition()
                 .duration(500)
-                .style('opacity', (d: any) => (activeIndex === null || d.index === activeIndex ? 1 : 0.5));
+                .style('opacity', (d: any) => (d.index === clickedIndex ? 1 : 0.5));
 
-            // legend.selectAll('text')
-            //     .transition()
-            //     .duration(500)
-            //     .style('opacity', (d: any) => (activeIndex === null || d.index === activeIndex ? 1 : 0.4));
-            legend.selectAll('rect')
-                .transition()
-                .duration(500)
-                .style('opacity', (d: any) => (activeIndex === null || d.index === activeIndex ? 1 : 0.4));
             legend.selectAll('text')
-                .transition()
-                .duration(500)
-                .style('fill', `${theme === 'light' ? "black" : "white"}`);
-        }
-
-        // Call updateChart initially to set the correct opacities
-        updateChart();
+                .style('opacity', (legendData, i, nodes) => {
+                    const isActive = d3.select(nodes[i]).classed('active');
+                    return isActive ? 1 : 0.5;
+                });
+        };
+        console.log('Initial state:', slice.selectAll('path').style('opacity'), legend.selectAll('text').style('opacity'));
+        // Call updateOpacity initially to set the initial state
+        updateOpacity();
 
     };
 
     return (
-        <div className={`${theme === 'light' ? 'bg-slate-50' : 'bg-[#515F73]'} w-full h-screen`}>
+        <div className={`${theme === 'light' ? 'bg-slate-200' : 'bg-slate-500'} w-full h-screen`}>
             <div className="max-w-[42.5rem] mx-auto p-2">
                 <svg ref={ref} style={{ width: '100%', height: 'auto' }} />
             </div>

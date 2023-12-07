@@ -29,7 +29,9 @@ export default async function Layout({ children }: { children: React.ReactNode }
               <div className="w-screen md:h-screen md:w-[29rem] ">
                 <PropertiesList allProperties={allProperties} />
               </div>
-              <Analytics allProperties={allProperties} />
+              <div className="flex flex-col md:flex-row w-full h-screen md:justify-center ">
+                <Analytics allProperties={allProperties} />
+              </div>
             </div>
           </main>
         </ThemeProvider>

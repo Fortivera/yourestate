@@ -137,7 +137,7 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
     };
 
     return (
-        <div className={`${theme === 'light' ? 'bg-slate-50' : 'bg-[#515F73]'} w-full h-screen`}>
+        <div className={`${theme === 'light' ? 'bg-slate-50' : 'bg-slate-600'} w-full h-screen`}>
             <div className="max-w-[42.5rem] mx-auto p-2">
                 <svg ref={ref} style={{ width: '100%', height: 'auto' }} />
             </div>

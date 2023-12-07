@@ -1,7 +1,9 @@
 import { ThemeContextProvider } from "@/context/ThemeContex"
 import ThemeProvider from "@/providers/ThemeProvider"
+import { Analytics } from "@vercel/analytics/react"
 import { getProperty } from "lib/useRequestFunctions"
-import { Analytics } from "../../components/Analytics"
+
+// import { Analytics } from "../../components/Analytics"
 import Navbar from "../../components/Navbar"
 import PropertiesList from "../../components/PropertiesList"
 
@@ -29,7 +31,9 @@ export default async function Layout({ children }: { children: React.ReactNode }
               <div className="w-screen md:h-screen md:w-[29rem] ">
                 <PropertiesList allProperties={allProperties} />
               </div>
-              <Analytics allProperties={allProperties} />
+              <div className="flex flex-col md:flex-row w-screen h-screen md:justify-center ">
+                <Analytics allProperties={allProperties} />
+              </div>
             </div>
           </main>
         </ThemeProvider>

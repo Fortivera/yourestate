@@ -24,20 +24,18 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
         svg.selectAll('*').remove();
 
         // Create a new pie chart
-        createPieChart(allProperties, theme);
-    }, [allProperties, theme]);
+        createPieChart(allProperties);
+    }, [allProperties]);
 
-    const createPieChart = (data: Property[], theme: string) => {
-        const typeCount = new Map<string, number>()
+    const createPieChart = (data: Property[]) => {
+        const typeCount = new Map<string, number>();
 
         data.forEach((property) => {
             if (!typeCount.has(property.type)) {
                 typeCount.set(property.type, 1);
-            }
-            else {
+            } else {
                 typeCount.set(property.type, typeCount.get(property.type)! + 1);
             }
-
         });
 
         const typeTuples: [string, number][] = Array.from(typeCount.entries());
@@ -45,10 +43,8 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
         const pieGenerator = d3.pie<[string, number]>().value((d) => d[1]);
         const pieData = pieGenerator(typeTuples);
 
-
-
-        const width = 700
-        const height = 500
+        const width = 700;
+        const height = 500;
         const svg = d3.select(ref.current)
             .attr('viewBox', `0 0 ${width} ${height}`)
             .attr('preserveAspectRatio', 'xMidYMid meet');
@@ -68,36 +64,46 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             .append('g')
             .classed('cursor-pointer', true);
 
-        let activeIndex: number | null = null;
-
         slice.append('path')
             .attr('d', arcGenerator as any)
             .attr('fill', (d, i) => String(color(i.toString())))
             .style('opacity', 1) // Set initial opacity to 1
-            .on('click', function (event, d) {
-                activeIndex = activeIndex === d.index ? null : d.index;
-                updateChart();
+            .on('click', function () {
+                const clickedSlice = d3.select(this);
+                const isClicked = clickedSlice.classed('clicked');
+
+                // Toggle the 'clicked' class on the clicked slice
+                clickedSlice.classed('clicked', !isClicked);
+
+                // Update opacity for all slices based on the 'clicked' class
+                slice.selectAll('path')
+                    .transition()
+                    .duration(50)
+                    .style('opacity', function () {
+                        return d3.select(this).classed('clicked') ? 1 : 0.5;
+                    });
+
+                // Update opacity for all legend items based on the 'clicked' class
+                legend.selectAll('text')
+                    .style('opacity', function () {
+                        return d3.select(this).classed('clicked') ? 1 : 0.5;
+                    });
             });
 
         slice.append('text')
-            .text((d) => ` ${((d.data[1] / data.length) * 100).toFixed(2)}%`)
+            .text((d) => ` ${(d.data[1] / data.length * 100).toFixed(2)}%`)
             .attr('transform', (d) => `translate(${arcGenerator.centroid(d as any)})`)
             .style('font-size', '14px')
             .style('text-anchor', 'middle');
 
-        const legend = svg
-            .append('g')
+        const legend = svg.append('g')
             .attr('transform', `translate(630, 50)`)
             .selectAll('g')
             .data(pieData)
             .enter()
             .append('g')
             .attr('transform', (d, i) => `translate(0, ${i * 25})`)
-            .classed('cursor-pointer', true)
-            .on('click', function (event, d) {
-                activeIndex = activeIndex === d.index ? null : d.index;
-                updateChart();
-            });
+            .classed('cursor-pointer', true);
 
         legend.append('rect')
             .attr('width', 20)
@@ -109,35 +115,32 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             .attr('x', 25)
             .attr('y', 15)
             .style('font-size', '14px')
-            .style('opacity', 1); // Set initial opacity to 1 for all legend items
+            .style('opacity', 1) // Set initial opacity to 1 for all legend items
+            .on('click', function () {
+                const clickedLegend = d3.select(this);
+                const isClicked = clickedLegend.classed('clicked');
 
-        function updateChart() {
-            slice.selectAll('path')
-                .transition()
-                .duration(500)
-                .style('opacity', (d: any) => (activeIndex === null || d.index === activeIndex ? 1 : 0.5));
+                // Toggle the 'clicked' class on the clicked legend item
+                clickedLegend.classed('clicked', !isClicked);
 
-            // legend.selectAll('text')
-            //     .transition()
-            //     .duration(500)
-            //     .style('opacity', (d: any) => (activeIndex === null || d.index === activeIndex ? 1 : 0.4));
-            legend.selectAll('rect')
-                .transition()
-                .duration(500)
-                .style('opacity', (d: any) => (activeIndex === null || d.index === activeIndex ? 1 : 0.4));
-            legend.selectAll('text')
-                .transition()
-                .duration(500)
-                .style('fill', `${theme === 'light' ? "black" : "white"}`);
-        }
+                // Update opacity for all slices based on the 'clicked' class
+                slice.selectAll('path')
+                    .transition()
+                    .duration(50)
+                    .style('opacity', function () {
+                        return d3.select(this).classed('clicked') ? 1 : 0.5;
+                    });
 
-        // Call updateChart initially to set the correct opacities
-        updateChart();
-
+                // Update opacity for all legend items based on the 'clicked' class
+                legend.selectAll('text')
+                    .style('opacity', function () {
+                        return d3.select(this).classed('clicked') ? 1 : 0.5;
+                    });
+            });
     };
 
     return (
-        <div className={`${theme === 'light' ? 'bg-slate-50' : 'bg-[#515F73]'} w-full h-screen`}>
+        <div className={`${theme === 'light' ? 'bg-slate-200' : 'bg-slate-500'} w-full h-screen`}>
             <div className="max-w-[42.5rem] mx-auto p-2">
                 <svg ref={ref} style={{ width: '100%', height: 'auto' }} />
             </div>

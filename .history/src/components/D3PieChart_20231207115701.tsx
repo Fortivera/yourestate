@@ -24,10 +24,10 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
         svg.selectAll('*').remove();
 
         // Create a new pie chart
-        createPieChart(allProperties, theme);
-    }, [allProperties, theme]);
+        createPieChart(allProperties);
+    }, [allProperties]);
 
-    const createPieChart = (data: Property[], theme: string) => {
+    const createPieChart = (data: Property[]) => {
         const typeCount = new Map<string, number>()
 
         data.forEach((property) => {
@@ -128,7 +128,7 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             legend.selectAll('text')
                 .transition()
                 .duration(500)
-                .style('fill', `${theme === 'light' ? "black" : "white"}`);
+                .style('fill', (d: any) => (activeIndex === null || d.data.label === activeIndex ? (theme ? 'white' : 'black') : 'grey'));
         }
 
         // Call updateChart initially to set the correct opacities
@@ -137,7 +137,7 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
     };
 
     return (
-        <div className={`${theme === 'light' ? 'bg-slate-50' : 'bg-[#515F73]'} w-full h-screen`}>
+        <div className={`${theme === 'light' ? 'bg-slate-50' : 'bg-slate-600'} w-full h-screen`}>
             <div className="max-w-[42.5rem] mx-auto p-2">
                 <svg ref={ref} style={{ width: '100%', height: 'auto' }} />
             </div>
