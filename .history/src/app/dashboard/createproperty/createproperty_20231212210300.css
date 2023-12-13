@@ -1,0 +1,6 @@
+input:invalid[focused="true"]{
+    border : 1px solid transparent red;
+     box-shadow: inset 0 0 3px rgba(255, 0, 0, 0.3);
+    padding: 1px;
+    outline: none;
+}
