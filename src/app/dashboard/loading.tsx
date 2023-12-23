@@ -5,12 +5,29 @@ import { useContext } from "react"
 
 export default function Loading() {
   const { theme } = useContext(ThemeContext)
+
   return (
     <>
-      <div className="bg-black/20 backdrop-blur-xs bg-blend-saturation fixed top-0 w-full h-screen bg-cover z-10 " />
-      <dialog open className={`${theme === "light" ? "bg-white" : "bg-slate-500 text-white"} border rounded-lg shadow-sm overflow-hidden pt-1 z-10 top-96`}>
-        <h1 className="text-lg">Loading...</h1>
-      </dialog>
+      <div
+        className={`fixed inset-0 bg-black bg-opacity-10 backdrop-blur-sm z-40
+                      transition-opacity duration-300 ease-in-out`}
+      ></div>
+      <div className={`fixed inset-0 z-50 flex items-center justify-center`}>
+        <div
+          className={`${theme === "light" ? "bg-white" : "bg-gray-700"} 
+                        rounded-xl shadow-2xl p-6 mx-auto 
+                        flex flex-col items-center 
+                        w-40`}
+        >
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+          <div
+            className="animate-pulse 
+                        transition-transform duration-100 ease-in-out text-lg mt-4"
+          >
+            Loading...
+          </div>
+        </div>
+      </div>
     </>
   )
 }
