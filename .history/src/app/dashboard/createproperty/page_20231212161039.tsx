@@ -175,7 +175,7 @@ export default function NewProperty() {
             </select>
           </div>
           {formLables.map((entity) => {
-            ; <div className="flex flex-col md:flex-row py-2 ">
+            ;<div className="flex flex-col md:flex-row py-2 ">
               <label className="pr-3 w-52 " htmlFor={`${entity.name}`}>
                 {entity.name}
               </label>

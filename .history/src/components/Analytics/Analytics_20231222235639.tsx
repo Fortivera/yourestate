@@ -20,7 +20,6 @@ export const Analytics = ({ allProperties }: Props) => {
         <D3PieChart allProperties={allProperties} />
         <div>
           <D3BarChart allProperties={allProperties} />
-
         </div>
       </div>
     </>

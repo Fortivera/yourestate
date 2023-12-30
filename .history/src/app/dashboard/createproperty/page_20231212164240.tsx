@@ -118,12 +118,12 @@ export default function NewProperty() {
     },
   ]
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>, type: string) => {
-    let newValue = event.target.value;
-    if (type === 'number') {
-      newValue = newValue.replace(/[^\d]/g, '');
+    let newValue = event.target.value
+    if (type === "number") {
+      newValue = newValue.replace(/[^\d]/g, "")
     }
-    return newValue;
-  };
+    return newValue
+  }
   // function checkInput(event: React.ChangeEvent<HTMLInputElement>) {
   //   //if there was a click or change of state, go intot he input and check what type. if type is number and user wasnt? gg error
   //   const { type, value } = event.target
@@ -182,24 +182,15 @@ export default function NewProperty() {
             </select>
           </div>
           {formLabels.map((entity) => {
-            const [value, setValue] = useState('');
+            const [value, setValue] = useState("")
             return (
-              <div key={entity.id} className='flex flex-col md:flex-row py-2 '>
-                <label className='pr-3 w-52' htmlFor={`${entity.name}`}>
+              <div key={entity.id} className="flex flex-col md:flex-row py-2 ">
+                <label className="pr-3 w-52" htmlFor={`${entity.name}`}>
                   {entity.name}
                 </label>
-                <input
-                  className={`${theme === 'light' ? 'bg-white' : inputColour} leading-7 w-auto md:w-72 border-b-2`}
-                  id=''
-                  type={`${entity.type}`}
-                  name={`${entity.name}`}
-                  aria-label={`${entity.ariaLabel}`}
-                  placeholder={`${entity.placeholder}`}
-                  value={value}
-                  onChange={(e) => setValue(handleInputChange(e, entity.type))}
-                />
+                <input className={`${theme === "light" ? "bg-white" : inputColour} leading-7 w-auto md:w-72 border-b-2`} id="" type={`${entity.type}`} name={`${entity.name}`} aria-label={`${entity.ariaLabel}`} placeholder={`${entity.placeholder}`} value={value} onChange={(e) => setValue(handleInputChange(e, entity.type))} />
               </div>
-            );
+            )
           })}
           <div className="my-5 ">
             <div className="flex flexcol items-center justify-center gap-20">

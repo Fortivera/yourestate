@@ -8,14 +8,12 @@ import CancelIcon from "public/CancelIcon"
 import { ThemeContext } from "@/context/ThemeContex"
 
 export default function NewProperty() {
-  const [validInput, setValidIput] = useState('true')
+  const [validInput, setValidIput] = useState("true")
   const router = useRouter()
 
   function checkInput(event: Event) {
     //if there was a click or change of state, go intot he input and check what type. if type is number and user wasnt? gg error
-    const { type } = event.target.
-
-      if(event.target)
+    const { type } = event.target.if(event.target)
   }
 
   async function postHandler(event: FormEvent<HTMLFormElement>) {

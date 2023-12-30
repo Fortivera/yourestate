@@ -1,7 +1,7 @@
 export const metadata = {
-    title: "Products",
+  title: "Products",
 }
 
 export default function ProductsPage() {
-    return <h1>Products</h1>
+  return <h1>Products</h1>
 }

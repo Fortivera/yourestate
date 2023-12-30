@@ -14,7 +14,6 @@ export default function NewProperty() {
   const formLables = {
     id: 1,
     name: "",
-
   }
   function checkInput(event: React.ChangeEvent<HTMLInputElement>) {
     //if there was a click or change of state, go intot he input and check what type. if type is number and user wasnt? gg error

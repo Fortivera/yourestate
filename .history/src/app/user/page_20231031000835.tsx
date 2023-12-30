@@ -42,14 +42,7 @@ export default function Registration() {
                   Email
                 </label>
               </div>
-              <input
-                id="Email"
-                name="Email"
-                type="email"
-                placeholder="Email"
-                required
-                className="block w-full border rounded-lg px-3 py-2 mt-1 focus:ring focus:ring-blue-300"
-              />
+              <input id="Email" name="Email" type="email" placeholder="Email" required className="block w-full border rounded-lg px-3 py-2 mt-1 focus:ring focus:ring-blue-300" />
 
               <div className="mb-4 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="text-blue-500 mr-2">
@@ -59,14 +52,7 @@ export default function Registration() {
                   Name
                 </label>
               </div>
-              <input
-                id="Name"
-                name="Name"
-                type="text"
-                placeholder="Name"
-                required
-                className="block w-full border rounded-lg px-3 py-2 mt-1 focus:ring focus:ring-blue-300"
-              />
+              <input id="Name" name="Name" type="text" placeholder="Name" required className="block w-full border rounded-lg px-3 py-2 mt-1 focus:ring focus:ring-blue-300" />
 
               <div className="mb-4 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="text-blue-500 mr-2">
@@ -76,16 +62,7 @@ export default function Registration() {
                   Password
                 </label>
               </div>
-              <input
-                id="Password"
-                name="Password"
-                type="password"
-                placeholder="Password"
-                pattern="[a-z0-9]{1,15}"
-                title="Password should be digits (0 to 9) or alphabets (a to z)."
-                required
-                className="block w-full border rounded-lg px-3 py-2 mt-1 focus:ring focus:ring-blue-300"
-              />
+              <input id="Password" name="Password" type="password" placeholder="Password" pattern="[a-z0-9]{1,15}" title="Password should be digits (0 to 9) or alphabets (a to z)." required className="block w-full border rounded-lg px-3 py-2 mt-1 focus:ring focus:ring-blue-300" />
 
               <div className="flex items-center justify-between">
                 <button type="button" aria-label="Cancel button" className="text-blue-500 text-sm hover:underline">

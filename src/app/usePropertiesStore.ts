@@ -3,35 +3,38 @@ import { getProperty } from "lib/useRequestFunctions"
 import { create } from "zustand"
 
 interface PropertyState {
-  allProperties: Property[]
-  fetchAllProperties: () => void
-  addProperty: (property: Property) => void
-  deleteProperty: (id: number) => void
+    allProperties: Property[]
+    fetchAllPropertiesZustand: () => void
+    addPropertyZustand: (property: Property) => void
+    updatePropertyZustand: (id: number, updated: Property) => void
+    deletePropertyZustand: (id: number) => void
 }
 
 export const usePropertyStore = create<PropertyState>((set) => ({
-  allProperties: [],
+    allProperties: [],
 
-  fetchAllProperties: async () => {
-    try {
-      const allProperties = await getProperty()
-      set({ allProperties })
-    } catch (error) {
-      console.error("Error fetching properties:", error)
-    }
-    // const allPropertiesPromise: Promise<Property[]> = await getProperty()
-    // const allProperties = await allPropertiesPromise
-    // usePropertyStore.setState({ allProperties })
-  },
+    fetchAllPropertiesZustand: async () => {
+        try {
+            const allProperties = await getProperty()
+            set({ allProperties })
+        } catch (error) {
+            console.error("Error fetching properties:", error)
+        }
+    },
 
-  addProperty: (property) => {
-    set((state) => ({
-      allProperties: [...state.allProperties, property],
-    }))
-  },
-  deleteProperty: (id) => {
-    set((state) => ({
-      allProperties: state.allProperties.filter((property) => property.id != id),
-    }))
-  },
+    addPropertyZustand: (property) => {
+        set((state) => ({
+            allProperties: [...state.allProperties, property],
+        }))
+    },
+    updatePropertyZustand: (id, updated: Property) => {
+        set((state) => ({
+            allProperties: state.allProperties.map((property) => (property.id === id ? { ...property, ...updated } : property)),
+        }))
+    },
+    deletePropertyZustand: (id) => {
+        set((state) => ({
+            allProperties: state.allProperties.filter((property) => property.id != id),
+        }))
+    },
 }))

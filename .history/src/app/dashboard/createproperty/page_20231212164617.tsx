@@ -183,22 +183,13 @@ export default function NewProperty() {
           </div>
           {formLabels.map((entity) => {
             return (
-              <div key={entity.id} className='flex flex-col md:flex-row py-2 '>
-                <label className='pr-3 w-52' htmlFor={`${entity.name}`}>
+              <div key={entity.id} className="flex flex-col md:flex-row py-2 ">
+                <label className="pr-3 w-52" htmlFor={`${entity.name}`}>
                   {entity.name}
                 </label>
-                <input
-                  className={`${theme === 'light' ? 'bg-white' : inputColour} leading-7 w-auto md:w-72 border-b-2`}
-                  id=''
-                  type={`${entity.type}`}
-                  name={`${entity.name}`}
-                  aria-label={`${entity.ariaLabel}`}
-                  placeholder={`${entity.placeholder}`}
-                  value={values[entity.name] || ''}
-                  onChange={(e) => handleInputChange(e, entity.type)}
-                />
+                <input className={`${theme === "light" ? "bg-white" : inputColour} leading-7 w-auto md:w-72 border-b-2`} id="" type={`${entity.type}`} name={`${entity.name}`} aria-label={`${entity.ariaLabel}`} placeholder={`${entity.placeholder}`} value={values[entity.name] || ""} onChange={(e) => handleInputChange(e, entity.type)} />
               </div>
-            );
+            )
           })}
           <div className="my-5 ">
             <div className="flex flexcol items-center justify-center gap-20">

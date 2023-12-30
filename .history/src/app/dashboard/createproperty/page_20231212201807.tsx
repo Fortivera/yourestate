@@ -49,7 +49,7 @@ export default function NewProperty() {
       </div>
       <form method="POST" id="property-form" onSubmit={postHandler}>
         <div className="py-2 px-8 flex flex-col mx-auto border-2 border-gray-400 z-1">
-          <FormLabels onChange={ } />
+          <FormLabels onChange={} />
           <div className="my-5 ">
             <div className="flex flexcol items-center justify-center gap-20">
               <button type="button" className="w-28 rounded-md py-1 shadow-md hover:bg-red-400 bg-white text-black">

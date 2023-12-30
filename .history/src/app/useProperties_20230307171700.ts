@@ -1,5 +1,3 @@
 import { create } from "zustand"
 
-export const useProperties = create<Property>((set) => ({
-
-}))
+export const useProperties = create<Property>((set) => ({}))

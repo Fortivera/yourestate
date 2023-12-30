@@ -14,7 +14,6 @@ async function handlePut(event: FormEvent<HTMLFormElement>) {
     console.log(requestData)
     await updateProperty(requestData, property.id)
 
-
     router.replace("/dashboard")
   } catch (error) {
     console.error(error)

@@ -11,13 +11,9 @@ import CancelButton from "@/components/CancelButton"
 import SubmitButton from "@/components/SubmitButton"
 
 export default function NewProperty() {
-  const [values, setValues] = useState({
-
-  })
+  const [values, setValues] = useState({})
   const router = useRouter()
-  function onChange(e) {
-
-  }
+  function onChange(e) {}
 
   async function postHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

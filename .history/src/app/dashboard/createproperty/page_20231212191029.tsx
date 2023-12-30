@@ -20,9 +20,7 @@ export default function NewProperty() {
     ariaLabel: "",
   })
   const router = useRouter()
-  function onChange(e) {
-
-  }
+  function onChange(e) {}
 
   async function postHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

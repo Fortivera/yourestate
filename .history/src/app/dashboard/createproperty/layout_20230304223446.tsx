@@ -1,1 +1,1 @@
-import Layout from "../layout";
+import Layout from "../layout"

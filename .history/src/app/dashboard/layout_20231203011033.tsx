@@ -27,7 +27,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
             {/* <StoreInitializer allProperties={zustandData} /> */}
             {children}
           </div>
-          <main >
+          <main>
             <div className="flex flex-col md:flex-row ">
               <div className="w-screen md:h-screen md:w-[29rem] ">
                 <PropertiesList allProperties={allProperties} />

@@ -31,7 +31,6 @@ export default async function Layout({ children }: { children: React.ReactNode }
               </div>
 
               <Analytics allProperties={allProperties} />
-
             </div>
           </main>
         </ThemeProvider>

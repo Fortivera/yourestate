@@ -1,3 +1,3 @@
 export async function GET() {
-    const res = await fetch()
+  const res = await fetch()
 }

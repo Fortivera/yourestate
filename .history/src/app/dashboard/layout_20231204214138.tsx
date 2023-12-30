@@ -33,7 +33,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
               </div>
               <div className="w-full h-screen flex justify-center">
                 {/* <Analytics /> */}
-                <D3PieChart allProperties={1, 2, 3, 4} />
+                <D3PieChart allProperties={(1, 2, 3, 4)} />
               </div>
             </div>
           </main>

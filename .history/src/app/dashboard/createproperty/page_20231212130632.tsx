@@ -21,7 +21,6 @@ export default function NewProperty() {
       errorMessage = "Please insert a number value"
     }
     setValidIput(errorMessage)
-
   }
 
   async function postHandler(event: FormEvent<HTMLFormElement>) {

@@ -20,9 +20,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
           <header>
             <Navbar />
           </header>
-          <div>
-            {children}
-          </div>
+          <div>{children}</div>
           <main>
             <div className="flex flex-col md:flex-row ">
               <div className="w-screen md:h-screen md:w-[29rem] h-[50vh] overflow-y-scroll">

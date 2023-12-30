@@ -8,7 +8,7 @@ import CancelIcon from "public/CancelIcon"
 import { ThemeContext } from "@/context/ThemeContex"
 
 export default function NewProperty() {
-  const [validInput, setValidIput] = useState('true')
+  const [validInput, setValidIput] = useState("true")
   const router = useRouter()
 
   function checkInput(event: React.ChangeEvent<HTMLInputElement>) {

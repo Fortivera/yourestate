@@ -108,12 +108,20 @@ export default function NewProperty() {
             <label className="pr-3 w-52" htmlFor="Tenant">
               Number of Tenants
             </label>
-            <input className={`${theme === "light" ? "bg-white" : inputColour} leading-7 w-auto md:w-72 border-b-2`} id="" type="number" name="Tenant" aria-label="Tenants" placeholder="Tenants" onBlur={(e) => {
-              if (isNaN(e.target.value)) {
-                // Show your custom error message
-                alert("Please enter a number");
-              }
-            }} />
+            <input
+              className={`${theme === "light" ? "bg-white" : inputColour} leading-7 w-auto md:w-72 border-b-2`}
+              id=""
+              type="number"
+              name="Tenant"
+              aria-label="Tenants"
+              placeholder="Tenants"
+              onBlur={(e) => {
+                if (isNaN(e.target.value)) {
+                  // Show your custom error message
+                  alert("Please enter a number")
+                }
+              }}
+            />
           </div>
           <div className="flex flex-col md:flex-row py-2">
             <label className="pr-3 w-52" htmlFor="Rent">

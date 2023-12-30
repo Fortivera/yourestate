@@ -1,20 +1,19 @@
 import React from "react"
 
 type Props = {
-    params: {
-        propertyid: string,
-
-    }
+  params: {
+    propertyid: string
+  }
 }
 
 export async function getUser(userId: number) {
-    const dataFetch = await fetch(`${process.env.SERVER_URL}${process.env.PROPERTY_ENDPOINT}/${userId})`)
+  const dataFetch = await fetch(`${process.env.SERVER_URL}${process.env.PROPERTY_ENDPOINT}/${userId})`)
 
-    if (!res.ok) throw new Error
-    const data = await dataFetch.json()
-    return data
+  if (!res.ok) throw new Error()
+  const data = await dataFetch.json()
+  return data
 }
 
 export default function PropertyPage({ params: { propertyid } }: Props) {
-    return <div>page {propertyid}</div>
+  return <div>page {propertyid}</div>
 }

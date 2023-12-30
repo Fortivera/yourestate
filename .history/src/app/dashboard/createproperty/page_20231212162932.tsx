@@ -19,7 +19,7 @@ export default function NewProperty() {
       placeholder: "Address",
       label: "Address",
       ariaLabel: "Address",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ export default function NewProperty() {
       placeholder: "Suite",
       label: "Suite",
       ariaLabel: "Suite",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
     {
       id: 3,
@@ -37,7 +37,7 @@ export default function NewProperty() {
       placeholder: "Postal Code",
       label: "Postal Code",
       ariaLabel: "PostalCode",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
     {
       id: 4,
@@ -46,7 +46,7 @@ export default function NewProperty() {
       placeholder: "City",
       label: "City",
       ariaLabel: "City",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
     {
       id: 5,
@@ -55,7 +55,7 @@ export default function NewProperty() {
       placeholder: "Province",
       label: "Province",
       ariaLabel: "Province",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
     {
       id: 6,
@@ -64,7 +64,7 @@ export default function NewProperty() {
       placeholder: "Country",
       label: "Country",
       ariaLabel: "Country",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
     {
       id: 7,
@@ -73,7 +73,7 @@ export default function NewProperty() {
       placeholder: "Tenants",
       label: "Number of Tenants",
       ariaLabel: "Tenants",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
     {
       id: 8,
@@ -82,7 +82,7 @@ export default function NewProperty() {
       placeholder: "Monthly Rate",
       label: "Rent",
       ariaLabel: "Rent",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
     {
       id: 9,
@@ -91,7 +91,7 @@ export default function NewProperty() {
       placeholder: "Area (sq. ft)",
       label: "Surface Area (sq. ft)",
       ariaLabel: "SurfaceArea",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
     {
       id: 10,
@@ -100,7 +100,7 @@ export default function NewProperty() {
       placeholder: "Age",
       label: "Property Age",
       ariaLabel: "Age",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
     {
       id: 11,
@@ -109,7 +109,7 @@ export default function NewProperty() {
       placeholder: "Monthly Rate",
       label: "Electricity",
       ariaLabel: "Electricity",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
     {
       id: 12,
@@ -118,7 +118,7 @@ export default function NewProperty() {
       placeholder: "Monthly Rate",
       label: "Hydro",
       ariaLabel: "Hydro",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
     {
       id: 13,
@@ -127,7 +127,7 @@ export default function NewProperty() {
       placeholder: "Monthly Rate",
       label: "Gas",
       ariaLabel: "Gas",
-      pattern: "[0-9]"
+      pattern: "[0-9]",
     },
   ]
   // function checkInput(event: React.ChangeEvent<HTMLInputElement>) {

@@ -2,47 +2,39 @@
 import React, { FormEvent, Suspense } from "react"
 import { useHandleSpecificIdFilter } from "lib/useRequestFunctions"
 import EditProperty from "./EditProperty"
-import { useProperties } from "@/app/usePropertiesStore";
+import { useProperties } from "@/app/usePropertiesStore"
 
 type Params = {
-    params: {
-        propertyid: number,
-    }
+  params: {
+    propertyid: number
+  }
 }
 
 export default function ShowProperty({ params: { propertyid } }: Params) {
+  const { allProperties } = useProperties().allProperties
 
-
-    const { allProperties } = useProperties().allProperties
-
-    console.log('d')
-    console.log(allProperties)
-    console.log(propertyid)
-    debugger
-    function useHandleSpecificIdFilter(arr: any, propertyid: number) {
-        for (let i = 0; i < arr.length; i++) {
-
-            if (arr[i].id != propertyid) {
-                console.log("kek")
-            } else {
-                return arr[i]
-            }
-
-        }
+  console.log("d")
+  console.log(allProperties)
+  console.log(propertyid)
+  debugger
+  function useHandleSpecificIdFilter(arr: any, propertyid: number) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].id != propertyid) {
+        console.log("kek")
+      } else {
+        return arr[i]
+      }
     }
-    const property = useHandleSpecificIdFilter(allProperties, propertyid)
-    // const property = useHandleSpecificIdFilter(allProperties, propertyid) as Property
-    console.log(property)
+  }
+  const property = useHandleSpecificIdFilter(allProperties, propertyid)
+  // const property = useHandleSpecificIdFilter(allProperties, propertyid) as Property
+  console.log(property)
 
+  // const property: Property = await getProperty(propertyid)
 
-
-
-    // const property: Property = await getProperty(propertyid)
-
-    return (
-        <>
-            <EditProperty property={property} />
-        </>
-    )
+  return (
+    <>
+      <EditProperty property={property} />
+    </>
+  )
 }
-

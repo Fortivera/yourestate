@@ -35,7 +35,6 @@ export default function Registration() {
           <div className="mb-4 relative">
             <label htmlFor="Email" className="">
               <SvgEmail width={18} height={18} className={"absolute left-3 top-3"} />
-
             </label>
             <input id="Email" name="Email" type="email" placeholder="Email" required className="block w-full border rounded-lg py-2 pl-9 mt-1 focus:ring focus:ring-blue-300" />
           </div>

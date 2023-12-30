@@ -18,7 +18,6 @@ export const Analytics = ({ allProperties }: Props) => {
       <div className={`${theme === "light" ? "bg-white" : "bg-slate-600"} flex flex-col md:flex-row md:justify-center w-full p-1 `}>
         <D3DonutPieChart allProperties={allProperties} />
         <D3PieChart allProperties={allProperties} />
-
       </div>
     </>
   )

@@ -1,4 +1,3 @@
-
 import { ThemeContextProvider } from "@/context/ThemeContex"
 import ThemeProvider from "@/providers/ThemeProvider"
 import { Analytics } from "@vercel/analytics/react"

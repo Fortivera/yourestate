@@ -51,7 +51,7 @@ export default function NewProperty() {
           <FormLabels />
           <div className="my-5 ">
             <div className="flex flexcol items-center justify-center gap-20">
-              <CancelIcon redirect={ } />
+              <CancelIcon redirect={} />
 
               <button className="w-28 bg-indigo-200 rounded-md py-1 hover:bg-indigo-300 shadow-md text-black" type="submit">
                 Submit

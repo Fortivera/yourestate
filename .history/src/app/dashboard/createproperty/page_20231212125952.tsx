@@ -8,7 +8,7 @@ import CancelIcon from "public/CancelIcon"
 import { ThemeContext } from "@/context/ThemeContex"
 
 export default function NewProperty() {
-  const [validInput, setValidIput] = useState('true')
+  const [validInput, setValidIput] = useState("true")
   const router = useRouter()
 
   function checkInput(event: React.ChangeEvent<HTMLInputElement>) {
@@ -17,8 +17,7 @@ export default function NewProperty() {
 
     if (type === "text" && !!value.match(/^[a-zA-Z\s]+$/)) {
       return "Please insert a text value"
-    }
-    else {
+    } else {
       return "Please insert a number value"
     }
   }

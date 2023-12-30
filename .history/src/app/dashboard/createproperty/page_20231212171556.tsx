@@ -188,10 +188,10 @@ export default function NewProperty() {
                   onKeyDown={
                     entity.type === "number"
                       ? (event: React.KeyboardEvent<HTMLInputElement>) => {
-                        if (event.key.toLowerCase() === "e") {
-                          event.preventDefault()
+                          if (event.key.toLowerCase() === "e") {
+                            event.preventDefault()
+                          }
                         }
-                      }
                       : undefined
                   }
                 />

@@ -8,8 +8,6 @@ import CancelIcon from "public/CancelIcon"
 
 import FormLabels from "@/components/FormLabels"
 
-
-
 export default function NewProperty() {
   const [values, setValues] = useState({
     id: "",

@@ -118,12 +118,11 @@ export default function NewProperty() {
     },
   ]
 
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key.toLowerCase() === 'e') {
-      event.preventDefault();
+    if (event.key.toLowerCase() === "e") {
+      event.preventDefault()
     }
-  };
+  }
   // function checkInput(event: React.ChangeEvent<HTMLInputElement>) {
   //   //if there was a click or change of state, go intot he input and check what type. if type is number and user wasnt? gg error
   //   const { type, value } = event.target

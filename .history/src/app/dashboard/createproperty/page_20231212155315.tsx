@@ -11,14 +11,15 @@ export default function NewProperty() {
   const [validInput, setValidIput] = useState<string>()
   const router = useRouter()
 
-  const formLables = [{
-    id: 1,
-    name: "Address",
-    type: "text",
-    placeholder: "Address",
-    label: "Address",
-    ariaLabel: "Address",
-  },
+  const formLables = [
+    {
+      id: 1,
+      name: "Address",
+      type: "text",
+      placeholder: "Address",
+      label: "Address",
+      ariaLabel: "Address",
+    },
   ]
   function checkInput(event: React.ChangeEvent<HTMLInputElement>) {
     //if there was a click or change of state, go intot he input and check what type. if type is number and user wasnt? gg error

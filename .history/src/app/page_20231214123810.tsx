@@ -41,7 +41,9 @@ export default function Login() {
             </label>
             <input defaultValue="admin" id="Password" type="password" name="Password" placeholder="Password" required className="block w-full border rounded-lg py-2 pl-9 mt-1 focus:ring focus:ring-blue-300" />
           </div>
-          <a href=""><i class="fa-brands fa-google-plus-g"></i></a>
+          <a href="">
+            <i class="fa-brands fa-google-plus-g"></i>
+          </a>
 
           <button type="button" onClick={handleLogin} aria-label="Sign-in button" className="flex justify-center bg-[#5392f7] text-white rounded-lg w-1/3 py-2 mb-4 hover:bg-[#3b83f6]">
             <p>Login</p>

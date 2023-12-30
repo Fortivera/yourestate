@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 // jest.config.mjs
 import nextJest from "next/jest.js"
-import { configure } from 'next-router-mock';
+import { configure } from "next-router-mock"
 
-configure({});
+configure({})
 
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
@@ -19,10 +19,9 @@ const config = {
 
   testEnvironment: "jest-environment-jsdom",
   moduleNameMapper: {
-    '^public/(.*)$': '<rootDir>/public/$1',
-  }
+    "^public/(.*)$": "<rootDir>/public/$1",
+  },
 }
-
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
 export default createJestConfig(config)

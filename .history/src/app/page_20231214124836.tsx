@@ -46,7 +46,9 @@ export default function Login() {
           <a>
             <SvgGoogle />
           </a>
-          <a href=""><SvgGithub /></a>
+          <a href="">
+            <SvgGithub />
+          </a>
 
           <button type="button" onClick={handleLogin} aria-label="Sign-in button" className="flex justify-center bg-[#5392f7] text-white rounded-lg w-1/3 py-2 mb-4 hover:bg-[#3b83f6]">
             <p>Login</p>

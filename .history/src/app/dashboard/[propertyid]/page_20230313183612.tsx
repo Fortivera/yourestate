@@ -1,59 +1,45 @@
-
-
 import Link from "next/link"
 import React, { FormEvent, Suspense } from "react"
 import { Modal } from "../../components/Modal"
 import CancelIcon from "public/CancelIcon"
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation"
 import { useProperties } from "../../usePropertiesStore"
-import Kek from "@/app/components/aaate";
-
+import Kek from "@/app/components/aaate"
 
 type Params = {
-    params: {
-        propertyid: number,
-    }
+  params: {
+    propertyid: number
+  }
 }
-
-
 
 export default async function ShowProperty({ params: { propertyid } }: Params) {
+  // const router = useRouter()
 
+  // const property: Property = await getProperty(propertyid)
 
-    // const router = useRouter()
+  // async function handlePut(event: FormEvent<HTMLFormElement>) {
+  //     event.preventDefault()
+  //     const dataCollected = event.target as HTMLFormElement
+  //     const formData = new FormData(dataCollected) as Iterable<[Property, FormDataEntryValue]>
+  //     const requestData: Property = Object.fromEntries(formData);
+  //     console.log(requestData);
+  //     updateProperty(requestData, propertyid)
+  //     router.refresh()
+  //     router.push("/dashboard")
+  // }
 
+  // function handleDelete() {
+  //     deleteProperty(propertyid)
+  //     router.refresh()
+  //     router.push("/dashboard")
+  // }
 
-
-    // const property: Property = await getProperty(propertyid)
-
-    // async function handlePut(event: FormEvent<HTMLFormElement>) {
-    //     event.preventDefault()
-    //     const dataCollected = event.target as HTMLFormElement
-    //     const formData = new FormData(dataCollected) as Iterable<[Property, FormDataEntryValue]>
-    //     const requestData: Property = Object.fromEntries(formData);
-    //     console.log(requestData);
-    //     updateProperty(requestData, propertyid)
-    //     router.refresh()
-    //     router.push("/dashboard")
-    // }
-
-    // function handleDelete() {
-    //     deleteProperty(propertyid)
-    //     router.refresh()
-    //     router.push("/dashboard")
-    // }
-
-
-    return (
-
-        <Modal>
-            <Kek propertyid={propertyid} />
-        </Modal>
-
-    )
+  return (
+    <Modal>
+      <Kek propertyid={propertyid} />
+    </Modal>
+  )
 }
-
-
 
 // async function deleteProperty(userInput: number) {
 

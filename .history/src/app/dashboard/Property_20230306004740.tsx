@@ -1,12 +1,8 @@
 interface propers {
-    id: number,
-    city: string
+  id: number
+  city: string
 }
 
 export default function Property({ id, city }: propers) {
-    return (
-        <div key={id}>
-            {city}
-        </div>
-    )
+  return <div key={id}>{city}</div>
 }

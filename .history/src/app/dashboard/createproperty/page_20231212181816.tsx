@@ -156,7 +156,6 @@ export default function NewProperty() {
         </button>
       </div>
       <form method="POST" id="property-form" onSubmit={postHandler}>
-
         <FormLabels labels={formStructure} />
         <div className="my-5 ">
           <div className="flex flexcol items-center justify-center gap-20">
@@ -170,7 +169,7 @@ export default function NewProperty() {
           </div>
         </div>
       </form>
-    </Modal >
+    </Modal>
   )
 }
 

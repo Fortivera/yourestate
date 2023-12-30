@@ -35,7 +35,6 @@ export default async function Layout({ children }: { children: React.ReactNode }
                 <div className="w-[600px]">
                   <D3PieChart allProperties={allProperties} />
                 </div>
-
               </div>
             </div>
           </main>

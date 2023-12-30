@@ -29,8 +29,6 @@ export default function Registration() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="bg-white border rounded-lg shadow-md p-8 max-w-xs w-full mx-2">
           <h1 className="text-2xl font-semibold text-center mb-4">Sign Up</h1>
-
-
         </div>
       </div>
     </form>

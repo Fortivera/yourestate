@@ -13,9 +13,7 @@ import SubmitButton from "@/components/SubmitButton"
 export default function NewProperty() {
   // const [validInput, setValidIput] = useState<string>()
   const router = useRouter()
-  function onChange() {
-
-  }
+  function onChange() {}
 
   async function postHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

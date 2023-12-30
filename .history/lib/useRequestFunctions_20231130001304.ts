@@ -53,7 +53,7 @@ export async function updateProperty(userInput: Property, id: number) {
 
 export async function getProperty() {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROPERTY_ENDPOINT}`, { cache: 'no-store' })
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROPERTY_ENDPOINT}`, { cache: "no-store" })
     if (!response.ok) {
       throw new Error("Failed to fetch data.")
     }

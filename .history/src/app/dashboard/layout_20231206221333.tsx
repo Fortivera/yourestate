@@ -13,7 +13,6 @@ export default async function Layout({ children }: { children: React.ReactNode }
   const allPropertiesPromise: Promise<Property[]> = await getProperty()
   const allProperties = await allPropertiesPromise
 
-
   usePropertyStore.setState({ allProperties })
 
   return (

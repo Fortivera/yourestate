@@ -2,8 +2,6 @@
 import React from "react"
 import { D3PieChart } from "./D3PieChart"
 
-
-
 export const Analytics = (allProperties: any) => {
   return (
     <>

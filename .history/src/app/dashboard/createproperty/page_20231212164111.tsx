@@ -118,12 +118,12 @@ export default function NewProperty() {
     },
   ]
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>, type: string) => {
-    let newValue = event.target.value;
-    if (type === 'number') {
-      newValue = newValue.replace(/[^\d]/g, '');
+    let newValue = event.target.value
+    if (type === "number") {
+      newValue = newValue.replace(/[^\d]/g, "")
     }
-    return newValue;
-  };
+    return newValue
+  }
   // function checkInput(event: React.ChangeEvent<HTMLInputElement>) {
   //   //if there was a click or change of state, go intot he input and check what type. if type is number and user wasnt? gg error
   //   const { type, value } = event.target

@@ -31,49 +31,24 @@ export default function Registration() {
           <h1 className="text-2xl font-semibold text-center mb-4">Sign Up</h1>
 
           <div className="mb-4">
-
             <label className="text-sm" htmlFor="Email">
-
               Email
             </label>
-            <input
-              id="Email"
-              name="Email"
-              type="email"
-              placeholder="Email"
-              required
-              className="block w-full border rounded-lg px-3 py-2 mt-1 focus:ring focus:ring-blue-300"
-            />
+            <input id="Email" name="Email" type="email" placeholder="Email" required className="block w-full border rounded-lg px-3 py-2 mt-1 focus:ring focus:ring-blue-300" />
           </div>
 
           <div className="mb-4">
             <label className="text-sm" htmlFor="Name">
               Name
             </label>
-            <input
-              id="Name"
-              name="Name"
-              type="text"
-              placeholder="Name"
-              required
-              className="block w-full border rounded-lg px-3 py-2 mt-1 focus:ring focus:ring-blue-300"
-            />
+            <input id="Name" name="Name" type="text" placeholder="Name" required className="block w-full border rounded-lg px-3 py-2 mt-1 focus:ring focus:ring-blue-300" />
           </div>
 
           <div className="mb-4">
             <label className="text-sm" htmlFor="Password">
               Password
             </label>
-            <input
-              id="Password"
-              name="Password"
-              type="password"
-              placeholder="Password"
-              pattern="[a-z0-9]{1,15}"
-              title="Password should be digits (0 to 9) or alphabets (a to z)."
-              required
-              className="block w-full border rounded-lg px-3 py-2 mt-1 focus:ring focus:ring-blue-300"
-            />
+            <input id="Password" name="Password" type="password" placeholder="Password" pattern="[a-z0-9]{1,15}" title="Password should be digits (0 to 9) or alphabets (a to z)." required className="block w-full border rounded-lg px-3 py-2 mt-1 focus:ring focus:ring-blue-300" />
           </div>
 
           <div className="flex items-center justify-between">

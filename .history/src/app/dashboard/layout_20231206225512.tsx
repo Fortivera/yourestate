@@ -30,9 +30,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
                 <PropertiesList allProperties={allProperties} />
               </div>
               <div className="w-full">
-
                 <Analytics allProperties={allProperties} />
-
               </div>
             </div>
           </main>
