@@ -47,7 +47,6 @@ export default function NewProperty() {
         const formData = new FormData(dataCollected) as Iterable<[Property, FormDataEntryValue]>
         const formDataObj = Object.fromEntries(formData)
 
-        
         const parsedData = zodPropertySchema.safeParse(Object.fromEntries(formData))
         if (parsedData.success) {
             const validatedData = parsedData.data

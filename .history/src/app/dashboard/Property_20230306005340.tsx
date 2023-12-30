@@ -1,3 +1,3 @@
 export default function Property() {
-  return <div key={id}>{city}</div>
+    return <div key={id}>{city}</div>
 }

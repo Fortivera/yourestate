@@ -6,26 +6,26 @@ import { D3DonutPieChart } from "./D3charts/D3DonutPieChart"
 import { D3PieChart } from "./D3charts/D3PieChart"
 
 interface Props {
-  allProperties: Property[]
+    allProperties: Property[]
 }
 
 export const Analytics = ({ allProperties }: Props) => {
-  const { theme } = useContext(ThemeContext)
+    const { theme } = useContext(ThemeContext)
 
-  return (
-    <>
-      {/* <div className="w-full h-full">{<iframe height="100%" width="100%" title="Report Section" src="https://app.powerbi.com/view?r=eyJrIjoiZDVmOGZlMWMtN2VkYS00NmRkLWJiZDgtMGY1MzQyNTdlOWQ1IiwidCI6IjcwYWQ5MjFmLTFmZjQtNDZjNC1hMmZkLWIxNTc0MjcxODQ3NiJ9" allowFullScreen={true}></iframe>}</div> */}
-      <div className={`${theme === "light" ? "bg-slate-50" : "bg-[#515F73]"} grid grid-cols-1 md:grid-cols-2 w-full p-1 font-Poppins`}>
-        <div>
-          <D3DonutPieChart allProperties={allProperties} />
-        </div>
-        <div>
-          <D3PieChart allProperties={allProperties} />
-        </div>
-        <div className="lg:col-span-full flex justify-center">
-          <D3BarChart allProperties={allProperties} />
-        </div>
-      </div>
-    </>
-  )
+    return (
+        <>
+            {/* <div className="w-full h-full">{<iframe height="100%" width="100%" title="Report Section" src="https://app.powerbi.com/view?r=eyJrIjoiZDVmOGZlMWMtN2VkYS00NmRkLWJiZDgtMGY1MzQyNTdlOWQ1IiwidCI6IjcwYWQ5MjFmLTFmZjQtNDZjNC1hMmZkLWIxNTc0MjcxODQ3NiJ9" allowFullScreen={true}></iframe>}</div> */}
+            <div className={`${theme === "light" ? "bg-slate-50" : "bg-[#515F73]"} grid grid-cols-1 md:grid-cols-2 w-full p-1 font-Poppins`}>
+                <div>
+                    <D3DonutPieChart allProperties={allProperties} />
+                </div>
+                <div>
+                    <D3PieChart allProperties={allProperties} />
+                </div>
+                <div className="lg:col-span-full flex justify-center">
+                    <D3BarChart allProperties={allProperties} />
+                </div>
+            </div>
+        </>
+    )
 }

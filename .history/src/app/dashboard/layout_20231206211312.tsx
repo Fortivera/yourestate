@@ -9,43 +9,43 @@ import PropertiesList from "../../components/PropertiesList"
 import { usePropertyStore } from "../usePropertiesStore"
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-  const allPropertiesPromise: Promise<Property[]> = await getProperty()
-  const allProperties = await allPropertiesPromise
+    const allPropertiesPromise: Promise<Property[]> = await getProperty()
+    const allProperties = await allPropertiesPromise
 
-  usePropertyStore.setState({ allProperties })
+    usePropertyStore.setState({ allProperties })
 
-  return (
-    <>
-      <ThemeContextProvider>
-        <ThemeProvider>
-          <header>
-            <Navbar />
-          </header>
-          <div>
-            {/* <StoreInitializer allProperties={zustandData} /> */}
-            {children}
-          </div>
-          <main>
-            <div className="flex flex-col md:flex-row ">
-              <div className="w-screen md:h-screen md:w-[29rem] ">
-                <PropertiesList allProperties={allProperties} />
-              </div>
-              <div className="flex flex-col md:flex-row w-screen h-screen   ">
-                {/* <Analytics /> */}
-                <div className="max-w-[600px]">
-                  <D3PieChart allProperties={allProperties} />
-                </div>
-                {/* <div className="max-w-[400px]">
+    return (
+        <>
+            <ThemeContextProvider>
+                <ThemeProvider>
+                    <header>
+                        <Navbar />
+                    </header>
+                    <div>
+                        {/* <StoreInitializer allProperties={zustandData} /> */}
+                        {children}
+                    </div>
+                    <main>
+                        <div className="flex flex-col md:flex-row ">
+                            <div className="w-screen md:h-screen md:w-[29rem] ">
+                                <PropertiesList allProperties={allProperties} />
+                            </div>
+                            <div className="flex flex-col md:flex-row w-screen h-screen   ">
+                                {/* <Analytics /> */}
+                                <div className="max-w-[600px]">
+                                    <D3PieChart allProperties={allProperties} />
+                                </div>
+                                {/* <div className="max-w-[400px]">
                   <D3PieChart allProperties={allProperties} />
                 </div>
                 <div className="max-w-[400px]">
                   <D3PieChart allProperties={allProperties} />
                 </div> */}
-              </div>
-            </div>
-          </main>
-        </ThemeProvider>
-      </ThemeContextProvider>
-    </>
-  )
+                            </div>
+                        </div>
+                    </main>
+                </ThemeProvider>
+            </ThemeContextProvider>
+        </>
+    )
 }

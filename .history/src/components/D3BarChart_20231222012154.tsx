@@ -4,37 +4,35 @@
 "use client"
 
 // Import necessary libraries
-import React, { useContext, useEffect, useRef } from 'react';
-import * as d3 from 'd3';
-import { ThemeContext } from '@/context/ThemeContex';
-
+import React, { useContext, useEffect, useRef } from "react"
+import * as d3 from "d3"
+import { ThemeContext } from "@/context/ThemeContex"
 
 interface Props {
-    allProperties: Property[];
+    allProperties: Property[]
 }
 
 interface EnergySums {
-    electricity: number;
-    gas: number;
-    hydro: number;
+    electricity: number
+    gas: number
+    hydro: number
 }
 
 export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
-    const ref = useRef<SVGSVGElement>(null);
-    const { theme } = useContext(ThemeContext);
+    const ref = useRef<SVGSVGElement>(null)
+    const { theme } = useContext(ThemeContext)
 
     useEffect(() => {
         // Create a new bar chart
-        createBarChart(allProperties,theme);
-    }, [allProperties,theme]);
+        createBarChart(allProperties, theme)
+    }, [allProperties, theme])
 
-    const createBarChart = (data: Property[],theme: string) => {
-        if (!ref.current) return;
+    const createBarChart = (data: Property[], theme: string) => {
+        if (!ref.current) return
 
-        const svg = d3.select(ref.current);
-        svg.selectAll('*').remove();
-        const energySumsByCountry = new Map<string, EnergySums>(); // country: {gas: amount, hydro: amount, electricity: amount}
-
+        const svg = d3.select(ref.current)
+        svg.selectAll("*").remove()
+        const energySumsByCountry = new Map<string, EnergySums>() // country: {gas: amount, hydro: amount, electricity: amount}
 
         data.forEach((property) => {
             if (!energySumsByCountry.has(property.country)) {
@@ -42,150 +40,143 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
                     electricity: property.electricity,
                     gas: property.gas,
                     hydro: property.hydro,
-                });
+                })
             } else {
-                const energyTypes = energySumsByCountry.get(property.country)!;
-                energyTypes.electricity += property.electricity;
-                energyTypes.gas += property.gas;
-                energyTypes.hydro += property.hydro;
+                const energyTypes = energySumsByCountry.get(property.country)!
+                energyTypes.electricity += property.electricity
+                energyTypes.gas += property.gas
+                energyTypes.hydro += property.hydro
             }
-        });
+        })
 
         const energyTuples: [string, EnergySums][] = Array.from(energySumsByCountry.entries()) // [[country: {gas: amount, hydro: amount, electricity: amount}], [...]]
 
-        const width = 700;
-        const height = 500;
-        const margin = { top: 20, right: 30, bottom: 40, left: 90 };
-        svg.attr('viewBox', `0 0 ${width} ${height}`)
-            .attr('preserveAspectRatio', 'xMidYMid meet');
-        let activeEnergyType: string | null = null;
+        const width = 700
+        const height = 500
+        const margin = { top: 20, right: 30, bottom: 40, left: 90 }
+        svg.attr("viewBox", `0 0 ${width} ${height}`).attr("preserveAspectRatio", "xMidYMid meet")
+        let activeEnergyType: string | null = null
 
         const updateChart = () => {
-    svg.selectAll(".bar")
-        .transition()
-        .duration(300)
-        .style("opacity", (d:any) => activeEnergyType === null || d.type === activeEnergyType ? 1 : 0.1);
+            svg.selectAll(".bar")
+                .transition()
+                .duration(300)
+                .style("opacity", (d: any) => (activeEnergyType === null || d.type === activeEnergyType ? 1 : 0.1))
 
-    legend.selectAll("rect")
-        .transition()
-        .duration(300)
-        .style("opacity", d => activeEnergyType === null || d === activeEnergyType ? 1 : 0.4);
+            legend
+                .selectAll("rect")
+                .transition()
+                .duration(300)
+                .style("opacity", (d) => (activeEnergyType === null || d === activeEnergyType ? 1 : 0.4))
 
-    legend.selectAll("text")
-        .transition()
-        .duration(300)
-        .style("opacity", d => activeEnergyType === null || d === activeEnergyType ? 1 : 0.4);
-};
-
-
+            legend
+                .selectAll("text")
+                .transition()
+                .duration(300)
+                .style("opacity", (d) => (activeEnergyType === null || d === activeEnergyType ? 1 : 0.4))
+        }
 
         // Scale for the groups (countries)
-        const x0Scale = d3.scaleBand()
+        const x0Scale = d3
+            .scaleBand()
             .domain(energyTuples.map(([country]) => country))
             .rangeRound([margin.left, width - margin.right])
-            .paddingInner(0.2);
+            .paddingInner(0.2)
 
         // Scale for the bars within each group (energy types)
-        type EnergyType = 'gas' | 'hydro' | 'electricity';
-        const energyTypes: EnergyType[] = ['gas', 'hydro', 'electricity'];
+        type EnergyType = "gas" | "hydro" | "electricity"
+        const energyTypes: EnergyType[] = ["gas", "hydro", "electricity"]
 
-        const x1Scale = d3.scaleBand()
-            .domain(energyTypes)
-            .rangeRound([0, x0Scale.bandwidth()])
-            .padding(0.1);
+        const x1Scale = d3.scaleBand().domain(energyTypes).rangeRound([0, x0Scale.bandwidth()]).padding(0.1)
 
         // Compute the maximum value for the y-axis
-        const maxEnergyValue = d3.max(energyTuples, ([, energySums]) =>
-            Math.max(energySums.gas, energySums.hydro, energySums.electricity)
-        );
+        const maxEnergyValue = d3.max(energyTuples, ([, energySums]) => Math.max(energySums.gas, energySums.hydro, energySums.electricity))
 
         // Scale for the y-axis
-        const yScale = d3.scaleLinear()
-            .domain([0, maxEnergyValue! * 1.10])
-            .range([height - margin.bottom, margin.top]);
+        const yScale = d3
+            .scaleLinear()
+            .domain([0, maxEnergyValue! * 1.1])
+            .range([height - margin.bottom, margin.top])
 
         // Group for each country
-        const countryGroup = svg.selectAll(".country-group")
+        const countryGroup = svg
+            .selectAll(".country-group")
             .data(energyTuples)
             .join("g")
             .attr("class", "country-group")
-            .attr("transform", d => `translate(${x0Scale(d[0])}, 0)`);
+            .attr("transform", (d) => `translate(${x0Scale(d[0])}, 0)`)
 
         // Bars for each energy type within the country group
         const pastelColors: Record<EnergyType, string> = {
             gas: "#a1c9f4", // Pastel Blue
             hydro: "#b8deb8", // Pastel Green
-            electricity: "#ffb3de" // Pastel Pink
-        };
+            electricity: "#ffb3de", // Pastel Pink
+        }
 
         // Bars for each energy type within the country group
-        countryGroup.selectAll(".bar")
-            .data(d => energyTypes.map(type => ({ type, value: d[1][type] })))
+        countryGroup
+            .selectAll(".bar")
+            .data((d) => energyTypes.map((type) => ({ type, value: d[1][type] })))
             .join("rect")
             .attr("class", "bar")
-            .attr("x", d => x1Scale(d.type)!)
-            .attr("y", d => yScale(d.value))
+            .attr("x", (d) => x1Scale(d.type)!)
+            .attr("y", (d) => yScale(d.value))
             .attr("width", x1Scale.bandwidth())
-            .attr("height", d => height - margin.bottom - yScale(d.value))
-            .attr("fill", d => pastelColors[d.type])
-            .on('click', function (event, d) {
-        activeEnergyType = activeEnergyType === d.type ? null : d.type;
-        updateChart();
-    })
-
-            
+            .attr("height", (d) => height - margin.bottom - yScale(d.value))
+            .attr("fill", (d) => pastelColors[d.type])
+            .on("click", function (event, d) {
+                activeEnergyType = activeEnergyType === d.type ? null : d.type
+                updateChart()
+            })
 
         // X-axis
         svg.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`)
             .call(d3.axisBottom(x0Scale))
-            .selectAll('path,line ')
-            .style('stroke', theme === 'light' ? "black" : "white")
-            .style('stroke-width', '1px'); // Set the stroke width
+            .selectAll("path,line ")
+            .style("stroke", theme === "light" ? "black" : "white")
+            .style("stroke-width", "1px") // Set the stroke width
 
         // Y-axis
         svg.append("g")
             .attr("transform", `translate(${margin.left},0)`)
             .call(d3.axisLeft(yScale))
-            .selectAll('path,line ')
-            .style('stroke', theme === 'light' ? "black" : "white")
-    .style('stroke-width', '1px'); // Set the stroke width
+            .selectAll("path,line ")
+            .style("stroke", theme === "light" ? "black" : "white")
+            .style("stroke-width", "1px") // Set the stroke width
 
+        const legend = svg.append("g").attr("class", "legend").attr("transform", `translate(100, 0)`)
 
-
-        const legend = svg.append("g")
-            .attr("class", "legend")
-            .attr("transform", `translate(100, 0)`);
-
-        legend.selectAll("rect")
+        legend
+            .selectAll("rect")
             .data(energyTypes)
-            .enter().append("rect")
+            .enter()
+            .append("rect")
             .attr("x", (d, i) => i * 100) // Adjust spacing based on your layout
             .attr("y", 10)
             .attr("width", 15)
             .attr("height", 15)
-            .style("fill", type => pastelColors[type])
-            .on('click', function (event, d) {
-            activeEnergyType = activeEnergyType === d ? null : d;
-            updateChart()
+            .style("fill", (type) => pastelColors[type])
+            .on("click", function (event, d) {
+                activeEnergyType = activeEnergyType === d ? null : d
+                updateChart()
             })
-   
 
-        legend.selectAll("text")
+        legend
+            .selectAll("text")
             .data(energyTypes)
-            .enter().append("text")
+            .enter()
+            .append("text")
             .attr("x", (d, i) => i * 100 + 20) // Align with the squares
             .attr("y", 25)
-            .text(d => d.charAt(0).toUpperCase() + d.slice(1)) // Capitalize labels
+            .text((d) => d.charAt(0).toUpperCase() + d.slice(1)) // Capitalize labels
             .style("font-size", "12px")
             .style("cursor", "pointer")
-            .style('fill', `${theme === 'light' ? "black" : "white"}`)
-            .on('click', function (event, d) {
-        activeEnergyType = activeEnergyType === d ? null : d;
-        updateChart();
-    })
-    
-         
+            .style("fill", `${theme === "light" ? "black" : "white"}`)
+            .on("click", function (event, d) {
+                activeEnergyType = activeEnergyType === d ? null : d
+                updateChart()
+            })
 
         // const xScale = d3.scaleBand()
         //     .domain(energyTuples.map(([country]) => country))
@@ -214,7 +205,6 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
         //         .attr('width', xScale.bandwidth() / 3)
         //         .attr('height', ([, energySums]) => yScale(energySums[type as keyof EnergySums]))
         //         .attr('fill', colorScale(energyType));
-
 
         // });
 
@@ -257,13 +247,13 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
         //     .attr('y', 9)
         //     .attr('dy', '0.35em')
         //     .text(d => d);
-    };
+    }
 
     return (
-        <div className={`${theme === 'light' ? 'bg-slate-50' : 'bg-[#515F73]'} w-full`}>
+        <div className={`${theme === "light" ? "bg-slate-50" : "bg-[#515F73]"} w-full`}>
             <div className="max-w-[42.5rem] mx-auto p-2">
-                <svg ref={ref} style={{ width: '100%', height: 'auto' }} />
+                <svg ref={ref} style={{ width: "100%", height: "auto" }} />
             </div>
         </div>
-    );
-};
+    )
+}

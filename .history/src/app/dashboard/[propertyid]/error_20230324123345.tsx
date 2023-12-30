@@ -5,19 +5,19 @@ import { useEffect } from "react"
 import Link from "next/link"
 
 export default function Error({ error, reset }: { error: Error; reset: () => void }) {
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error)
-  }, [error])
+    useEffect(() => {
+        // Log the error to an error reporting service
+        console.error(error)
+    }, [error])
 
-  return (
-    <Modal>
-      <div>
-        <h2>{error.message}</h2>
-        <button className="w-28 rounded-md py-1 shadow-md bg-red-300 hover:bg-red-400" type="button">
-          <span>Go Back</span>
-        </button>
-      </div>
-    </Modal>
-  )
+    return (
+        <Modal>
+            <div>
+                <h2>{error.message}</h2>
+                <button className="w-28 rounded-md py-1 shadow-md bg-red-300 hover:bg-red-400" type="button">
+                    <span>Go Back</span>
+                </button>
+            </div>
+        </Modal>
+    )
 }

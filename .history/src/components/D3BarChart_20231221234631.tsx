@@ -4,37 +4,35 @@
 "use client"
 
 // Import necessary libraries
-import React, { useContext, useEffect, useRef } from 'react';
-import * as d3 from 'd3';
-import { ThemeContext } from '@/context/ThemeContex';
-
+import React, { useContext, useEffect, useRef } from "react"
+import * as d3 from "d3"
+import { ThemeContext } from "@/context/ThemeContex"
 
 interface Props {
-    allProperties: Property[];
+    allProperties: Property[]
 }
 
 interface EnergySums {
-    electricity: number;
-    gas: number;
-    hydro: number;
+    electricity: number
+    gas: number
+    hydro: number
 }
 
 export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
-    const ref = useRef<SVGSVGElement>(null);
-    const { theme } = useContext(ThemeContext);
+    const ref = useRef<SVGSVGElement>(null)
+    const { theme } = useContext(ThemeContext)
 
     useEffect(() => {
         // Create a new bar chart
-        createBarChart(allProperties,);
-    }, [allProperties,]);
+        createBarChart(allProperties)
+    }, [allProperties])
 
     const createBarChart = (data: Property[]) => {
-        if (!ref.current) return;
+        if (!ref.current) return
 
-        const svg = d3.select(ref.current);
-        svg.selectAll('*').remove();
-        const energySumsByCountry = new Map<string, EnergySums>(); // country: {gas: amount, hydro: amount, electricity: amount}
-
+        const svg = d3.select(ref.current)
+        svg.selectAll("*").remove()
+        const energySumsByCountry = new Map<string, EnergySums>() // country: {gas: amount, hydro: amount, electricity: amount}
 
         data.forEach((property) => {
             if (!energySumsByCountry.has(property.country)) {
@@ -42,90 +40,91 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
                     electricity: property.electricity,
                     gas: property.gas,
                     hydro: property.hydro,
-                });
+                })
             } else {
-                const energyTypes = energySumsByCountry.get(property.country)!;
-                energyTypes.electricity += property.electricity;
-                energyTypes.gas += property.gas;
-                energyTypes.hydro += property.hydro;
+                const energyTypes = energySumsByCountry.get(property.country)!
+                energyTypes.electricity += property.electricity
+                energyTypes.gas += property.gas
+                energyTypes.hydro += property.hydro
             }
-        });
+        })
 
         const energyTuples: [string, EnergySums][] = Array.from(energySumsByCountry.entries()) // [[country: {gas: amount, hydro: amount, electricity: amount}], [...]]
 
-        const width = 710;
-        const height = 500;
-        const margin = { top: 30, right: 20, bottom: 70, left: 50 };
+        const width = 710
+        const height = 500
+        const margin = { top: 30, right: 20, bottom: 70, left: 50 }
 
-        svg.attr('viewBox', `0 0 ${width} ${height}`)
-            .attr('preserveAspectRatio', 'xMidYMid meet');
+        svg.attr("viewBox", `0 0 ${width} ${height}`).attr("preserveAspectRatio", "xMidYMid meet")
 
         // Assuming 'data' is an array of objects with 'category' and 'value'
-        const xScale = d3.scaleBand()
+        const xScale = d3
+            .scaleBand()
             .range([0, width - margin.left - margin.right])
-            .domain(data.map(d => d.category))
-            .padding(0.1);
+            .domain(data.map((d) => d.category))
+            .padding(0.1)
 
-        const yScale = d3.scaleLinear()
+        const yScale = d3
+            .scaleLinear()
             .range([height - margin.top - margin.bottom, 0])
-            .domain([0, d3.max(data, d => d.value)]);
+            .domain([0, d3.max(data, (d) => d.value)])
 
-        const g = svg.append('g')
-            .attr('transform', `translate(${margin.left}, ${margin.top})`);
+        const g = svg.append("g").attr("transform", `translate(${margin.left}, ${margin.top})`)
 
-        let activeIndex = null;
+        let activeIndex = null
 
-        g.selectAll('.bar')
+        g.selectAll(".bar")
             .data(data)
             .enter()
-            .append('rect')
-            .classed('bar', true)
-            .attr('x', d => xScale(d.category))
-            .attr('y', d => yScale(d.value))
-            .attr('width', xScale.bandwidth())
-            .attr('height', d => height - margin.top - margin.bottom - yScale(d.value))
-            .on('click', function (event, d, i) {
-                activeIndex = activeIndex === i ? null : i;
-                updateChart();
-            });
+            .append("rect")
+            .classed("bar", true)
+            .attr("x", (d) => xScale(d.category))
+            .attr("y", (d) => yScale(d.value))
+            .attr("width", xScale.bandwidth())
+            .attr("height", (d) => height - margin.top - margin.bottom - yScale(d.value))
+            .on("click", function (event, d, i) {
+                activeIndex = activeIndex === i ? null : i
+                updateChart()
+            })
 
-        const legend = svg.append('g')
-            .attr('transform', `translate(${margin.left}, ${margin.top / 2})`);
+        const legend = svg.append("g").attr("transform", `translate(${margin.left}, ${margin.top / 2})`)
 
-        legend.selectAll('rect')
+        legend
+            .selectAll("rect")
             .data(data)
             .enter()
-            .append('rect')
-            .attr('width', 20)
-            .attr('height', 20)
-            .attr('x', (d, i) => i * 100)
-            .attr('y', 0)
-            .attr('fill', (d, i) => d.color) // Assuming each data point has a color
-            .on('click', function (event, d, i) {
-                activeIndex = activeIndex === i ? null : i;
-                updateChart();
-            });
+            .append("rect")
+            .attr("width", 20)
+            .attr("height", 20)
+            .attr("x", (d, i) => i * 100)
+            .attr("y", 0)
+            .attr("fill", (d, i) => d.color) // Assuming each data point has a color
+            .on("click", function (event, d, i) {
+                activeIndex = activeIndex === i ? null : i
+                updateChart()
+            })
 
-        legend.selectAll('text')
+        legend
+            .selectAll("text")
             .data(data)
             .enter()
-            .append('text')
-            .attr('x', (d, i) => i * 100 + 25)
-            .attr('y', 15)
-            .text(d => d.category)
-            .on('click', function (event, d, i) {
-                activeIndex = activeIndex === i ? null : i;
-                updateChart();
-            });
+            .append("text")
+            .attr("x", (d, i) => i * 100 + 25)
+            .attr("y", 15)
+            .text((d) => d.category)
+            .on("click", function (event, d, i) {
+                activeIndex = activeIndex === i ? null : i
+                updateChart()
+            })
 
         function updateChart() {
-            g.selectAll('.bar')
+            g.selectAll(".bar")
                 .transition()
                 .duration(500)
-                .style('opacity', (d, i) => (activeIndex === null || i === activeIndex ? 1 : 0.1));
+                .style("opacity", (d, i) => (activeIndex === null || i === activeIndex ? 1 : 0.1))
         }
 
-        updateChart(); // Initial update
+        updateChart() // Initial update
 
         // const xScale = d3.scaleBand()
         //     .domain(energyTuples.map(([country]) => country))
@@ -154,7 +153,6 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
         //         .attr('width', xScale.bandwidth() / 3)
         //         .attr('height', ([, energySums]) => yScale(energySums[type as keyof EnergySums]))
         //         .attr('fill', colorScale(energyType));
-
 
         // });
 
@@ -197,13 +195,13 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
         //     .attr('y', 9)
         //     .attr('dy', '0.35em')
         //     .text(d => d);
-    };
+    }
 
     return (
-        <div className={`${theme === 'light' ? 'bg-slate-50' : 'bg-[#515F73]'} w-full`}>
+        <div className={`${theme === "light" ? "bg-slate-50" : "bg-[#515F73]"} w-full`}>
             <div className="max-w-[42.5rem] mx-auto p-2">
-                <svg ref={ref} style={{ width: '100%', height: 'auto' }} />
+                <svg ref={ref} style={{ width: "100%", height: "auto" }} />
             </div>
         </div>
-    );
-};
+    )
+}

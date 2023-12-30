@@ -12,23 +12,23 @@ import handleSpecificIdFilter from "@/app/lib/requestHandlers"
 import EditProperty from "./EditProperty"
 
 type Params = {
-  params: {
-    propertyid: number
-  }
+    params: {
+        propertyid: number
+    }
 }
 
 export default function ShowProperty({ params: { propertyid } }: Params) {
-  const router = useRouter()
-  const { allProperties } = useProperties.getState()
-  console.log(allProperties)
-  const property = handleSpecificIdFilter(allProperties, propertyid) as Property
-  console.log(property)
+    const router = useRouter()
+    const { allProperties } = useProperties.getState()
+    console.log(allProperties)
+    const property = handleSpecificIdFilter(allProperties, propertyid) as Property
+    console.log(property)
 
-  // const property: Property = await getProperty(propertyid)
+    // const property: Property = await getProperty(propertyid)
 
-  return (
-    <>
-      <EditProperty property={property} />
-    </>
-  )
+    return (
+        <>
+            <EditProperty property={property} />
+        </>
+    )
 }

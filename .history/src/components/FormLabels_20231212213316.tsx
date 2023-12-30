@@ -1,19 +1,18 @@
 /* eslint-disable prettier/prettier */
 import { ChangeEvent, useContext, useState } from "react"
 import { ThemeContext } from "@/context/ThemeContex"
-import "../../src/app/dashboard/createproperty/createproperty.css";
+import "../../src/app/dashboard/createproperty/createproperty.css"
 interface labelStructure {
-    id: number,
-    name: string,
-    type: string,
-    placeholder: string,
-    label: string,
-    ariaLabel: string,
-
+    id: number
+    name: string
+    type: string
+    placeholder: string
+    label: string
+    ariaLabel: string
 }
 interface FormInputProps {
     // eslint-disable-next-line no-unused-vars
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 const formLabels: labelStructure[] = [
     {
@@ -23,8 +22,6 @@ const formLabels: labelStructure[] = [
         placeholder: "Address",
         label: "Address",
         ariaLabel: "Address",
-
-
     },
     {
         id: 2,
@@ -124,8 +121,6 @@ const formLabels: labelStructure[] = [
     },
 ]
 
-
-
 export default function FormInput(props: FormInputProps) {
     const { onChange } = props
     const { theme } = useContext(ThemeContext)
@@ -164,19 +159,19 @@ export default function FormInput(props: FormInputProps) {
                         </label>
                         <input
                             className={`${theme === "light" ? "bg-white" : inputColour} leading-7 w-auto md:w-72 border-b-2`}
-                            {...entity} required
+                            {...entity}
+                            required
                             onKeyDown={
-                                entity.type === "number" ? (event: React.KeyboardEvent<HTMLInputElement>) => {
-                                    if (event.key.toLowerCase() === "e") {
-                                        event.preventDefault()
-                                    }
-                                } : undefined
+                                entity.type === "number"
+                                    ? (event: React.KeyboardEvent<HTMLInputElement>) => {
+                                          if (event.key.toLowerCase() === "e") {
+                                              event.preventDefault()
+                                          }
+                                      }
+                                    : undefined
                             }
                             onChange={onChange}
-
-
                         />
-
                     </div>
                 )
             })}

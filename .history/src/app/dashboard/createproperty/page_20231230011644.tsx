@@ -52,7 +52,7 @@ export default function NewProperty() {
             mutation.mutate(validatedData)
             router.replace("/dashboard")
         } else {
-            // Handle errors  
+            // Handle errors
             console.error(parsedData.error)
         }
     }

@@ -18,8 +18,8 @@ export default function ShowProperty({ params: { propertyid } }: Params) {
     // usePropertyStore.setState({ allProperties })
     // const zustandAllProperties = usePropertyStore.getState().allProperties
 
-    const { data: cachedData } = useQuery(['myDataKey'], fetchDataFunction, { enabled: false });
- 
+    const { data: cachedData } = useQuery(["myDataKey"], fetchDataFunction, { enabled: false })
+
     const filteredByIdProperty = filterId(allProperties!, propertyid) as Property
     return (
         <>

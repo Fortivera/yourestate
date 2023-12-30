@@ -1,3 +1,3 @@
 export default function PropertyPage(props) {
-  return <h1>Clicked Property</h1>
+    return <h1>Clicked Property</h1>
 }

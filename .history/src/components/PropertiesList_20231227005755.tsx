@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function PropertiesList({ allProperties }: Props) {
-  const [searchUsed, setSearchUsed] = useState<boolean>(false)
+    const [searchUsed, setSearchUsed] = useState<boolean>(false)
     const [searchedData, setSearchData] = useState("")
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -4,37 +4,35 @@
 "use client"
 
 // Import necessary libraries
-import React, { useContext, useEffect, useRef } from 'react';
-import * as d3 from 'd3';
-import { ThemeContext } from '@/context/ThemeContex';
-
+import React, { useContext, useEffect, useRef } from "react"
+import * as d3 from "d3"
+import { ThemeContext } from "@/context/ThemeContex"
 
 interface Props {
-    allProperties: Property[];
+    allProperties: Property[]
 }
 
 interface EnergySums {
-    electricity: number;
-    gas: number;
-    hydro: number;
+    electricity: number
+    gas: number
+    hydro: number
 }
 
 export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
-    const ref = useRef<SVGSVGElement>(null);
-    const { theme } = useContext(ThemeContext);
+    const ref = useRef<SVGSVGElement>(null)
+    const { theme } = useContext(ThemeContext)
 
     useEffect(() => {
         // Create a new bar chart
-        createBarChart(allProperties,);
-    }, [allProperties,]);
+        createBarChart(allProperties)
+    }, [allProperties])
 
     const createBarChart = (data: Property[]) => {
-        if (!ref.current) return;
+        if (!ref.current) return
 
-        const svg = d3.select(ref.current);
-        svg.selectAll('*').remove();
-        const energySumsByCountry = new Map<string, EnergySums>(); // country: {gas: amount, hydro: amount, electricity: amount}
-
+        const svg = d3.select(ref.current)
+        svg.selectAll("*").remove()
+        const energySumsByCountry = new Map<string, EnergySums>() // country: {gas: amount, hydro: amount, electricity: amount}
 
         data.forEach((property) => {
             if (!energySumsByCountry.has(property.country)) {
@@ -42,73 +40,76 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
                     electricity: property.electricity,
                     gas: property.gas,
                     hydro: property.hydro,
-                });
+                })
             } else {
-                const energyTypes = energySumsByCountry.get(property.country)!;
-                energyTypes.electricity += property.electricity;
-                energyTypes.gas += property.gas;
-                energyTypes.hydro += property.hydro;
+                const energyTypes = energySumsByCountry.get(property.country)!
+                energyTypes.electricity += property.electricity
+                energyTypes.gas += property.gas
+                energyTypes.hydro += property.hydro
             }
-        });
+        })
 
         const energyTuples: [string, EnergySums][] = Array.from(energySumsByCountry.entries()) // [[country: {gas: amount, hydro: amount, electricity: amount}], [...]]
 
-        const width = 700;
-        const height = 500;
-        const margin = { top: 20, right: 30, bottom: 40, left: 90 };
-        svg.attr('viewBox', `0 0 ${width} ${height}`)
-            .attr('preserveAspectRatio', 'xMidYMid meet');
-        let activeIndex: number | null = null;
+        const width = 700
+        const height = 500
+        const margin = { top: 20, right: 30, bottom: 40, left: 90 }
+        svg.attr("viewBox", `0 0 ${width} ${height}`).attr("preserveAspectRatio", "xMidYMid meet")
+        let activeIndex: number | null = null
 
-// Function to update the chart's appearance based on the active index
-function updateChart() {
-    svg.selectAll(".bar")
-        .transition()
-        .duration(500)
-        .style("opacity", (d, i) => (activeIndex === null || i === activeIndex ? 1 : 0.1));
+        // Function to update the chart's appearance based on the active index
+        function updateChart() {
+            svg.selectAll(".bar")
+                .transition()
+                .duration(500)
+                .style("opacity", (d, i) => (activeIndex === null || i === activeIndex ? 1 : 0.1))
 
-    legend.selectAll("rect")
-        .transition()
-        .duration(500)
-        .style("opacity", (d, i) => (activeIndex === null || i === activeIndex ? 1 : 0.4));
+            legend
+                .selectAll("rect")
+                .transition()
+                .duration(500)
+                .style("opacity", (d, i) => (activeIndex === null || i === activeIndex ? 1 : 0.4))
 
-    legend.selectAll("text")
-        .transition()
-        .duration(500)
-        .style("opacity", (d, i) => (activeIndex === null || i === activeIndex ? 1 : 0.4));
-}
+            legend
+                .selectAll("text")
+                .transition()
+                .duration(500)
+                .style("opacity", (d, i) => (activeIndex === null || i === activeIndex ? 1 : 0.4))
+        }
 
-// Draw bars and attach event listeners
-svg.selectAll(".bar")
-    .data(energyTuples)
-    .enter()
-    .append("rect")
-    .attr("class", "bar")
-    // ... set other attributes like x, y, width, height ...
-    .on('click', function (event, d, i) {
-        activeIndex = activeIndex === i ? null : i;
-        updateChart();
-    });
+        // Draw bars and attach event listeners
+        svg.selectAll(".bar")
+            .data(energyTuples)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            // ... set other attributes like x, y, width, height ...
+            .on("click", function (event, d, i) {
+                activeIndex = activeIndex === i ? null : i
+                updateChart()
+            })
 
-// Create the legend
-const legend = svg.append("g")
-                  // ... set legend position ...
-legend.selectAll("rect")
-      // ... define rectangles and their positions ...
-      .on('click', function (event, d, i) {
-          activeIndex = activeIndex === i ? null : i;
-          updateChart();
-      });
+        // Create the legend
+        const legend = svg.append("g")
+        // ... set legend position ...
+        legend
+            .selectAll("rect")
+            // ... define rectangles and their positions ...
+            .on("click", function (event, d, i) {
+                activeIndex = activeIndex === i ? null : i
+                updateChart()
+            })
 
-legend.selectAll("text")
-      // ... define text labels and their positions ...
-      .on('click', function (event, d, i) {
-          activeIndex = activeIndex === i ? null : i;
-          updateChart();
-      });
+        legend
+            .selectAll("text")
+            // ... define text labels and their positions ...
+            .on("click", function (event, d, i) {
+                activeIndex = activeIndex === i ? null : i
+                updateChart()
+            })
 
-// Initial call to set the correct opacities
-updateChart();
+        // Initial call to set the correct opacities
+        updateChart()
 
         // const xScale = d3.scaleBand()
         //     .domain(energyTuples.map(([country]) => country))
@@ -137,7 +138,6 @@ updateChart();
         //         .attr('width', xScale.bandwidth() / 3)
         //         .attr('height', ([, energySums]) => yScale(energySums[type as keyof EnergySums]))
         //         .attr('fill', colorScale(energyType));
-
 
         // });
 
@@ -180,13 +180,13 @@ updateChart();
         //     .attr('y', 9)
         //     .attr('dy', '0.35em')
         //     .text(d => d);
-    };
+    }
 
     return (
-        <div className={`${theme === 'light' ? 'bg-slate-50' : 'bg-[#515F73]'} w-full`}>
+        <div className={`${theme === "light" ? "bg-slate-50" : "bg-[#515F73]"} w-full`}>
             <div className="max-w-[42.5rem] mx-auto p-2">
-                <svg ref={ref} style={{ width: '100%', height: 'auto' }} />
+                <svg ref={ref} style={{ width: "100%", height: "auto" }} />
             </div>
         </div>
-    );
-};
+    )
+}

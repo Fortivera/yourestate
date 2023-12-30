@@ -55,7 +55,7 @@ export default function NewProperty() {
         formDataObj.electricity = Number(formDataObj.electricity)
         formDataObj.hydro = Number(formDataObj.hydro)
         formDataObj.gas = Number(formDataObj.gas)
-        
+
         const parsedData = zodPropertySchema.safeParse(Object.fromEntries(formData))
         if (parsedData.success) {
             const validatedData = parsedData.data

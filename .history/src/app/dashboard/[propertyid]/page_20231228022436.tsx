@@ -19,7 +19,7 @@ export default function ShowProperty({ params: { propertyid } }: Params) {
     // const zustandAllProperties = usePropertyStore.getState().allProperties
 
     const { data: allProperties, error } = useQuery({
-        queryKey: ["allProperties"]
+        queryKey: ["allProperties"],
     })
     if (error) return <div>Failed to load</div>
     const filteredByIdProperty = filterId(allProperties!, propertyid) as Property

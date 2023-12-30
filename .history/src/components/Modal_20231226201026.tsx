@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { ThemeContext } from "@/context/ThemeContex"
 
 export const Modal = ({ children }: any) => {
-      const router = useRouter()
+    const router = useRouter()
     const { theme } = useContext(ThemeContext)
     const closeHandler: MouseEventHandler = (): void => {
         router.push("/dashboard")

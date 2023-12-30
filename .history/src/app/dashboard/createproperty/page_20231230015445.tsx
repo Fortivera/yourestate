@@ -63,9 +63,9 @@ export default function NewProperty() {
         formDataObj.hydro = Number(formDataObj.hydro)
         formDataObj.gas = Number(formDataObj.gas)
         if (isNaN(formDataObj.id) || isNaN(formDataObj.tenant)) {
-  console.error("Invalid number input");
-  return;
-}
+            console.error("Invalid number input")
+            return
+        }
         const parsedData = zodPropertySchema.safeParse(formDataObj)
         if (parsedData.success) {
             const validatedData = parsedData.data

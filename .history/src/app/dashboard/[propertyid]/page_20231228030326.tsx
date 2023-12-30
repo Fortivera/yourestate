@@ -19,7 +19,7 @@ export default function ShowProperty({ params: { propertyid } }: Params) {
     // const zustandAllProperties = usePropertyStore.getState().allProperties
 
     const { data: allProperties } = useQuery(["allProperties"], fetchDataFunction, { enabled: false })
- 
+
     const filteredByIdProperty = filterId(allProperties!, propertyid) as Property
     return (
         <>

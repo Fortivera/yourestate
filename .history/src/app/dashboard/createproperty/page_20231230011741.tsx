@@ -49,7 +49,7 @@ export default function NewProperty() {
 
         formDataObj.id = Number(formDataObj.id)
         formDataObj.rent = Number(formDataObj.rent)
-        
+
         const parsedData = zodPropertySchema.safeParse(Object.fromEntries(formData))
         if (parsedData.success) {
             const validatedData = parsedData.data

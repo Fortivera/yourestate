@@ -9,16 +9,17 @@ interface D3ChartProps {
 }
 
 function createPieChart(svg, data, width, height) {
-    const pie = d3.pie().value((d) => d.value)(data);
-    const arc = d3.arc().innerRadius(0).outerRadius(Math.min(width, height) / 2);
+    const pie = d3.pie().value((d) => d.value)(data)
+    const arc = d3
+        .arc()
+        .innerRadius(0)
+        .outerRadius(Math.min(width, height) / 2)
 
-    svg
-        .selectAll('path')
+    svg.selectAll("path")
         .data(pie)
-        .join('path')
-        .attr('d', arc)
-        .attr('fill', (d, i) => d3.schemeCategory10[i]);
+        .join("path")
+        .attr("d", arc)
+        .attr("fill", (d, i) => d3.schemeCategory10[i])
 }
-
 
 export default D3Chart

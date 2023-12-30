@@ -4,22 +4,19 @@
 "use client"
 
 // Import necessary libraries
-import React, { useEffect, useRef } from 'react';
-import * as d3 from 'd3';
-
-
-
+import React, { useEffect, useRef } from "react"
+import * as d3 from "d3"
 
 interface Props {
-    allProperties: Property[];
+    allProperties: Property[]
 }
 
 export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
-    const ref = useRef<SVGSVGElement>(null);
+    const ref = useRef<SVGSVGElement>(null)
 
     useEffect(() => {
-        createPieChart(allProperties);
-    }, [allProperties]);
+        createPieChart(allProperties)
+    }, [allProperties])
 
     const createPieChart = (data: Property[]) => {
         const typeCount = new Map<string, number>([
@@ -27,98 +24,96 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
             ["Parking", 0],
             ["Land", 0],
             ["House", 0],
-        ]);
+        ])
 
         data.forEach((property) => {
             if (typeCount.has(property.type)) {
-                typeCount.set(property.type, typeCount.get(property.type)! + 1);
+                typeCount.set(property.type, typeCount.get(property.type)! + 1)
             }
-        });
+        })
 
-        const typeTuples: [string, number][] = Array.from(typeCount.entries());
+        const typeTuples: [string, number][] = Array.from(typeCount.entries())
 
-        const pieGenerator = d3.pie<[string, number]>().value((d) => d[1]);
-        const pieData = pieGenerator(typeTuples);
+        const pieGenerator = d3.pie<[string, number]>().value((d) => d[1])
+        const pieData = pieGenerator(typeTuples)
 
-        const width = 500;
-        const height = 500;
-        const svg = d3.select(ref.current)
-            .attr('viewBox', `0 0 ${width} ${height}`)
-            .attr('preserveAspectRatio', 'xMidYMid meet');
+        const width = 500
+        const height = 500
+        const svg = d3.select(ref.current).attr("viewBox", `0 0 ${width} ${height}`).attr("preserveAspectRatio", "xMidYMid meet")
 
-        const color = d3.scaleOrdinal<string>().range(d3.schemePastel1);
+        const color = d3.scaleOrdinal<string>().range(d3.schemePastel1)
 
-        const arcGenerator = d3.arc<d3.PieArcDatum<[string, number]>>()
+        const arcGenerator = d3
+            .arc<d3.PieArcDatum<[string, number]>>()
             .innerRadius(Math.min(width, height) / 4)
-            .outerRadius(Math.min(width, height) / 2);
+            .outerRadius(Math.min(width, height) / 2)
 
-        const g = svg.append('g')
-            .attr('transform', `translate(${width / 2}, ${height / 2})`);
+        const g = svg.append("g").attr("transform", `translate(${width / 2}, ${height / 2})`)
 
-
-
-        const slice = g.selectAll('g')
+        const slice = g
+            .selectAll("g")
             .data(pieData)
             .enter()
-            .append('g')
-            .classed('cursor-pointer', true)
-            .on('mouseover', function (this: SVGElement, d) {
+            .append("g")
+            .classed("cursor-pointer", true)
+            .on("mouseover", function (this: SVGElement, d) {
                 // Handle mouseover event
-                const slice = d3.select(this);
-                const originalColor = slice.select('path').attr('fill'); // Store the original color
+                const slice = d3.select(this)
+                const originalColor = slice.select("path").attr("fill") // Store the original color
 
-                slice.select('path').attr('fill', 'orange'); // Change the color on hover
+                slice.select("path").attr("fill", "orange") // Change the color on hover
 
-                slice.attr('data-original-color', originalColor); // Store the original color as a data attribute
+                slice.attr("data-original-color", originalColor) // Store the original color as a data attribute
 
-                const tooltip = g.append('g')
-                    .attr('class', 'tooltip')
-                    .style('opacity', 0);
+                const tooltip = g.append("g").attr("class", "tooltip").style("opacity", 0)
 
                 if (d.data && Array.isArray(d.data) && d.data.length >= 2) {
-                    tooltip.append('text')
+                    tooltip
+                        .append("text")
                         .text(`${d.data[0]}: ${((d.data[1] / data.length) * 100).toFixed(2)}%`)
-                        .attr('text-anchor', 'middle')
-                        .style('font-size', '14px')
-                        .attr('y', 20);
+                        .attr("text-anchor", "middle")
+                        .style("font-size", "14px")
+                        .attr("y", 20)
 
-                    const bbox = tooltip.node()?.getBBox();
+                    const bbox = tooltip.node()?.getBBox()
 
                     if (bbox) {
-                        const padding = 5;
+                        const padding = 5
 
-                        tooltip.insert('rect', 'text')
-                            .attr('x', bbox.x - padding)
-                            .attr('y', bbox.y - padding)
-                            .attr('width', bbox.width + padding * 2)
-                            .attr('height', bbox.height + padding * 2)
-                            .style('fill', 'white')
-                            .style('opacity', 0.75);
+                        tooltip
+                            .insert("rect", "text")
+                            .attr("x", bbox.x - padding)
+                            .attr("y", bbox.y - padding)
+                            .attr("width", bbox.width + padding * 2)
+                            .attr("height", bbox.height + padding * 2)
+                            .style("fill", "white")
+                            .style("opacity", 0.75)
                     }
                 }
             })
 
-            .on('mouseout', function () {
+            .on("mouseout", function () {
                 // Handle mouseout event
-                const slice = d3.select(this);
-                const originalColor = slice.attr('data-original-color'); // Retrieve the original color
+                const slice = d3.select(this)
+                const originalColor = slice.attr("data-original-color") // Retrieve the original color
 
-                slice.select('path').attr('fill', originalColor); // Set the fill back to the original color
+                slice.select("path").attr("fill", originalColor) // Set the fill back to the original color
 
                 // Remove the tooltip
-                g.select('.tooltip').remove();
-            });
+                g.select(".tooltip").remove()
+            })
 
+        slice
+            .append("path")
+            .attr("d", arcGenerator as any)
+            .attr("fill", (d, i) => String(color(i.toString())))
 
-        slice.append('path')
-            .attr('d', arcGenerator as any)
-            .attr('fill', (d, i) => String(color(i.toString())));
-
-        slice.append('text')
+        slice
+            .append("text")
             .text((d) => `${d.data[0]}: ${((d.data[1] / data.length) * 100).toFixed(2)}%`)
-            .attr('transform', (d) => `translate(${arcGenerator.centroid(d as any)})`)
-            .style('font-size', '14px')
-            .style('text-anchor', 'middle');
+            .attr("transform", (d) => `translate(${arcGenerator.centroid(d as any)})`)
+            .style("font-size", "14px")
+            .style("text-anchor", "middle")
     }
-    return <svg ref={ref} width={500} height={500} />;
-};
+    return <svg ref={ref} width={500} height={500} />
+}

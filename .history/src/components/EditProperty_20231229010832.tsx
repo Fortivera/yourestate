@@ -14,7 +14,7 @@ interface Props {
     allProperties?: Property[]
 }
 
-export default function EditProperty({ property, allProperties : cachedProperties }: Props) {
+export default function EditProperty({ property, allProperties: cachedProperties }: Props) {
     const queryClient = useQueryClient()
     const router = useRouter()
 

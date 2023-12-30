@@ -35,7 +35,6 @@ export default function NewProperty() {
         router.refresh()
         router.replace("/dashboard")
     }
-     
 
     return (
         <Modal>
@@ -55,7 +54,7 @@ export default function NewProperty() {
                                 <Link href={`/dashboard`}>Cancel</Link>
                             </button>
 
-                            <button   className="w-28 bg-indigo-200 rounded-md py-1 hover:bg-indigo-300 shadow-md text-black" type="submit">
+                            <button className="w-28 bg-indigo-200 rounded-md py-1 hover:bg-indigo-300 shadow-md text-black" type="submit">
                                 Submit
                             </button>
                         </div>

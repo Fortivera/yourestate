@@ -24,7 +24,7 @@ export default function ShowProperty({ params: { propertyid } }: Params) {
     const filteredByIdProperty = filterId(allProperties!, propertyid) as Property
     return (
         <>
-            <EditProperty property={filteredByIdProperty, allProperties} />
+            <EditProperty property={(filteredByIdProperty, allProperties)} />
         </>
     )
 }

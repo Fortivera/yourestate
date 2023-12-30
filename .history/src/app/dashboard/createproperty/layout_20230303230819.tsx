@@ -1,8 +1,8 @@
 export const metadata = {
-  title: "Create Property",
-  description: "great explanation of dash",
+    title: "Create Property",
+    description: "great explanation of dash",
 }
 
 export default function Layout(children: any) {
-  return <>{children}</>
+    return <>{children}</>
 }

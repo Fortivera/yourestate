@@ -3,5 +3,5 @@
 import { useEffect } from "react"
 
 export default function Error({ error, reset }: { error: Error; reset: () => void }) {
-  return alert(`${error.cause}`)
+    return alert(`${error.cause}`)
 }

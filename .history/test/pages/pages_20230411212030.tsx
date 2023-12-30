@@ -1,2 +1,2 @@
-import React from "react";
-import Login from "@/app/page";
+import React from "react"
+import Login from "@/app/page"

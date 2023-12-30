@@ -16,8 +16,7 @@ function D3Chart({ svg, data, width, height }: D3ChartProps) {
         .innerRadius(0)
         .outerRadius(Math.min(width, height) / 2)
 
-    svg
-        .selectAll("path")
+    svg.selectAll("path")
         .data(pie)
         .join("path")
         .attr("d", arc)

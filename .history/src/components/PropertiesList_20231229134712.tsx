@@ -14,19 +14,19 @@ import { getProperty } from "lib/useRequestFunctions"
 // }
 
 export default function PropertiesList() {
-  const { data: allProperties, error } = useQuery({
-    queryKey: ["allProperties"],
-    queryFn: getProperty,
-  })
+    const { data: allProperties, error } = useQuery({
+        queryKey: ["allProperties"],
+        queryFn: getProperty,
+    })
 
-  if (error) return <div>Failed to load</div>
-  if (!allProperties) return <div>Loading...</div>
+    if (error) return <div>Failed to load</div>
+    if (!allProperties) return <div>Loading...</div>
 
-  return (
-    <ul>
-      {allProperties.map((property) => (
-        <li key={property.id}>{property.country}</li>
-      ))}
-    </ul>
-  )
+    return (
+        <ul>
+            {allProperties.map((property) => (
+                <li key={property.id}>{property.country}</li>
+            ))}
+        </ul>
+    )
 }

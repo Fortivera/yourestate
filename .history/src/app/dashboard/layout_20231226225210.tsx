@@ -13,25 +13,24 @@ export default async function Layout({ children }: { children: React.ReactNode }
 
     usePropertyStore.setState({ allProperties })
 
- 
-  return (
-    <>
-      <ThemeContextProvider>
-        <ThemeProvider>
-          <header>
-            <Navbar />
-          </header>
-          <div>{children}</div>
-          <main>
-            <div className="flex flex-col md:flex-row mt-14">
-              <div className="w-screen md:h-auto md:w-[29rem] h-[50vh]">
-                <PropertiesList allProperties={allProperties} />
-              </div>
-              <Analytics allProperties={allProperties} />
-            </div>
-          </main>
-        </ThemeProvider>
-      </ThemeContextProvider>
-    </>
-  )
+    return (
+        <>
+            <ThemeContextProvider>
+                <ThemeProvider>
+                    <header>
+                        <Navbar />
+                    </header>
+                    <div>{children}</div>
+                    <main>
+                        <div className="flex flex-col md:flex-row mt-14">
+                            <div className="w-screen md:h-auto md:w-[29rem] h-[50vh]">
+                                <PropertiesList allProperties={allProperties} />
+                            </div>
+                            <Analytics allProperties={allProperties} />
+                        </div>
+                    </main>
+                </ThemeProvider>
+            </ThemeContextProvider>
+        </>
+    )
 }

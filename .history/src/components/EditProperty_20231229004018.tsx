@@ -44,10 +44,10 @@ export default function EditProperty({ property }: Props) {
 
         await deleteProperty(property.id)
         const cachedProperties = queryClient.getQueryData(["allProperties"]) as Property[]
-            if (cachedProperties) {
-                const updatedCachedProperties = cachedProperties.map((p) => (p.id === updatedProperty.id ? updatedProperty : p))
-                queryClient.setQueryData(["allProperties"], updatedCachedProperties)
-            }
+        if (cachedProperties) {
+            const updatedCachedProperties = cachedProperties.map((p) => (p.id === updatedProperty.id ? updatedProperty : p))
+            queryClient.setQueryData(["allProperties"], updatedCachedProperties)
+        }
         // router.refresh()
         router.replace("/dashboard")
     }

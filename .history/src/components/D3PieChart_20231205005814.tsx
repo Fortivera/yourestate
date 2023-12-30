@@ -4,27 +4,28 @@
 "use client"
 
 // Import necessary libraries
-import React, { useEffect, useRef } from 'react';
-import * as d3 from 'd3';
-
-
-
+import React, { useEffect, useRef } from "react"
+import * as d3 from "d3"
 
 // Define the Props type
 interface Props {
-    allProperties: Property[];
+    allProperties: Property[]
 }
 
 export const D3PieChart = ({ allProperties }: Props) => {
-    const ref = useRef<SVGSVGElement>(null);
+    const ref = useRef<SVGSVGElement>(null)
 
     useEffect(() => {
-        createPieChart(allProperties);
-    }, [allProperties]);
+        createPieChart(allProperties)
+    }, [allProperties])
 
     const createPieChart = (data: Property[]) => {
-        let typeCount = new Map<string, number>([["Farm", 0], ["Parking", 0], ["Land", 0], ["House", 0]])
-
+        let typeCount = new Map<string, number>([
+            ["Farm", 0],
+            ["Parking", 0],
+            ["Land", 0],
+            ["House", 0],
+        ])
 
         data.forEach((property) => {
             if (typeCount.has(property.type)) {
@@ -35,21 +36,21 @@ export const D3PieChart = ({ allProperties }: Props) => {
         const entries: [string, number][] = Object.entries(typeCount)
 
         // Create a pie generator
-        const pieGenerator = pie<[string, number]>().value((d) => d[1]);
+        const pieGenerator = pie<[string, number]>().value((d) => d[1])
 
         // Generate the pie data
-        const pieData = pieGenerator(typeTuples);
+        const pieData = pieGenerator(typeTuples)
 
-        const svg = d3.select(ref.current);
-        const width = +svg.attr('width');
-        const height = +svg.attr('height');
-        const radius = Math.min(width, height) / 2;
+        const svg = d3.select(ref.current)
+        const width = +svg.attr("width")
+        const height = +svg.attr("height")
+        const radius = Math.min(width, height) / 2
         const color = d3.scaleOrdinal(d3.schemeCategory10)
 
-        const pieGenerator = d3.pie().value((d) => d.value);
-        const pie = pieGenerator(data);
+        const pieGenerator = d3.pie().value((d) => d.value)
+        const pie = pieGenerator(data)
 
-        const arcPathGenerator = d3.arc();
+        const arcPathGenerator = d3.arc()
         const arcs = pie.map((p) =>
             arcPathGenerator({
                 innerRadius: 50, // makes a donut instead of a pie
@@ -57,25 +58,25 @@ export const D3PieChart = ({ allProperties }: Props) => {
                 startAngle: p.startAngle,
                 endAngle: p.endAngle,
             })
-        );
+        )
 
-        svg.attr('transform', `translate(${width / 2}, ${height / 2})`);
+        svg.attr("transform", `translate(${width / 2}, ${height / 2})`)
 
-        svg.selectAll('path')
+        svg.selectAll("path")
             .data(pieData)
             .enter()
-            .append('path')
-            .attr('d', arc)
-            .style('fill', (d, i) => color(i.toString()));
+            .append("path")
+            .attr("d", arc)
+            .style("fill", (d, i) => color(i.toString()))
 
-        svg.selectAll('text')
+        svg.selectAll("text")
             .data(pieData)
             .enter()
-            .append('text')
-            .attr('transform', d => `translate(${arc.centroid(d)})`)
-            .attr('dy', '.35em')
-            .text(d => d.data.type);
-    };
+            .append("text")
+            .attr("transform", (d) => `translate(${arc.centroid(d)})`)
+            .attr("dy", ".35em")
+            .text((d) => d.data.type)
+    }
 
-    return <svg ref={ref} width={500} height={500} />;
-};
+    return <svg ref={ref} width={500} height={500} />
+}

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function ProductsPage() {
     return (
         <>
-      <div></div>
+            <div></div>
         </>
     )
 }

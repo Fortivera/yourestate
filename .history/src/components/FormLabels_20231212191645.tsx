@@ -2,19 +2,17 @@
 
 import { useContext } from "react"
 
-
 import { ThemeContext } from "@/context/ThemeContex"
 
 interface labelStructure {
-    id: number,
-    name: string,
-    type: string,
-    placeholder: string,
-    label: string,
-    ariaLabel: string,
-    pattern: string,
-    required: true,
-
+    id: number
+    name: string
+    type: string
+    placeholder: string
+    label: string
+    ariaLabel: string
+    pattern: string
+    required: true
 }
 
 const formLabels: labelStructure[] = [
@@ -27,7 +25,6 @@ const formLabels: labelStructure[] = [
         ariaLabel: "Address",
         pattern: "^[A-Za-z0-9]",
         required: true,
-
     },
     {
         id: 2,
@@ -139,8 +136,6 @@ const formLabels: labelStructure[] = [
     },
 ]
 
-
-
 export default function FormInput() {
     const { theme } = useContext(ThemeContext)
     const inputColour = "bg-slate-500/60 text-[#ddd]"
@@ -173,14 +168,15 @@ export default function FormInput() {
                         </label>
                         <input
                             className={`${theme === "light" ? "bg-white" : inputColour} leading-7 w-auto md:w-72 border-b-2`}
-                            {...entity} required
+                            {...entity}
+                            required
                             onKeyDown={
                                 entity.type === "number"
                                     ? (event: React.KeyboardEvent<HTMLInputElement>) => {
-                                        if (event.key.toLowerCase() === "e") {
-                                            event.preventDefault()
-                                        }
-                                    }
+                                          if (event.key.toLowerCase() === "e") {
+                                              event.preventDefault()
+                                          }
+                                      }
                                     : undefined
                             }
                         />

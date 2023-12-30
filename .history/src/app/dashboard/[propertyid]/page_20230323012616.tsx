@@ -5,24 +5,24 @@ import EditProperty from "./EditProperty"
 import { useProperties } from "@/app/usePropertiesStore"
 
 type Params = {
-  params: {
-    propertyid: number
-  }
+    params: {
+        propertyid: number
+    }
 }
 
 type objAllProperties = {
-  allProperties: {
-    allProperties: Property[]
-  }
+    allProperties: {
+        allProperties: Property[]
+    }
 }
 export default function ShowProperty({ params: { propertyid } }: Params) {
-  //Zustand causes strange object enclosure, so we reassign to make create proper type
-  const data = useProperties((state) => state.allProperties) as unknown as objAllProperties
-  const allProperties = data.allProperties as unknown as Property[]
+    //Zustand causes strange object enclosure, so we reassign to make create proper type
+    const data = useProperties((state) => state.allProperties) as unknown as objAllProperties
+    const allProperties = data.allProperties as unknown as Property[]
 
-  return (
-    <>
-      <EditProperty property={filterId(allProperties, propertyid)} />
-    </>
-  )
+    return (
+        <>
+            <EditProperty property={filterId(allProperties, propertyid)} />
+        </>
+    )
 }

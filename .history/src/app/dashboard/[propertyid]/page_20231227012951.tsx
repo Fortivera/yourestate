@@ -5,19 +5,19 @@ import EditProperty from "../../../components/EditProperty"
 import { usePropertyStore } from "@/app/usePropertiesStore"
 
 type Params = {
-  params: {
-    propertyid: number
-  }
+    params: {
+        propertyid: number
+    }
 }
 
 export default function ShowProperty({ params: { propertyid } }: Params) {
-  const zustandAllProperties = usePropertyStore((state) => state.allProperties)
+    const zustandAllProperties = usePropertyStore((state) => state.allProperties)
 
-  const filteredByIdProperty = filterId(zustandAllProperties, propertyid) as Property
+    const filteredByIdProperty = filterId(zustandAllProperties, propertyid) as Property
 
-  return (
-    <>
-      <EditProperty property={filteredByIdProperty} />
-    </>
-  )
+    return (
+        <>
+            <EditProperty property={filteredByIdProperty} />
+        </>
+    )
 }

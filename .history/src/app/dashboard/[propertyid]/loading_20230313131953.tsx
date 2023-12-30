@@ -1,3 +1,3 @@
 function loading() {
-  ;<h1>Loading</h1>
+    ;<h1>Loading</h1>
 }

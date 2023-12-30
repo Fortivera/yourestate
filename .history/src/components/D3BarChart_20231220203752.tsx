@@ -4,37 +4,35 @@
 "use client"
 
 // Import necessary libraries
-import React, { useContext, useEffect, useRef } from 'react';
-import * as d3 from 'd3';
-import { ThemeContext } from '@/context/ThemeContex';
-
+import React, { useContext, useEffect, useRef } from "react"
+import * as d3 from "d3"
+import { ThemeContext } from "@/context/ThemeContex"
 
 interface Props {
-    allProperties: Property[];
+    allProperties: Property[]
 }
 
 interface EnergySums {
-    electricity: number;
-    gas: number;
-    hydro: number;
+    electricity: number
+    gas: number
+    hydro: number
 }
 
 export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
-    const ref = useRef<SVGSVGElement>(null);
-    const { theme } = useContext(ThemeContext);
+    const ref = useRef<SVGSVGElement>(null)
+    const { theme } = useContext(ThemeContext)
 
     useEffect(() => {
         // Create a new bar chart
-        createBarChart(allProperties,);
-    }, [allProperties,]);
+        createBarChart(allProperties)
+    }, [allProperties])
 
     const createBarChart = (data: Property[]) => {
-        if (!ref.current) return;
+        if (!ref.current) return
 
-        const svg = d3.select(ref.current);
-        svg.selectAll('*').remove();
-        const energySumsByCountry = new Map<string, EnergySums>();
-
+        const svg = d3.select(ref.current)
+        svg.selectAll("*").remove()
+        const energySumsByCountry = new Map<string, EnergySums>()
 
         data.forEach((property) => {
             if (!energySumsByCountry.has(property.country)) {
@@ -42,20 +40,16 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
                     electricity: property.electricity,
                     gas: property.gas,
                     hydro: property.hydro,
-                });
+                })
             } else {
-                const energySums = energySumsByCountry.get(property.country)!;
-                energySums.electricity += property.electricity;
-                energySums.gas += property.gas;
-                energySums.hydro += property.hydro;
+                const energySums = energySumsByCountry.get(property.country)!
+                energySums.electricity += property.electricity
+                energySums.gas += property.gas
+                energySums.hydro += property.hydro
             }
-        });
+        })
 
-        const energyTuples: [string, EnergySums][] = Array.from(energySumsByCountry.entries());
-
-
-
-
+        const energyTuples: [string, EnergySums][] = Array.from(energySumsByCountry.entries())
 
         // const xScale = d3.scaleBand()
         //     .domain(energyTuples.map(([country]) => country))
@@ -84,7 +78,6 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
         //         .attr('width', xScale.bandwidth() / 3)
         //         .attr('height', ([, energySums]) => yScale(energySums[type as keyof EnergySums]))
         //         .attr('fill', colorScale(energyType));
-
 
         // });
 
@@ -127,13 +120,13 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
         //     .attr('y', 9)
         //     .attr('dy', '0.35em')
         //     .text(d => d);
-    };
+    }
 
     return (
-        <div className={`${theme === 'light' ? 'bg-slate-50' : 'bg-[#515F73]'} w-full`}>
+        <div className={`${theme === "light" ? "bg-slate-50" : "bg-[#515F73]"} w-full`}>
             <div className="max-w-[42.5rem] mx-auto p-2">
-                <svg ref={ref} style={{ width: '1000px', height: "1000px" }} />
+                <svg ref={ref} style={{ width: "1000px", height: "1000px" }} />
             </div>
         </div>
-    );
-};
+    )
+}

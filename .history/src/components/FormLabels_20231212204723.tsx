@@ -3,16 +3,15 @@ import { useContext, useState } from "react"
 import { ThemeContext } from "@/context/ThemeContex"
 
 interface labelStructure {
-    id: number,
-    name: string,
-    type: string,
-    placeholder: string,
-    label: string,
-    ariaLabel: string,
-
+    id: number
+    name: string
+    type: string
+    placeholder: string
+    label: string
+    ariaLabel: string
 }
 interface FormInputProps {
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 const formLabels: labelStructure[] = [
     {
@@ -22,8 +21,6 @@ const formLabels: labelStructure[] = [
         placeholder: "Address",
         label: "Address",
         ariaLabel: "Address",
-
-
     },
     {
         id: 2,
@@ -123,8 +120,6 @@ const formLabels: labelStructure[] = [
     },
 ]
 
-
-
 export default function FormInput(props: FormInputProps) {
     const { onChange } = props
     const { theme } = useContext(ThemeContext)
@@ -163,18 +158,20 @@ export default function FormInput(props: FormInputProps) {
                         </label>
                         <input
                             className={`${theme === "light" ? "bg-white" : inputColour} leading-7 w-auto md:w-72 border-b-2`}
-                            {...entity} required
+                            {...entity}
+                            required
                             onKeyDown={
-                                entity.type === "number" ? (event: React.KeyboardEvent<HTMLInputElement>) => {
-                                    if (event.key.toLowerCase() === "e") {
-                                        event.preventDefault()
-                                    }
-                                } : undefined
+                                entity.type === "number"
+                                    ? (event: React.KeyboardEvent<HTMLInputElement>) => {
+                                          if (event.key.toLowerCase() === "e") {
+                                              event.preventDefault()
+                                          }
+                                      }
+                                    : undefined
                             }
                             onChange={onChange}
                             onBlur={handleFocus}
                             focused={focused.toString()}
-
                         />
                         <div className="text-red-400">{entity.type === "text" ? undefined : "Incorect input type, please use numerals"}</div>
                     </div>

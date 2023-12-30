@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import Link from "next/link"
 type locationType = {
-    location: string,
+    location: string
 }
 export default function CancelButton(location: locationType) {
     return (

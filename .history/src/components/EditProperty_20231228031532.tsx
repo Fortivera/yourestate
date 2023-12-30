@@ -26,11 +26,11 @@ export default function EditProperty({ property }: Props) {
 
             console.log(requestData)
             await updateProperty(requestData, property.id)
-            const properties = queryClient.getQueryData(['allProperties']);
-        if (properties) {
-            const updatedProperties = properties.map(p => p.id === updatedProperty.id ? updatedProperty : p);
-            queryClient.setQueryData(['allProperties'], updatedProperties);
-        }
+            const properties = queryClient.getQueryData(["allProperties"])
+            if (properties) {
+                const updatedProperties = properties.map((p) => (p.id === updatedProperty.id ? updatedProperty : p))
+                queryClient.setQueryData(["allProperties"], updatedProperties)
+            }
             // router.refresh()
             router.replace("/dashboard")
         } catch (error) {

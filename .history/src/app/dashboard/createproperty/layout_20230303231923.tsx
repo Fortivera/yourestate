@@ -3,9 +3,9 @@
 import ProductsPage from "../page"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <section>{children}</section>
-    </>
-  )
+    return (
+        <>
+            <section>{children}</section>
+        </>
+    )
 }

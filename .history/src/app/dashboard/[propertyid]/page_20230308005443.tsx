@@ -6,47 +6,47 @@ import { useRouter } from "next/navigation"
 import { useProperties } from "@/app/usePropertiesStore"
 
 type Params = {
-  params: {
-    propertyid: number
-  }
+    params: {
+        propertyid: number
+    }
 }
 
 function ff(arr: any, propertyid: number) {
-  for (let i = 0; i <= arr.length; i++) {
-    if (arr[i].id != propertyid) {
-      continue
-    } else {
-      return arr[i]
+    for (let i = 0; i <= arr.length; i++) {
+        if (arr[i].id != propertyid) {
+            continue
+        } else {
+            return arr[i]
+        }
     }
-  }
 }
 
 export default async function ShowProperty({ params: { propertyid } }: Params) {
-  const pproperty: any = useProperties.getState()
-  console.log(pproperty)
-  const property = ff(pproperty, propertyid)
+    const pproperty: any = useProperties.getState()
+    console.log(pproperty)
+    const property = ff(pproperty, propertyid)
 
-  // const property: Property = await getProperty(propertyid)
-  // const router = useRouter()
+    // const property: Property = await getProperty(propertyid)
+    // const router = useRouter()
 
-  // async function handlePut(event: FormEvent<HTMLFormElement>) {
-  //     event.preventDefault()
-  //     const dataCollected = event.target as HTMLFormElement
-  //     const formData = new FormData(dataCollected) as Iterable<[Property, FormDataEntryValue]>
-  //     const requestData: Property = Object.fromEntries(formData);
-  //     console.log(requestData);
-  //     updateProperty(requestData, propertyid)
-  //     router.refresh()
-  //     router.push("/dashboard")
-  // }
+    // async function handlePut(event: FormEvent<HTMLFormElement>) {
+    //     event.preventDefault()
+    //     const dataCollected = event.target as HTMLFormElement
+    //     const formData = new FormData(dataCollected) as Iterable<[Property, FormDataEntryValue]>
+    //     const requestData: Property = Object.fromEntries(formData);
+    //     console.log(requestData);
+    //     updateProperty(requestData, propertyid)
+    //     router.refresh()
+    //     router.push("/dashboard")
+    // }
 
-  // function handleDelete() {
-  //     deleteProperty(propertyid)
-  //     router.refresh()
-  //     router.push("/dashboard")
-  // }
+    // function handleDelete() {
+    //     deleteProperty(propertyid)
+    //     router.refresh()
+    //     router.push("/dashboard")
+    // }
 
-  return <></>
+    return <></>
 }
 
 // async function getProperty(propertyid: number) {

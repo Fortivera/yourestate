@@ -5,32 +5,32 @@ import EditProperty from "./EditProperty"
 import { useProperties } from "@/app/usePropertiesStore"
 
 type Params = {
-  params: {
-    propertyid: number
-  }
+    params: {
+        propertyid: number
+    }
 }
 
 export default function ShowProperty({ params: { propertyid } }: Params) {
-  const allProperties = useProperties((state) => state.allProperties)
+    const allProperties = useProperties((state) => state.allProperties)
 
-  console.log({ allProperties })
-  // console.log(allProperties[0])
+    console.log({ allProperties })
+    // console.log(allProperties[0])
 
-  function useHandleSpecificIdFilter(arr: any, propertyid: number) {
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i].id != propertyid) {
-      } else {
-        return arr[i]
-      }
+    function useHandleSpecificIdFilter(arr: any, propertyid: number) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].id != propertyid) {
+            } else {
+                return arr[i]
+            }
+        }
     }
-  }
-  const property = useHandleSpecificIdFilter(allProperties, propertyid)
-  // const property = useHandleSpecificIdFilter(allProperties, propertyid) as Property
-  // console.log(property)
+    const property = useHandleSpecificIdFilter(allProperties, propertyid)
+    // const property = useHandleSpecificIdFilter(allProperties, propertyid) as Property
+    // console.log(property)
 
-  return (
-    <>
-      <EditProperty property={property} />
-    </>
-  )
+    return (
+        <>
+            <EditProperty property={property} />
+        </>
+    )
 }

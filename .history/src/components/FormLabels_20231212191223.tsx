@@ -2,16 +2,15 @@
 
 import { useContext } from "react"
 
-
 import { ThemeContext } from "@/context/ThemeContex"
 
 interface labelStructure {
-    id: number,
-    name: string,
-    type: string,
-    placeholder: string,
-    label: string,
-    ariaLabel: string,
+    id: number
+    name: string
+    type: string
+    placeholder: string
+    label: string
+    ariaLabel: string
 }
 
 const formLabels: labelStructure[] = [
@@ -21,8 +20,8 @@ const formLabels: labelStructure[] = [
         type: "text",
         placeholder: "Address",
         label: "Address",
-        ariaLabel: "Address", required: true,
-
+        ariaLabel: "Address",
+        required: true,
     },
     {
         id: 2,
@@ -122,8 +121,6 @@ const formLabels: labelStructure[] = [
     },
 ]
 
-
-
 export default function FormInput() {
     const { theme } = useContext(ThemeContext)
     const inputColour = "bg-slate-500/60 text-[#ddd]"
@@ -160,10 +157,10 @@ export default function FormInput() {
                             onKeyDown={
                                 entity.type === "number"
                                     ? (event: React.KeyboardEvent<HTMLInputElement>) => {
-                                        if (event.key.toLowerCase() === "e") {
-                                            event.preventDefault()
-                                        }
-                                    }
+                                          if (event.key.toLowerCase() === "e") {
+                                              event.preventDefault()
+                                          }
+                                      }
                                     : undefined
                             }
                         />

@@ -1,7 +1,1 @@
-
-
-describe("Render a create property page", () => {
-
-}
-
-)
+describe("Render a create property page", () => {})

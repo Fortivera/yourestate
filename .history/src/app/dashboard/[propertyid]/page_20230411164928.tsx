@@ -5,23 +5,23 @@ import { useProperties } from "@/app/usePropertiesStore"
 import StoreInitializer from "@/app/components/StoreInitializer"
 
 type Params = {
-  params: {
-    propertyid: number
-  }
+    params: {
+        propertyid: number
+    }
 }
 
 export default async function ShowProperty({ params: { propertyid } }: Params) {
-  // const allProperties = useProperties.getState().allProperties
+    // const allProperties = useProperties.getState().allProperties
 
-  const allPropertiesPromise: Promise<Property[]> = await getData()
-  const allProperties = await allPropertiesPromise
-  useProperties.setState({ allProperties })
-  const zustandData = useProperties.getState().allProperties
-  const filteredProperty = filterId(zustandData, propertyid) as any
+    const allPropertiesPromise: Promise<Property[]> = await getData()
+    const allProperties = await allPropertiesPromise
+    useProperties.setState({ allProperties })
+    const zustandData = useProperties.getState().allProperties
+    const filteredProperty = filterId(zustandData, propertyid) as any
 
-  return (
-    <>
-      <EditProperty property={filteredProperty} />
-    </>
-  )
+    return (
+        <>
+            <EditProperty property={filteredProperty} />
+        </>
+    )
 }

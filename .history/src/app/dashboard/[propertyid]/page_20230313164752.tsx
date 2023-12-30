@@ -6,58 +6,58 @@ import { useRouter } from "next/navigation"
 import { useProperties } from "../../usePropertiesStore"
 
 type Params = {
-  params: {
-    propertyid: number
-  }
+    params: {
+        propertyid: number
+    }
 }
 
 export default async function ShowProperty({ params: { propertyid } }: Params) {
-  const { allProperties } = await useProperties.getState()
-  console.log(allProperties)
+    const { allProperties } = await useProperties.getState()
+    console.log(allProperties)
 
-  async function handleSpecificIdFilter(arr: Property[], propertyid: number) {
-    for (let i = 0; i < arr.length; i++) {
-      try {
-        if (arr[i].id != propertyid) {
-          continue
-        } else {
-          return arr[i]
+    async function handleSpecificIdFilter(arr: Property[], propertyid: number) {
+        for (let i = 0; i < arr.length; i++) {
+            try {
+                if (arr[i].id != propertyid) {
+                    continue
+                } else {
+                    return arr[i]
+                }
+            } catch (error) {
+                console.error(error)
+            }
         }
-      } catch (error) {
-        console.error(error)
-      }
     }
-  }
 
-  // const router = useRouter()
+    // const router = useRouter()
 
-  const property = (await handleSpecificIdFilter(allProperties, propertyid)) as Property
-  console.log(property)
+    const property = (await handleSpecificIdFilter(allProperties, propertyid)) as Property
+    console.log(property)
 
-  // const property: Property = await getProperty(propertyid)
+    // const property: Property = await getProperty(propertyid)
 
-  // async function handlePut(event: FormEvent<HTMLFormElement>) {
-  //     event.preventDefault()
-  //     const dataCollected = event.target as HTMLFormElement
-  //     const formData = new FormData(dataCollected) as Iterable<[Property, FormDataEntryValue]>
-  //     const requestData: Property = Object.fromEntries(formData);
-  //     console.log(requestData);
-  //     updateProperty(requestData, propertyid)
-  //     router.refresh()
-  //     router.push("/dashboard")
-  // }
+    // async function handlePut(event: FormEvent<HTMLFormElement>) {
+    //     event.preventDefault()
+    //     const dataCollected = event.target as HTMLFormElement
+    //     const formData = new FormData(dataCollected) as Iterable<[Property, FormDataEntryValue]>
+    //     const requestData: Property = Object.fromEntries(formData);
+    //     console.log(requestData);
+    //     updateProperty(requestData, propertyid)
+    //     router.refresh()
+    //     router.push("/dashboard")
+    // }
 
-  // function handleDelete() {
-  //     deleteProperty(propertyid)
-  //     router.refresh()
-  //     router.push("/dashboard")
-  // }
+    // function handleDelete() {
+    //     deleteProperty(propertyid)
+    //     router.refresh()
+    //     router.push("/dashboard")
+    // }
 
-  return (
-    <Modal>
-      <ShowProperty />
-    </Modal>
-  )
+    return (
+        <Modal>
+            <ShowProperty />
+        </Modal>
+    )
 }
 
 // async function deleteProperty(userInput: number) {

@@ -5,35 +5,35 @@
 @tailwind utilities;
 
 .navbarDark {
-  background-color: rgb(45 48 56);
-  color: #ddd;
+    background-color: rgb(45 48 56);
+    color: #ddd;
 }
 .navbarLight {
-  background-color: rgba(164, 188, 244, 255);
-  color: black;
+    background-color: rgba(164, 188, 244, 255);
+    color: black;
 }
 .propertyListLight {
-  background-color: rgb(249 250 251);
-  color: black;
-  border-color: rgb(229 231 235);
+    background-color: rgb(249 250 251);
+    color: black;
+    border-color: rgb(229 231 235);
 }
 .propertyListDark {
-  background-color: rgb(45 48 56 / 0.95);
-  color: #ddd;
+    background-color: rgb(45 48 56 / 0.95);
+    color: #ddd;
 }
 .searchbarLight {
-  background-color: rgb(248 250 252);
-  color: black;
+    background-color: rgb(248 250 252);
+    color: black;
 }
 .searchbarDark {
-  background-color: rgb(100 116 139 / 0.6);
-  color: #ddd;
+    background-color: rgb(100 116 139 / 0.6);
+    color: #ddd;
 }
 .propertyLight {
-  background-color: rgb(249 250 251);
-  color: black;
+    background-color: rgb(249 250 251);
+    color: black;
 }
 .propertyDark {
-  background-color: rgb(45 48 56 / 0.95);
-  color: #ddd;
+    background-color: rgb(45 48 56 / 0.95);
+    color: #ddd;
 }

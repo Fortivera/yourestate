@@ -51,7 +51,7 @@ export async function updateProperty(userInput: Property, id: number) {
     }
 }
 
-export async function getProperty():Property[] {
+export async function getProperty(): Property[] {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROPERTY_ENDPOINT}`, {
             cache: "no-store",

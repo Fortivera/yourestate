@@ -1,5 +1,1 @@
-
-
-describe("Create a new property"
-
-)
+describe("Create a new property")

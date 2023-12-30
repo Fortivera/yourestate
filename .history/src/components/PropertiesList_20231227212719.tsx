@@ -16,10 +16,10 @@ interface Props {
 export default function PropertiesList({ allProperties }: Props) {
     const { data, error } = useQuery({
         queryKey: ["allProperties"],
-        queryFn: getProperty,    
+        queryFn: getProperty,
     })
-    if(error) return <div>Failed to load</div>
-    if(!data) return <div>Loading...</div>
+    if (error) return <div>Failed to load</div>
+    if (!data) return <div>Loading...</div>
     const [searchUsed, setSearchUsed] = useState<boolean>(false)
     const [searchedData, setSearchData] = useState("")
 

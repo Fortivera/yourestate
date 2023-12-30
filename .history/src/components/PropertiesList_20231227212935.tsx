@@ -17,7 +17,7 @@ export default function PropertiesList({ allProperties }: Props) {
     const [searchUsed, setSearchUsed] = useState<boolean>(false)
     const [searchedData, setSearchData] = useState("")
     const { theme } = useContext(ThemeContext)
-    
+
     const { data, error } = useQuery({
         queryKey: ["allProperties"],
         queryFn: getProperty,

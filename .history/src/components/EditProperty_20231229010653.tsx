@@ -13,7 +13,7 @@ interface Props {
     property: Property
 }
 
-export default function EditProperty({ property }: Props, {allProperties : cachedProperties}: Property[]) {
+export default function EditProperty({ property }: Props, { allProperties: cachedProperties }: Property[]) {
     const queryClient = useQueryClient()
     const router = useRouter()
 

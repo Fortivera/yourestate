@@ -4,7 +4,7 @@ import { filterId, getProperty } from "lib/useRequestFunctions"
 import EditProperty from "../../../components/EditProperty"
 // import { usePropertyStore } from "@/app/usePropertiesStore"
 import { useQuery } from "@tanstack/react-query"
-import { useQueryClient } from '@tanstack/react-query'
+import { useQueryClient } from "@tanstack/react-query"
 type Params = {
     params: {
         propertyid: number
@@ -19,7 +19,7 @@ export default function ShowProperty({ params: { propertyid } }: Params) {
     // const zustandAllProperties = usePropertyStore.getState().allProperties
 
     const { data: allProperties } = useQuery(["allProperties"], fetchDataFunction, { enabled: false })
- 
+
     const filteredByIdProperty = filterId(allProperties!, propertyid) as Property
     return (
         <>

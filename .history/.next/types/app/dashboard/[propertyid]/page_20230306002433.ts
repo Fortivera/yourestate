@@ -6,23 +6,23 @@ type TEntry = typeof entry
 
 // Check that the entry is a valid entry
 checkFields<
-  Diff<
-    {
-      default: Function
-      config?: {}
-      generateStaticParams?: Function
-      revalidate?: RevalidateRange<TEntry> | false
-      dynamic?: "auto" | "force-dynamic" | "error" | "force-static"
-      dynamicParams?: boolean
-      fetchCache?: "auto" | "force-no-store" | "only-no-store" | "default-no-store" | "default-cache" | "only-cache" | "force-cache"
-      preferredRegion?: "auto" | "home" | "edge"
-      runtime?: "nodejs" | "experimental-edge" | "edge"
-      metadata?: any
-      generateMetadata?: Function
-    },
-    TEntry,
-    ""
-  >
+    Diff<
+        {
+            default: Function
+            config?: {}
+            generateStaticParams?: Function
+            revalidate?: RevalidateRange<TEntry> | false
+            dynamic?: "auto" | "force-dynamic" | "error" | "force-static"
+            dynamicParams?: boolean
+            fetchCache?: "auto" | "force-no-store" | "only-no-store" | "default-no-store" | "default-cache" | "only-cache" | "force-cache"
+            preferredRegion?: "auto" | "home" | "edge"
+            runtime?: "nodejs" | "experimental-edge" | "edge"
+            metadata?: any
+            generateMetadata?: Function
+        },
+        TEntry,
+        ""
+    >
 >()
 
 // Check the prop type of the entry function
@@ -30,25 +30,25 @@ checkFields<Diff<PageProps, FirstArg<TEntry["default"]>, "default">>()
 
 // Check the arguments and return type of the generateMetadata function
 if ("generateMetadata" in entry) {
-  checkFields<Diff<PageProps, FirstArg<MaybeField<TEntry, "generateMetadata">>, "generateMetadata">>()
-  checkFields<Diff<ResolvingMetadata, SecondArg<MaybeField<TEntry, "generateMetadata">>, "generateMetadata">>()
+    checkFields<Diff<PageProps, FirstArg<MaybeField<TEntry, "generateMetadata">>, "generateMetadata">>()
+    checkFields<Diff<ResolvingMetadata, SecondArg<MaybeField<TEntry, "generateMetadata">>, "generateMetadata">>()
 }
 
 // Check the arguments and return type of the generateStaticParams function
 if ("generateStaticParams" in entry) {
-  checkFields<Diff<{ params: PageParams }, FirstArg<MaybeField<TEntry, "generateStaticParams">>, "generateStaticParams">>()
-  checkFields<Diff<{ __tag__: "generateStaticParams"; __return_type__: any[] | Promise<any[]> }, { __tag__: "generateStaticParams"; __return_type__: ReturnType<MaybeField<TEntry, "generateStaticParams">> }>>()
+    checkFields<Diff<{ params: PageParams }, FirstArg<MaybeField<TEntry, "generateStaticParams">>, "generateStaticParams">>()
+    checkFields<Diff<{ __tag__: "generateStaticParams"; __return_type__: any[] | Promise<any[]> }, { __tag__: "generateStaticParams"; __return_type__: ReturnType<MaybeField<TEntry, "generateStaticParams">> }>>()
 }
 
 type PageParams = any
 export interface PageProps {
-  params?: any
-  searchParams?: any
+    params?: any
+    searchParams?: any
 }
 export interface LayoutProps {
-  children?: React.ReactNode
+    children?: React.ReactNode
 
-  params?: any
+    params?: any
 }
 
 // =============

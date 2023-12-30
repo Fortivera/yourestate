@@ -4,12 +4,12 @@ import ProductsPage from "../page"
 import NewProperty from "./page"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <section>
-        <NewProperty />
-        {children}
-      </section>
-    </>
-  )
+    return (
+        <>
+            <section>
+                <NewProperty />
+                {children}
+            </section>
+        </>
+    )
 }

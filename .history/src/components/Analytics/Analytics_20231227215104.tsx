@@ -34,7 +34,7 @@ export const Analytics = () => {
                     </Suspense>
                 </div>
                 <div className="md:col-span-full flex justify-center">
-                    <Suspense fallback={<Loading/>}>
+                    <Suspense fallback={<Loading />}>
                         <D3BarChart allProperties={allProperties} />
                     </Suspense>
                 </div>

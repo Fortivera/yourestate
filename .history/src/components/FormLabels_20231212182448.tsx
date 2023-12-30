@@ -2,17 +2,15 @@
 
 import { useContext } from "react"
 
-
 import { ThemeContext } from "@/context/ThemeContex"
 
-
 interface labelProps {
-    id: number,
-    name: string,
-    type: string,
-    placeholder: string,
-    label: string,
-    ariaLabel: string,
+    id: number
+    name: string
+    type: string
+    placeholder: string
+    label: string
+    ariaLabel: string
 }
 
 export default function FormInput({ labels }: { labels: labelProps[] }) {
@@ -55,10 +53,10 @@ export default function FormInput({ labels }: { labels: labelProps[] }) {
                             onKeyDown={
                                 entity.type === "number"
                                     ? (event: React.KeyboardEvent<HTMLInputElement>) => {
-                                        if (event.key.toLowerCase() === "e") {
-                                            event.preventDefault()
-                                        }
-                                    }
+                                          if (event.key.toLowerCase() === "e") {
+                                              event.preventDefault()
+                                          }
+                                      }
                                     : undefined
                             }
                         />

@@ -36,8 +36,8 @@ describe("postData", () => {
         // Arrange
         const userInput = { name: "John Doe", age: 25 }
         const fetchMock = jest.spyOn(fetch, "default").mockRejectedValue(new Error("Network error"))
-        const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => { })
-        const alertSpy = jest.spyOn(window, "alert").mockImplementation(() => { })
+        const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {})
+        const alertSpy = jest.spyOn(window, "alert").mockImplementation(() => {})
 
         // Act
         await postData(userInput)

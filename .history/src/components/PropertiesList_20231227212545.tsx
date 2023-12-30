@@ -16,7 +16,7 @@ interface Props {
 export default function PropertiesList({ allProperties }: Props) {
     const { data, error } = useQuery({
         queryKey: ["allProperties"],
-        queryFn: getProperty,    
+        queryFn: getProperty,
     })
     const [searchUsed, setSearchUsed] = useState<boolean>(false)
     const [searchedData, setSearchData] = useState("")
