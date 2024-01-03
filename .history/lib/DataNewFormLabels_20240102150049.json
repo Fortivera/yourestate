@@ -1,0 +1,37 @@
+[
+    {
+        "name": "address",
+        "type": "text",
+        "placeholder": "Address",
+        "label": "Address",
+        "ariaLabel": "Address"
+    },
+    {
+        "name": "suite",
+        "type": "text",
+        "placeholder": "Suite",
+        "label": "Suite",
+        "ariaLabel": "Suite"
+    },
+    {
+        "name": "city",
+        "type": "text",
+        "placeholder": "City",
+        "label": "City",
+        "ariaLabel": "City"
+    },
+    {
+        "name": "state",
+        "type": "text",
+        "placeholder": "State",
+        "label": "State",
+        "ariaLabel": "State"
+    },
+    {
+        "name": "zip",
+        "type": "text",
+        "placeholder": "Zip",
+        "label": "Zip",
+        "ariaLabel": "Zip"
+    }
+]

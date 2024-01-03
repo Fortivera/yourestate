@@ -1,0 +1,8 @@
+interface labelStructure {
+    id?: string
+    name: string
+    type: string
+    placeholder: string
+    label: string
+    ariaLabel: string
+}

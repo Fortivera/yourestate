@@ -14,7 +14,7 @@ export default function Loading() {
             ></div>
             <div className={`fixed inset-0 z-50 flex items-center justify-center`}>
                 <div
-                    className={`${theme === "light" ? "bg-white" : "bg-gray-700"} 
+                    className={`${theme === "light" ? "bg-white text-black" : "bg-gray-700 text-white"} 
                         rounded-xl shadow-2xl p-6 mx-auto 
                         flex flex-col items-center 
                         w-40`}
