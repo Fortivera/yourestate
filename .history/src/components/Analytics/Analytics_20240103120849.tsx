@@ -22,7 +22,7 @@ export const Analytics = () => {
     return (
         <>
             {/* <div className="w-full h-full">{<iframe height="100%" width="100%" title="Report Section" src="https://app.powerbi.com/view?r=eyJrIjoiZDVmOGZlMWMtN2VkYS00NmRkLWJiZDgtMGY1MzQyNTdlOWQ1IiwidCI6IjcwYWQ5MjFmLTFmZjQtNDZjNC1hMmZkLWIxNTc0MjcxODQ3NiJ9" allowFullScreen={true}></iframe>}</div> */}
-            <div className={`${theme === "light" ? "bg-slate-50 border-t-2 shadow-darkInner shadow-[#ffffff] border-[#fffcfa]" : "bg-[#515F73] border-[#5f6c80] shadow-darkInner"} grid grid-cols-1 desktop:grid-cols-2 w-full py-2 px-1 font-Poppins border-t-2 md:border-hidden md:shadow-sm`}>
+            <div className={`${theme === "light" ? "bg-slate-50 border-[#e4e7ec]" : "bg-[#515F73] border-[#5f6c80]"} grid grid-cols-1  shadow-darkInner  desktop:grid-cols-2 w-full py-2 px-1 font-Poppins border-t-2 md:border-hidden md:shadow-none`}>
                 <div>
                     <Suspense fallback={<Loading />}>
                         <D3DonutPieChart allProperties={allProperties!} />

@@ -70,15 +70,15 @@ export default function PropertiesList() {
             })
     return (
         <>
-            <div className={`w-full h-full px-1 pt-1  md:border-r-2 ${theme === "light" ? "bg-slate-600/10 border-[#e4e7ec]" : "propertyListDark border-[#536079]"}    shadow-neutral-400 shadow-sm overflow-auto`}>
-                <div className="flex my-2 font-Noto text-base  ">
+            <div className={`w-full h-full px-1 pt-1  md:border-r-2 ${theme === "light" ? "bg-slate-600/10 border-[#1766ee]" : "propertyListDark border-[#536079]"}    shadow-neutral-400 shadow-sm overflow-auto`}>
+                <div className="flex  font-Noto text-base  ">
                     <div className="w-full relative">
                         <div className=" absolute inset-y-0 start-0 flex items-center pl-[10px] pointer-events-none">
                             <svg className=" w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </div>
-                        <input type="text" value={searchedData} className={`${theme === "light" ? "bg-slate-50 border-[#cacdd3]" : "bg-slate-500/60 border-[#96999f]"} pl-8 outline-none border-[1px]  rounded-lg mt-1 mb-1 h-10 w-full`} placeholder="Search..." onChange={handleChange} />
+                        <input type="text" value={searchedData} className={`${theme === "light" ? "bg-slate-50" : "bg-slate-500/60"} pl-8 outline-none border-[1px] border-slate-200 rounded-lg mt-1 mb-1 h-10 w-full`} placeholder="Search..." onChange={handleChange} />
                         {searchedData && (
                             <button
                                 onClick={handleSearchClear}
