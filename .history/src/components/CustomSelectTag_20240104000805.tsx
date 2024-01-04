@@ -11,7 +11,7 @@ export const CustomDropdown = ({ options, theme }: any) => {
     }
 
     return (
-        <div className={"relative block text-left w-full md:w-72 md:min-w-[12rem]"}>
+        <div className={"relative block text-left w-full md:w-72 "}>
             <input type="hidden" name="type" value={selectedOption} />
             <div
                 className={`${theme === "light" ? "bg-white border-2 border-[#9da0a63d] text-black focus:border-[#47444422] " : "bg-[#767a8572] border-2 border-[#595c653d] text-white focus:border-[#bab2b291]"}

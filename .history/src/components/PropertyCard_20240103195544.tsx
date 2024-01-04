@@ -17,7 +17,7 @@ export default function PropertyCard({ property }: Props) {
     return (
         <div
             className={`flex flex-col px-3 rounded-md font-Noto text-base transition-all duration-[180ms] ease-in-out
-    ${theme === "light" ? "bg-[#e0e4e8] border-[1px] border-b-[2px] border-[#cbccce] shadow-sm active:bg-[#d1d6dd] active:border-[#d0d1d3] md:hover:bg-[#d1d6dd] md:hover:border-[#d0d1d3]" : "bg-neutral-900/20 border-[1px] border-b-[2px] border-[#5e6775] shadow-darkSm active:bg-neutral-800 active:shadow-none active:border-[#222222] md:hover:bg-neutral-800 md:hover:shadow-none md:hover:border-[#222222]"}`}
+    ${theme === "light" ? "bg-[#e0e4e8] border-[1px] border-b-[2px] border-[#cbccce] shadow-sm focus:bg-[#d1d6dd] focus:border-[#d0d1d3] md:hover:bg-[#d1d6dd] md:hover:border-[#d0d1d3]" : "bg-neutral-900/20 border-[1px] border-b-[2px] border-[#5e6775] shadow-darkSm focus:bg-neutral-800 focus:shadow-none focus:border-[#222222] md:hover:bg-neutral-800 md:hover:shadow-none md:hover:border-[#222222]"}`}
         >
             <div className="py-2">
                 <h1 className="text-center text-lg py-1"> {property.type}</h1>

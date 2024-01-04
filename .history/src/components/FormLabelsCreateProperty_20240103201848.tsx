@@ -17,11 +17,11 @@ export default function FormLabelsCreateProperty() {
     return (
         <>
             <div className="flex flex-col md:flex-row py-2">
-                <label className="pr-3 w-52" htmlFor="Type">
-                    Property Type
-                </label>                      
-                <CustomDropdown options={["House", "Land", "Farm", "Parking"]} theme={theme} />
-            </div>
+                        <label className="pr-3 w-52" htmlFor="Type">
+                            Property Type
+                        </label>                      
+                        <CustomDropdown options={["House", "Land", "Farm", "Parking"]} theme={theme} />
+                    </div>
             {attributesHTML.map((entity) => {
                 return (
                     <div key={entity.id} className="flex flex-col md:flex-row py-2">

@@ -70,10 +70,10 @@ export default function PropertiesList() {
             })
     return (
         <>
-            <div className={`w-full h-full px-1 pt-1  md:border-r-2 ${theme === "light" ? "bg-slate-600/10 border-[#e4e7ec]" : "propertyListDark border-[#536079]"}    shadow-neutral-400 shadow-sm overflow-auto`}>
-                <div className="flex my-2 px-1 font-Noto text-base  ">
+            <div className={`w-full h-full px-2 pt-1  md:border-r-2 ${theme === "light" ? "bg-slate-600/10 border-[#e4e7ec]" : "propertyListDark border-[#536079]"}    shadow-neutral-400 shadow-sm overflow-auto`}>
+                <div className="flex my-2 font-Noto text-base  ">
                     <div className="w-full relative">
-                        <div className="absolute inset-y-0 start-0 flex items-center pl-[10px] pointer-events-none">
+                        <div className=" absolute inset-y-0 start-0 flex items-center pl-[10px] pointer-events-none">
                             <svg className=" w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>

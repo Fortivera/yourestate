@@ -13,7 +13,7 @@ import toast from "react-hot-toast"
 import propertyTypeParser from "lib/PostRequestTypeParser"
 import { CustomDropdown } from "./CustomSelectTag"
 import "../../src/app/globals.css"
-
+import FormField from "./FormField"
 interface Props {
     property: Property
     allProperties?: Property[]
@@ -109,6 +109,7 @@ export default function EditProperty({ property, allProperties: cachedProperties
                         </label>
                         <CustomDropdown options={["House", "Land", "Farm", "Parking"]} theme={theme} />
                     </div>
+                    <FormField defaultValue={property.address} />
                     <div className="flex flex-col md:flex-row py-2">
                         <label className="pr-3 w-52 " htmlFor="Address">
                             Address

@@ -13,7 +13,6 @@ import toast from "react-hot-toast"
 import propertyTypeParser from "lib/PostRequestTypeParser"
 import { CustomDropdown } from "./CustomSelectTag"
 import "../../src/app/globals.css"
-
 interface Props {
     property: Property
     allProperties?: Property[]
@@ -103,7 +102,7 @@ export default function EditProperty({ property, allProperties: cachedProperties
                         {" "}
                     </label>
                     <input hidden defaultValue={property.id} type="text" name="id" />
-                    <div className="flex flex-col md:flex-row py-2">
+                    <div className="flex flex-col md:flex-row py-2 items-center">
                         <label className="pr-3 w-52" htmlFor="Type">
                             Property Type
                         </label>
@@ -169,19 +168,19 @@ export default function EditProperty({ property, allProperties: cachedProperties
                         </label>
                         <input className={`${theme === "light" ? "bg-white border-2 border-[#9da0a63d] text-black" : "bg-[#767a8572] border-2 border-[#595c653d] text-white"} leading-7 w-full md:w-72 rounded-lg  pl-1 p-[2px]`} id="" type="number" name="age" aria-label="Age" defaultValue={property.age} />
                     </div>
-                    <div className="flex flex-col md:flex-row py-2">
+                    <div className="flex flex-col md:flex-row py-2 items-center">
                         <label className="pr-3 w-52" htmlFor="Electricity">
                             Electricity
                         </label>
                         <input className={`${theme === "light" ? "bg-white border-2 border-[#9da0a63d] text-black" : "bg-[#767a8572] border-2 border-[#595c653d] text-white"} leading-7 w-full md:w-72 rounded-lg  pl-1 p-[2px]`} id="" type="number" name="electricity" aria-label="Electricity" defaultValue={property.electricity} />
                     </div>
-                    <div className="flex flex-col md:flex-row py-2">
+                    <div className="flex flex-col md:flex-row py-2 items-center">
                         <label className="pr-3 w-52" htmlFor="Hydro">
                             Hydro
                         </label>
                         <input className={`${theme === "light" ? "bg-white border-2 border-[#9da0a63d] text-black" : "bg-[#767a8572] border-2 border-[#595c653d] text-white"} leading-7 w-full md:w-72 rounded-lg  pl-1 p-[2px]`} id="" type="number" name="hydro" aria-label="Hydro" defaultValue={property.hydro} />
                     </div>
-                    <div className="flex flex-col md:flex-row py-2">
+                    <div className="flex flex-col md:flex-row py-2 items-center">
                         <label className="pr-3 w-52" htmlFor="Gas">
                             Gas
                         </label>

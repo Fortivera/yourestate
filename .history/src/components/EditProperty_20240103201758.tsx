@@ -13,7 +13,6 @@ import toast from "react-hot-toast"
 import propertyTypeParser from "lib/PostRequestTypeParser"
 import { CustomDropdown } from "./CustomSelectTag"
 import "../../src/app/globals.css"
-
 interface Props {
     property: Property
     allProperties?: Property[]

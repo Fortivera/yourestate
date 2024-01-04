@@ -107,7 +107,9 @@ export default function EditProperty({ property, allProperties: cachedProperties
                         <label className="pr-3 w-52" htmlFor="Type">
                             Property Type
                         </label>
-                        <CustomDropdown options={["House", "Land", "Farm", "Parking"]} theme={theme} />
+                       
+                            <CustomDropdown options={["House", "Land", "Farm", "Parking"]} theme={theme} />
+                        
                     </div>
                     <div className="flex flex-col md:flex-row py-2">
                         <label className="pr-3 w-52 " htmlFor="Address">
