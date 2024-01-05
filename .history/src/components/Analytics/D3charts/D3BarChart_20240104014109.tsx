@@ -207,7 +207,7 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
     }
 
     return (
-        <div className={`${theme === "light" ? "bg-slate-50" : "bg-[#515F73]"} w-full`}>
+        <div className={`${theme === "light" ? "bg-slate-50" : "bg-[#515F73]"}   h-52`}>
             <div className="max-w-[42.5rem] mx-auto p-2">
                 <svg ref={ref} style={{ width: "100%", height: "auto" }} />
             </div>

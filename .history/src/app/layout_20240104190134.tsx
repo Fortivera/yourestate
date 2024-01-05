@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <body>
                 <ReactQueryProvider>
                     {children}
-                    <SpeedInsights />
+                    <Analytics />
                 </ReactQueryProvider>
             </body>
         </html>
