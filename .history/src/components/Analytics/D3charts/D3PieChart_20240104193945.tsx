@@ -16,9 +16,7 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
     const ref = useRef<SVGSVGElement>(null)
     const { theme } = useContext(ThemeContext)
 
-
-
-function extendColorScheme(baseScheme: readonly string[], desiredLength: number) {
+    function extendColorScheme(baseScheme: readonly string[], desiredLength: number) {
   const extendedScheme = [...baseScheme];
   const baseLength = baseScheme.length;
 
@@ -27,22 +25,22 @@ function extendColorScheme(baseScheme: readonly string[], desiredLength: number)
     if (baseColor) {
       const hslColor = d3.hsl(baseColor);
 
-      // Rotate the hue for variety
-      hslColor.h = (hslColor.h + (i * 50)) % 360; // Larger hue shift
+      // Adjust hue
+      hslColor.h = (hslColor.h + (i * 40)) % 360; // Example: Larger hue shift
 
-      // Adjust saturation to avoid it being too low (keeping pastel shades)
-      hslColor.s = Math.min(Math.max(hslColor.s, 0.4), 0.7); // Keep saturation in the pastel range
-      
-      // Adjust lightness to avoid dark colors
-      hslColor.l = Math.min(Math.max(hslColor.l, 0.7), 0.9); // Keep lightness high for pastel tones
+      // Adjust saturation
+      hslColor.s *= 0.9 - (i % baseLength) * 0.1; // Reducing saturation progressively
+      hslColor.s = Math.max(hslColor.s, 0.3); // Ensuring saturation doesn't get too low
+
+      // Adjust lightness
+      hslColor.l += (i % baseLength) * 0.05; // Slightly increasing lightness
+      hslColor.l = Math.min(hslColor.l, 0.9); // Ensuring lightness doesn't get too high
 
       extendedScheme.push(hslColor.toString());
     }
   }
   return extendedScheme;
 }
-
-
 
 
 

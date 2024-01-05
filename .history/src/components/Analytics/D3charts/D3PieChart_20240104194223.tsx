@@ -16,32 +16,46 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
     const ref = useRef<SVGSVGElement>(null)
     const { theme } = useContext(ThemeContext)
 
-
+    import * as d3 from 'd3';
 
 function extendColorScheme(baseScheme: readonly string[], desiredLength: number) {
   const extendedScheme = [...baseScheme];
-  const baseLength = baseScheme.length;
+  const colorDifferenceThreshold = 15; // Adjust this threshold as needed
 
-  for (let i = baseLength; i < desiredLength; i++) {
-    const baseColor = d3.color(baseScheme[i % baseLength]);
-    if (baseColor) {
-      const hslColor = d3.hsl(baseColor);
+  // Converts a color to Lab and calculates the difference
+  const colorDifference = (color1: d3.LabColor, color2: d3.LabColor) => {
+    return Math.sqrt(
+      Math.pow(color1.l - color2.l, 2) +
+      Math.pow(color1.a - color2.a, 2) +
+      Math.pow(color1.b - color2.b, 2)
+    );
+  };
 
-      // Rotate the hue for variety
-      hslColor.h = (hslColor.h + (i * 50)) % 360; // Larger hue shift
+  // Check if the new color is distinct
+  const isDistinct = (newColor: d3.LabColor) => {
+    return extendedScheme.every(existingColor => {
+      const labExisting = d3.lab(existingColor);
+      return colorDifference(labExisting, newColor) > colorDifferenceThreshold;
+    });
+  };
 
-      // Adjust saturation to avoid it being too low (keeping pastel shades)
-      hslColor.s = Math.min(Math.max(hslColor.s, 0.4), 0.7); // Keep saturation in the pastel range
-      
-      // Adjust lightness to avoid dark colors
-      hslColor.l = Math.min(Math.max(hslColor.l, 0.7), 0.9); // Keep lightness high for pastel tones
+  // Generate new colors
+  let attempts = 0;
+  while (extendedScheme.length < desiredLength && attempts < 1000) {
+    const baseColor = d3.lab(extendedScheme[attempts % baseScheme.length]);
+    const newColor = baseColor;
+    newColor.l = (newColor.l + attempts * 5) % 100; // Adjust lightness
+    newColor.a += (attempts * 5) % 128; // Adjust a-dimension
+    newColor.b += (attempts * 5) % 128; // Adjust b-dimension
 
-      extendedScheme.push(hslColor.toString());
+    if (isDistinct(newColor)) {
+      extendedScheme.push(newColor.toString());
     }
+    attempts++;
   }
+
   return extendedScheme;
 }
-
 
 
 

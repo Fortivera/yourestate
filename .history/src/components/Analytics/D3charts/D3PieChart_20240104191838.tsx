@@ -16,37 +16,6 @@ export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
     const ref = useRef<SVGSVGElement>(null)
     const { theme } = useContext(ThemeContext)
 
-
-
-function extendColorScheme(baseScheme: readonly string[], desiredLength: number) {
-  const extendedScheme = [...baseScheme];
-  const baseLength = baseScheme.length;
-
-  for (let i = baseLength; i < desiredLength; i++) {
-    const baseColor = d3.color(baseScheme[i % baseLength]);
-    if (baseColor) {
-      const hslColor = d3.hsl(baseColor);
-
-      // Rotate the hue for variety
-      hslColor.h = (hslColor.h + (i * 50)) % 360; // Larger hue shift
-
-      // Adjust saturation to avoid it being too low (keeping pastel shades)
-      hslColor.s = Math.min(Math.max(hslColor.s, 0.4), 0.7); // Keep saturation in the pastel range
-      
-      // Adjust lightness to avoid dark colors
-      hslColor.l = Math.min(Math.max(hslColor.l, 0.7), 0.9); // Keep lightness high for pastel tones
-
-      extendedScheme.push(hslColor.toString());
-    }
-  }
-  return extendedScheme;
-}
-
-
-
-
-
-
     useEffect(() => {
         // Clean up existing elements before creating a new chart
         const svg = d3.select(ref.current)

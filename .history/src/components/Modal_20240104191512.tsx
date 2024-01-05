@@ -18,7 +18,7 @@ export const Modal = ({ children }: any) => {
                 className={`
                         ${theme === "light" ? "bg-white border-[#9ea1a9]" : "bg-[#33363e] text-[#e6e1e1] border-[#6c7079]"}
                         w-[80%] max-w-[480px] md:w-1/2   
-                        mx-auto border-[1px] border-b-[2px]  rounded-lg shadow-sm overflow-hidden pt-1 z-50
+                        mx-auto border-[1px] border-b-[2px]  rounded-lg shadow-sm overflow-hidden pt-1 top-10 z-50
                     `}
             >
                 {children}
