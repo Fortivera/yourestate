@@ -25,11 +25,11 @@ export const CustomDropdown = ({ options, theme }: any) => {
             </div>
 
             {isOpen && (
-                <div className={`${theme === "light" ? "bg-white text-black" : "bg-[#595d69fd]  text-white"} z-50 origin-top-right absolute right-0 mt-1 w-full rounded-md shadow-lg  ring-1  ring-gray-100 ring-opacity-10 focus:outline-none`}>
+                <div className={`${theme === "light" ? "bg-white text-black" : "bg-[#595d69fd]  text-white"} z-10 origin-top-right absolute right-0 mt-1 w-full rounded-md shadow-lg  ring-1  ring-gray-100 ring-opacity-10 focus:outline-none`}>
                     {options.map((userinput: any, index: any) => (
-                        <div key={index} className={`${theme === "light" ? "hover:bg-[#edeef1fd] text-black" : "hover:bg-[#898a90fd]  text-white"} block px-4 py-2 text-sm hover:rounded-md`} onClick={() => handleOptionClick(userinput)}>
+                        <option key={index} className={`${theme === "light" ? "hover:bg-[#edeef1fd] text-black" : "hover:bg-[#898a90fd]  text-white"} block px-4 py-2 text-sm hover:rounded-md`} onClick={() => handleOptionClick(userinput)}>
                             {userinput}
-                        </div>
+                        </option>
                     ))}
                 </div>
             )}
