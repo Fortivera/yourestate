@@ -4,7 +4,7 @@
 "use client"
 
 // Import necessary libraries
-import React, { useContext, useEffect, useRef } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import * as d3 from "d3"
 import { ThemeContext } from "@/context/ThemeContex"
 
@@ -19,20 +19,46 @@ interface EnergySums {
 }
 
 export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
-    const ref = useRef<SVGSVGElement>(null)
-    const { theme } = useContext(ThemeContext)
+    const ref = useRef<SVGSVGElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { theme } = useContext(ThemeContext);
 
+   
     useEffect(() => {
         const svg = d3.select(ref.current)
         svg.selectAll("*").remove()
         // Create a new bar chart
-        createBarChart(allProperties, theme)
-    }, [allProperties, theme])
+        createBarChart(allProperties, theme, svgWidth);
+    }, [allProperties, theme,svgWidth])
 
-    const createBarChart = (data: Property[], theme: string) => {
+    useEffect(() => {
+        if (containerRef.current) {
+            // Initial draw
+            const containerWidth = containerRef.current.clientWidth;
+            createBarChart(allProperties, theme, containerWidth);
+
+            // Setup resize observer
+            const resizeObserver = new ResizeObserver(entries => {
+                if (!entries || entries.length === 0) {
+                    return;
+                }
+
+                // Get the new width and redraw chart
+                const newWidth = entries[0].contentRect.width;
+                createBarChart(allProperties, theme, newWidth);
+            });
+
+            resizeObserver.observe(containerRef.current);
+
+            // Clean up function
+            return () => resizeObserver.disconnect();
+        }
+    }, [allProperties, theme, containerRef.current])
+
+    const createBarChart = (data: Property[], theme: string,width: number) => {
         if (!ref.current) return
 
-
+        
         const energySumsByCountry = new Map<string, EnergySums>() // country: {gas: amount, hydro: amount, electricity: amount}
 
         data.forEach((property) => {
@@ -52,11 +78,11 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
 
         const energyTuples: [string, EnergySums][] = Array.from(energySumsByCountry.entries()) // [[country: {gas: amount, hydro: amount, electricity: amount}], [...]]
 
-        const width = 700
+         
         const height = 500
         const margin = { top: 20, right: 30, bottom: 40, left: 50 }
         const svg = d3.select(ref.current)
-                      .attr("viewBox", `0 0 700 550`)
+                      .attr("viewBox", `0 0 ${width} ${height}`)
                       .attr("preserveAspectRatio", "xMidYMid meet")
 
         const g = svg.append("g")
@@ -143,12 +169,6 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
             .attr("transform", `translate(0,${height - margin.bottom})`)
             .call(d3.axisBottom(x0Scale))
         xAxisGroup
-            .selectAll("text")
-            .style("text-anchor", "end") 
-            .attr("dx", "-.8em") 
-            .attr("dy", ".15em") 
-            .attr("transform", "rotate(-45)")
-        xAxisGroup
             .selectAll("path,line")
             .style("stroke", `${theme === "light" ? "black" : "white"}`)
             .style("stroke-width", "1px")
@@ -179,7 +199,7 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
             .style("font-weight", "normal")
             .style("font-size", "1rem")
 
-        const legend = g.append("g").attr("class", "legend").attr("transform", `translate(200, 0)`).classed("cursor-pointer", true)
+        const legend = g.append("g").attr("class", "legend").attr("transform", `translate(100, 0)`).classed("cursor-pointer", true)
 
         legend
             .selectAll("rect")
@@ -214,7 +234,7 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
 
     return (
         <div className={`${theme === "light" ? "bg-slate-50" : "bg-[#515F73]"} w-full`}>
-            <div className="max-w-[42.5rem] mx-auto p-2">
+            <div className="w-[42.5rem] mx-auto p-2">
                 <svg ref={ref} style={{ width: "100%", height: "auto" }} />
             </div>
         </div>

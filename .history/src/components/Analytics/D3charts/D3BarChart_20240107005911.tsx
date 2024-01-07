@@ -204,7 +204,7 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
             .attr("x", (d, i) => i * 100 + 20) // Align with the squares
             .attr("y", 25)
             .text((d) => d.charAt(0).toUpperCase() + d.slice(1)) // Capitalize labels
-            .style("font-size", "1rem")
+            .attr("class", "text-base sm:text-base md:text-sm lg:text-base")
             .style("fill", `${theme === "light" ? "black" : "white"}`)
             .on("click", function (event, d) {
                 activeEnergyType = activeEnergyType === d ? null : d

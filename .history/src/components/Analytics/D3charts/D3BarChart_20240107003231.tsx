@@ -53,10 +53,10 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
         const energyTuples: [string, EnergySums][] = Array.from(energySumsByCountry.entries()) // [[country: {gas: amount, hydro: amount, electricity: amount}], [...]]
 
         const width = 700
-        const height = 500
+        const height = 550
         const margin = { top: 20, right: 30, bottom: 40, left: 50 }
         const svg = d3.select(ref.current)
-                      .attr("viewBox", `0 0 700 550`)
+                      .attr("viewBox", `0 0 ${width} ${height}`)
                       .attr("preserveAspectRatio", "xMidYMid meet")
 
         const g = svg.append("g")

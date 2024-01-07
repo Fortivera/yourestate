@@ -12,40 +12,9 @@ interface Props {
     allProperties: Property[]
 }
 
-export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
+export const D3DonutPieChart: React.FC<Props> = ({ allProperties }: Props) => {
     const ref = useRef<SVGSVGElement>(null)
     const { theme } = useContext(ThemeContext)
-
-
-
-function extendColorScheme(baseScheme: readonly string[], desiredLength: number) {
-  const extendedScheme = [...baseScheme];
-  const baseLength = baseScheme.length;
-
-  for (let i = baseLength; i < desiredLength; i++) {
-    const baseColor = d3.color(baseScheme[i % baseLength]);
-    if (baseColor) {
-      const hslColor = d3.hsl(baseColor);
-
-      // Rotate the hue for variety
-      hslColor.h = (hslColor.h + (i * 50)) % 360; // Larger hue shift
-
-      // Adjust saturation to avoid it being too low (keeping pastel shades)
-      hslColor.s = Math.min(Math.max(hslColor.s, 0.4), 0.7); // Keep saturation in the pastel range
-      
-      // Adjust lightness to avoid dark colors
-      hslColor.l = Math.min(Math.max(hslColor.l, 0.7), 0.9); // Keep lightness high for pastel tones
-
-      extendedScheme.push(hslColor.toString());
-    }
-  }
-  return extendedScheme;
-}
-
-
-
-
-
 
     useEffect(() => {
         // Clean up existing elements before creating a new chart
@@ -60,10 +29,10 @@ function extendColorScheme(baseScheme: readonly string[], desiredLength: number)
         const typeCount = new Map<string, number>()
 
         data.forEach((property) => {
-            if (!typeCount.has(property.country)) {
-                typeCount.set(property.country, 1)
+            if (!typeCount.has(property.type)) {
+                typeCount.set(property.type, 1)
             } else {
-                typeCount.set(property.country, typeCount.get(property.country)! + 1)
+                typeCount.set(property.type, typeCount.get(property.type)! + 1)
             }
         })
 
@@ -76,18 +45,14 @@ function extendColorScheme(baseScheme: readonly string[], desiredLength: number)
         const height = 500
         const svg = d3.select(ref.current).attr("viewBox", `0 0 ${width} ${height}`).attr("preserveAspectRatio", "xMidYMid meet")
 
-         const uniqueDataCount = new Set(data.map((item) => item.country)).size
-
-        const color = d3
-        .scaleOrdinal<string>()
-        .range(extendColorScheme(d3.schemePastel1, uniqueDataCount))
+        const color = d3.scaleOrdinal<string>().range(d3.schemePastel1)
 
         const arcGenerator = d3
             .arc<d3.PieArcDatum<[string, number]>>()
-            .innerRadius(0)
+            .innerRadius(Math.min(width, height) / 4)
             .outerRadius(Math.min(width, height) / 2)
 
-        const g = svg.append("g").attr("transform", `translate(270, ${height / 2})`)
+        const g = svg.append("g").attr("transform", `translate(280, ${height / 2})`)
 
         const slice = g.selectAll("g").data(pieData).enter().append("g").classed("cursor-pointer", true)
 
@@ -106,18 +71,13 @@ function extendColorScheme(baseScheme: readonly string[], desiredLength: number)
         slice
             .append("text")
             .text((d) => ` ${((d.data[1] / data.length) * 100).toFixed(2)}%`)
-            .attr("transform", (d) => {
-                const centroid = arcGenerator.centroid(d);
-                const scale = 1.5; // Adjust this value to move text further or closer
-                const scaledCentroid = [centroid[0] * scale, centroid[1] * scale];
-                return `translate(${scaledCentroid})`;
-            })
+            .attr("transform", (d) => `translate(${arcGenerator.centroid(d as any)})`)
             .style("font-size", "1rem")
             .style("text-anchor", "middle")
 
         const legend = svg
             .append("g")
-            .attr("transform", `translate(580, 50)`)
+            .attr("transform", `translate(570, 50)`)
             .selectAll("g")
             .data(pieData)
             .enter()
@@ -140,7 +100,7 @@ function extendColorScheme(baseScheme: readonly string[], desiredLength: number)
             .text((d) => d.data[0])
             .attr("x", 25)
             .attr("y", 15)
-            .style("font-size", "1rem")
+            .attr("class", "text md:text-[1.3rem] lg:text-lg")
             .style("opacity", 1) // Set initial opacity to 1 for all legend items
 
         function updateChart() {
@@ -149,6 +109,7 @@ function extendColorScheme(baseScheme: readonly string[], desiredLength: number)
                 .transition()
                 .duration(500)
                 .style("opacity", (d: any) => (activeIndex === null || d.index === activeIndex ? 1 : 0.5))
+
             // legend.selectAll('text')
             //     .transition()
             //     .duration(500)
@@ -170,8 +131,8 @@ function extendColorScheme(baseScheme: readonly string[], desiredLength: number)
     }
 
     return (
-        <div className={`${theme === "light" ? "bg-slate-50" : "bg-[#515F73]"} w-full`}>
-            <div className="max-w-[42.5rem] mx-auto p-2">
+        <div className={`${theme === "light" ? "bg-slate-50" : "bg-[#515F73]"} w-full `}>
+            <div className="max-w-[42.5rem] mx-auto md:p-2 sm:py-10">
                 <svg ref={ref} style={{ width: "100%", height: "auto" }} />
             </div>
         </div>

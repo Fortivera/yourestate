@@ -106,12 +106,7 @@ function extendColorScheme(baseScheme: readonly string[], desiredLength: number)
         slice
             .append("text")
             .text((d) => ` ${((d.data[1] / data.length) * 100).toFixed(2)}%`)
-            .attr("transform", (d) => {
-                const centroid = arcGenerator.centroid(d);
-                const scale = 1.5; // Adjust this value to move text further or closer
-                const scaledCentroid = [centroid[0] * scale, centroid[1] * scale];
-                return `translate(${scaledCentroid})`;
-            })
+            .attr("transform", (d) => `translate(${arcGenerator.centroid(d as any)})`)
             .style("font-size", "1rem")
             .style("text-anchor", "middle")
 

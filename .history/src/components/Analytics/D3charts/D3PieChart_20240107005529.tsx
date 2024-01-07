@@ -140,7 +140,8 @@ function extendColorScheme(baseScheme: readonly string[], desiredLength: number)
             .text((d) => d.data[0])
             .attr("x", 25)
             .attr("y", 15)
-            .style("font-size", "1rem")
+            .attr("class", "text-base md:text-sm lg:text-base")
+
             .style("opacity", 1) // Set initial opacity to 1 for all legend items
 
         function updateChart() {

@@ -56,7 +56,7 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
         const height = 500
         const margin = { top: 20, right: 30, bottom: 40, left: 50 }
         const svg = d3.select(ref.current)
-                      .attr("viewBox", `0 0 700 550`)
+                      .attr("viewBox", `0 0 ${width} ${height}`)
                       .attr("preserveAspectRatio", "xMidYMid meet")
 
         const g = svg.append("g")
@@ -143,11 +143,11 @@ export const D3BarChart: React.FC<Props> = ({ allProperties }: Props) => {
             .attr("transform", `translate(0,${height - margin.bottom})`)
             .call(d3.axisBottom(x0Scale))
         xAxisGroup
-            .selectAll("text")
-            .style("text-anchor", "end") 
-            .attr("dx", "-.8em") 
-            .attr("dy", ".15em") 
-            .attr("transform", "rotate(-45)")
+    .selectAll("text")
+    .style("text-anchor", "end") // Anchor text at end for better alignment post-rotation
+    .attr("dx", "-.8em") // Adjust the position along x-axis
+    .attr("dy", ".15em") // Adjust the position along y-axis
+    .attr("transform", "rotate(-45)"); // Rotate text labels
         xAxisGroup
             .selectAll("path,line")
             .style("stroke", `${theme === "light" ? "black" : "white"}`)
