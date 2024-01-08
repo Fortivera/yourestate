@@ -6,5 +6,9 @@ export const metadata: Metadata = {
 }
 
 export default function ProductsPage() {
-    return
+    return (
+        <>
+            <div></div>
+        </>
+    )
 }

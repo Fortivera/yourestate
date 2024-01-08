@@ -9,7 +9,7 @@ import PropertiesList from "../../components/PropertiesList"
 
 // import { usePropertyStore } from "../usePropertiesStore"
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children, analytics, propertiesList }: { children: React.ReactNode; analytics: React.ReactNode; propertiesList: React.ReactNode }) {
     const queryClient = new QueryClient()
     await queryClient.prefetchQuery({
         queryKey: ["allProperties"],
@@ -30,16 +30,14 @@ export default async function Layout({ children }: { children: React.ReactNode }
                     </header>
                     <div>{children}</div>
                     <main>
-                        <div className="flex flex-col h-screen md:flex-row mt-14 relative">
+                        <section className="flex flex-col h-screen md:flex-row mt-14 relative">
                             <div className="w-screen md:h-auto md:w-[29rem] h-[50vh]">
-                                <HydrationBoundary state={dehydrate(queryClient)}>
-                                    <PropertiesList />
-                                </HydrationBoundary>
+                                <HydrationBoundary state={dehydrate(queryClient)}>{propertiesList}</HydrationBoundary>
                             </div>
                             <HydrationBoundary state={dehydrate(queryClient)}>
-                                <Analytics />
+                                {analytics}
                             </HydrationBoundary>
-                        </div>
+                        </section>
                     </main>
                 </ThemeProvider>
             </ThemeContextProvider>

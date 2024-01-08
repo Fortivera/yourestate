@@ -24,8 +24,7 @@ export default function PropertiesList() {
         queryFn: getProperty,
     })
     if (error) return <div>Failed to load</div>
-    const noPropertiesFound = <p className="text-center italic pt-4 opacity-80">No properties found</p>
-    const noSearchedPropertiesFound = <p className="text-center text-base italic pt-4 opacity-80">Searched properties not found</p>
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLowerCase()
         setSearchUsed(true)
@@ -36,40 +35,44 @@ export default function PropertiesList() {
         setSearchData("")
     }
     const showAllProperties =
-        allProperties && allProperties.length > 0
-            ? allProperties.map((property: Property) => {
-                  return (
-                      <>
-                          <Suspense fallback={<Loading />}>
-                              <li key={property.id} className="py-[4px] last:border-b-0">
-                                  <Link href={`/dashboard/${property.id}`}>
-                                      <PropertyCard property={property} />
-                                  </Link>
-                              </li>
-                          </Suspense>
-                      </>
-                  )
-              })
-            : noPropertiesFound
-
-    const filteredProperties = allProperties && allProperties.filter((property: Property) => property.country.toLowerCase().includes(searchedData.toLowerCase()) || property.city.toLowerCase().includes(searchedData.toLowerCase()) || property.type.toLowerCase().includes(searchedData.toLowerCase()) || property.address.toLowerCase().includes(searchedData.toLowerCase()))
+        allProperties && allProperties.length > 0 ? (
+            allProperties.map((property: Property) => {
+                return (
+                    <>
+                        <Suspense fallback={<Loading />}>
+                            <li key={property.id} className="py-[4px] last:border-b-0">
+                                <Link href={`/dashboard/${property.id}`}>
+                                    <PropertyCard property={property} />
+                                </Link>
+                            </li>
+                        </Suspense>
+                    </>
+                )
+            })
+        ) : (
+            <div className="text-center italic pt-4">No properties found</div>
+        )
 
     const showSearchedProperties =
-        filteredProperties && filteredProperties.length > 0
-            ? filteredProperties.map((filteredProperty: Property) => {
-                  return (
-                      <>
-                          <Suspense fallback={<Loading />}>
-                              <li key={filteredProperty.id} className="border-b-2 last:border-b-0">
-                                  <Link href={`/dashboard/${filteredProperty.id}`}>
-                                      <PropertyCard property={filteredProperty} />
-                                  </Link>
-                              </li>
-                          </Suspense>
-                      </>
-                  )
-              })
-            : noSearchedPropertiesFound
+        allProperties && allProperties.length > 0 ? (
+            allProperties
+                .filter((property: Property) => property.country.toLowerCase().includes(searchedData.toLowerCase()) || property.city.toLowerCase().includes(searchedData.toLowerCase()) || property.type.toLowerCase().includes(searchedData.toLowerCase()) || property.address.toLowerCase().includes(searchedData.toLowerCase()))
+                .map((filteredProperty: Property) => {
+                    return (
+                        <>
+                            <Suspense fallback={<Loading />}>
+                                <li key={filteredProperty.id} className="border-b-2 last:border-b-0">
+                                    <Link href={`/dashboard/${filteredProperty.id}`}>
+                                        <PropertyCard property={filteredProperty} />
+                                    </Link>
+                                </li>
+                            </Suspense>
+                        </>
+                    )
+                })
+        ) : (
+            <div className="text-center text-italic font-Noto">No properties found</div>
+        )
     return (
         <>
             <div className={`w-full h-full px-1 pt-1  md:border-r-2 ${theme === "light" ? "bg-slate-600/10 border-[#e4e7ec]" : "propertyListDark border-[#536079]"}    shadow-neutral-400 shadow-sm overflow-auto`}>

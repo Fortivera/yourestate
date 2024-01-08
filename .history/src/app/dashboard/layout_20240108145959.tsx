@@ -33,7 +33,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
                         <div className="flex flex-col h-screen md:flex-row mt-14 relative">
                             <div className="w-screen md:h-auto md:w-[29rem] h-[50vh]">
                                 <HydrationBoundary state={dehydrate(queryClient)}>
-                                    <PropertiesList />
+                                    {collection}
                                 </HydrationBoundary>
                             </div>
                             <HydrationBoundary state={dehydrate(queryClient)}>

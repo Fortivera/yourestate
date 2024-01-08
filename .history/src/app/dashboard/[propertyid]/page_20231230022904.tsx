@@ -21,16 +21,7 @@ export default function ShowProperty({ params: { propertyid } }: Params) {
     const queryClient = useQueryClient()
     const allProperties = queryClient.getQueryData<Property[]>(["allProperties"])
 
-    if (!allProperties) {
-        // Return a loading indicator, or handle appropriately
-        return <div>Loading...</div>
-    }
-
-    const filteredByIdProperty = filterId(allProperties, Number(propertyid)) as Property
-    if (!filteredByIdProperty) {
-        // Return an error message, redirect, or handle appropriately
-        return <div>Property not found</div>
-    }
+    const filteredByIdProperty = filterId(allProperties!, Number(propertyid)) as Property
     console.log("filteredByIdProperty", filteredByIdProperty)
     return (
         <>

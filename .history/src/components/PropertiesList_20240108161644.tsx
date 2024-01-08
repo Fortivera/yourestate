@@ -25,7 +25,7 @@ export default function PropertiesList() {
     })
     if (error) return <div>Failed to load</div>
     const noPropertiesFound = <p className="text-center italic pt-4 opacity-80">No properties found</p>
-    const noSearchedPropertiesFound = <p className="text-center text-base italic pt-4 opacity-80">Searched properties not found</p>
+    const noSearchedPropertiesFound = <div className="text-center text-base italic pt-4 opacity-80">Searched properties not found</div>
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLowerCase()
         setSearchUsed(true)

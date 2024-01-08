@@ -2,14 +2,14 @@ import { ThemeContextProvider } from "@/context/ThemeContex"
 import ThemeProvider from "@/providers/ThemeProvider"
 import { QueryClient, HydrationBoundary, dehydrate } from "@tanstack/react-query"
 import { getProperty } from "lib/useRequestFunctions"
+import { Suspense } from "react"
 
-import { Analytics } from "../../components/Analytics/Analytics"
 import Navbar from "../../components/Navbar"
-import PropertiesList from "../../components/PropertiesList"
+import Loading from "../loading"
 
 // import { usePropertyStore } from "../usePropertiesStore"
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children, analytics, propertiesList }: { children: React.ReactNode; analytics: React.ReactNode; propertiesList: React.ReactNode }) {
     const queryClient = new QueryClient()
     await queryClient.prefetchQuery({
         queryKey: ["allProperties"],
@@ -30,16 +30,16 @@ export default async function Layout({ children }: { children: React.ReactNode }
                     </header>
                     <div>{children}</div>
                     <main>
-                        <div className="flex flex-col h-screen md:flex-row mt-14 relative">
+                        <section className="flex flex-col h-screen md:flex-row mt-14 relative">
                             <div className="w-screen md:h-auto md:w-[29rem] h-[50vh]">
-                                <HydrationBoundary state={dehydrate(queryClient)}>
-                                    <PropertiesList />
-                                </HydrationBoundary>
+                                <Suspense fallback={<Loading />}>
+                                    <HydrationBoundary state={dehydrate(queryClient)}>{propertiesList}</HydrationBoundary>
+                                </Suspense>
                             </div>
-                            <HydrationBoundary state={dehydrate(queryClient)}>
-                                <Analytics />
-                            </HydrationBoundary>
-                        </div>
+                            <Suspense fallback={<Loading />}>
+                                <HydrationBoundary state={dehydrate(queryClient)}>{analytics}</HydrationBoundary>
+                            </Suspense>
+                        </section>
                     </main>
                 </ThemeProvider>
             </ThemeContextProvider>

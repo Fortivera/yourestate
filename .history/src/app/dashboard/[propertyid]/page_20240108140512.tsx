@@ -27,10 +27,6 @@ export default function ShowProperty({ params: { propertyid } }: Params) {
     }
 
     const filteredByIdProperty = filterId(allProperties, Number(propertyid)) as Property
-    if (!filteredByIdProperty) {
-        // Return an error message, redirect, or handle appropriately
-        return <div>Property not found</div>
-    }
     console.log("filteredByIdProperty", filteredByIdProperty)
     return (
         <>
