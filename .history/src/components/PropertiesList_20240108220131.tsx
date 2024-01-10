@@ -2,12 +2,15 @@
 
 import { Suspense, useContext, useState } from "react"
 import Link from "next/link"
+
 import { ThemeContext } from "@/context/ThemeContex"
+
 import { useQuery } from "@tanstack/react-query"
 import { getProperty } from "lib/useRequestFunctions"
 import Loading from "@/app/loading"
 import { Toaster } from "react-hot-toast"
 import PropertyCard from "@/components/PropertyCard"
+
 // interface Props {
 //     allProperties: Property[]
 // }
@@ -69,7 +72,7 @@ export default function PropertiesList() {
             : SearchedPropertiesNotFound
     return (
         <>
-            <div className={`w-full h-full px-1 pt-1  md:border-r-2 ${theme === "light" ? "bg-slate-600/10 border-[#e4e7ec]" : "propertyListDark border-[#536079]"}    shadow-neutral-400 shadow-sm  overflow-y-auto`}>
+            <div className={`w-full h-full px-1 pt-1  md:border-r-2 ${theme === "light" ? "bg-slate-600/10 border-[#e4e7ec]" : "propertyListDark border-[#536079]"}    shadow-neutral-400 shadow-sm overflow-y-scroll scrollbar-custom`}>
                 <div className="flex my-2 px-1 font-Noto text-base  ">
                     <div className="w-full relative">
                         <div className="absolute inset-y-0 start-0 flex items-center pl-[10px] pointer-events-none">

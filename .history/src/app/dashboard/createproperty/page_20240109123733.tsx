@@ -3,18 +3,19 @@
 import Link from "next/link"
 import { FormEvent, useContext, useState } from "react"
 import { Modal } from "../../../components/Modal"
-import { useRouter } from "next/navigation"
+
 import CancelIcon from "public/CancelIcon"
 import toast from "react-hot-toast"
 import FormLabelsCreateProperty from "@/components/FormLabelsCreateProperty"
 import { ThemeContext } from "@/context/ThemeContex"
+import { revalidatePath } from "next/cache"
 
 // import { useMutation, useQueryClient } from "@tanstack/react-query"
 // import { zodPropertyPostSchema } from "lib/ZodPropertySchema"
 
 export default function NewProperty() {
     // const queryClient = useQueryClient()
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+    const [isSubmitting, setIsSubmitting] = useState<boolean>()
     const { theme } = useContext(ThemeContext)
     // const [values, setValues] = useState({
     //     id: "",
@@ -24,7 +25,7 @@ export default function NewProperty() {
     //     label: "",
     //     arialabel: "",
     // })
-    const router = useRouter()
+    // const router = useRouter()
     // function onChange(e: ChangeEvent<HTMLInputElement>) {
     //     setValues({ ...values, [e.target.name]: e.target.value })
     // }
@@ -91,8 +92,7 @@ export default function NewProperty() {
             await postData(requestData)
             toast.success("Property was added successfully!", { duration: 2500 })
             console.log(requestData)
-            router.refresh()
-            router.replace("/dashboard")
+            revalidatePath("/dashboard")
         } catch (err) {
             toast.error("The form input is incorrect!", { duration: 2500 })
         }

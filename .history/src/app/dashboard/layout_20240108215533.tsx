@@ -2,6 +2,7 @@ import { ThemeContextProvider } from "@/context/ThemeContex"
 import ThemeProvider from "@/providers/ThemeProvider"
 import { QueryClient, HydrationBoundary, dehydrate } from "@tanstack/react-query"
 import { getProperty } from "lib/useRequestFunctions"
+
 import { Analytics } from "../../components/Analytics/Analytics"
 import Navbar from "../../components/Navbar"
 import PropertiesList from "../../components/PropertiesList"
@@ -28,9 +29,9 @@ export default async function Layout({ children }: { children: React.ReactNode }
                         <Navbar />
                     </header>
                     <div>{children}</div>
-                    <main>
-                        <div className="flex flex-col h-screen md:flex-row mt-14 relative ">
-                            <div className={`w-screen h-1/2 md:w-[29rem] md:h-full `}>
+                    <main className="overflow-y-hidden">
+                        <div className="flex flex-col  md:flex-row mt-14 relative ">
+                            <div className="w-screen h-[50vh] md:w-[29rem] md:h-full">
                                 <HydrationBoundary state={dehydrate(queryClient)}>
                                     <PropertiesList />
                                 </HydrationBoundary>

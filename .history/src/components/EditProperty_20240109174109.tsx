@@ -24,7 +24,7 @@ export default function EditProperty({ property, allProperties: cachedProperties
     const queryClient = useQueryClient()
     const router = useRouter()
 
-    const updateMutation = useMutation<void, Error, Property>({
+    const mutation = useMutation<void, Error, Property>({
         mutationFn: async (newPropertyData: Property) => await updateProperty(newPropertyData, property.id),
 
         onSuccess: (data, updatedProperty) => {
@@ -45,7 +45,7 @@ export default function EditProperty({ property, allProperties: cachedProperties
         },
         // Optionally handle errors, etc.
     })
-    async function handleUpdateSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleUodateSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
         try {
@@ -57,7 +57,7 @@ export default function EditProperty({ property, allProperties: cachedProperties
             if (checkedData.success) {
                 const validatedData = checkedData.data
                 console.log("the validated data updating", validatedData)
-                updateMutation.mutate(validatedData)
+                mutation.mutate(validatedData)
                 toast.success("Property updated successfully!", { duration: 2500 })
                 router.replace("/dashboard")
             } else {
@@ -70,7 +70,7 @@ export default function EditProperty({ property, allProperties: cachedProperties
         }
     }
 
-    async function handleDelete(event: React.MouseEvent<HTMLButtonElement>) {
+    async function handleDelete(event: any) {
         event.preventDefault()
 
         try {

@@ -29,8 +29,8 @@ export default async function Layout({ children }: { children: React.ReactNode }
                     </header>
                     <div>{children}</div>
                     <main>
-                        <div className="flex flex-col h-screen md:flex-row mt-14 relative ">
-                            <div className={`w-screen h-1/2 md:w-[29rem] md:h-full `}>
+                        <div className="flex flex-col  md:flex-row mt-14 relative ">
+                            <div className={`w-screen h-[50vh] md:w-[29rem] md:h-full`}>
                                 <HydrationBoundary state={dehydrate(queryClient)}>
                                     <PropertiesList />
                                 </HydrationBoundary>

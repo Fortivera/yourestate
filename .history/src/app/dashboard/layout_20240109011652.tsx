@@ -29,15 +29,17 @@ export default async function Layout({ children }: { children: React.ReactNode }
                     </header>
                     <div>{children}</div>
                     <main>
-                        <div className="flex flex-col h-screen md:flex-row mt-14 relative ">
-                            <div className={`w-screen h-1/2 md:w-[29rem] md:h-full `}>
+                        <div className="flex flex-col md:flex-row h-auto md:h-screen mt-14 relative">
+                            <div className={`w-full md:w-1/2 h-1/2 md:h-full overflow-y-auto`}>
                                 <HydrationBoundary state={dehydrate(queryClient)}>
                                     <PropertiesList />
                                 </HydrationBoundary>
                             </div>
-                            <HydrationBoundary state={dehydrate(queryClient)}>
-                                <Analytics />
-                            </HydrationBoundary>
+                            <div className="w-full md:w-1/2 h-1/2 md:h-full overflow-y-auto md:overflow-hidden">
+                                <HydrationBoundary state={dehydrate(queryClient)}>
+                                    <Analytics />
+                                </HydrationBoundary>
+                            </div>
                         </div>
                     </main>
                 </ThemeProvider>

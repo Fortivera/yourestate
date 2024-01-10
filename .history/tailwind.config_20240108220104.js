@@ -21,14 +21,28 @@ module.exports = {
                 mobile: "320px",
                 tablet: "481px",
                 laptop: "769px",
-                " desktop": "1025px",
+                desktop: "1450px",
             },
+            boxShadow: {
+                inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+                darkSm: '0 1px 2px 0 rgba(255, 255, 255, 0.05)',
+                darkInner: 'inset 0 2px 4px rgba(255, 255, 255, 0.1)',
+            },
+            backgroundImage: {
+                'gradient-dark': 'radial-gradient(circle, transparent, #23262b7f, transparent)',
+            scrollbar: ['rounded'],
+      },
+            
         },
         plugins: [],
     },
     variants: {
         extend: {
             borderColor: ["last"],
+             
+            scale: ['active'],
+      backgroundColor: ['active'],
+      boxShadow: ['active'],
         },
     },
 }

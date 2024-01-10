@@ -14,7 +14,7 @@ import { ThemeContext } from "@/context/ThemeContex"
 
 export default function NewProperty() {
     // const queryClient = useQueryClient()
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+    const [isSubmitting, setIsSubmitting] = useState<boolean>()
     const { theme } = useContext(ThemeContext)
     // const [values, setValues] = useState({
     //     id: "",
@@ -91,7 +91,6 @@ export default function NewProperty() {
             await postData(requestData)
             toast.success("Property was added successfully!", { duration: 2500 })
             console.log(requestData)
-            router.refresh()
             router.replace("/dashboard")
         } catch (err) {
             toast.error("The form input is incorrect!", { duration: 2500 })

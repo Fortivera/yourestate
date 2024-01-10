@@ -14,7 +14,7 @@ import { ThemeContext } from "@/context/ThemeContex"
 
 export default function NewProperty() {
     // const queryClient = useQueryClient()
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+    const [isSubmitting, setIsSubmitting] = useState<boolean>()
     const { theme } = useContext(ThemeContext)
     // const [values, setValues] = useState({
     //     id: "",

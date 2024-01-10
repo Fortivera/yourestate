@@ -70,7 +70,7 @@ export default function EditProperty({ property, allProperties: cachedProperties
         }
     }
 
-    async function handleDelete(event: React.MouseEvent<HTMLButtonElement>) {
+    async function handleDelete(event: any) {
         event.preventDefault()
 
         try {
