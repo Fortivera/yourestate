@@ -1,5 +1,5 @@
 
-## "RealEstate"
+## "YourEstate"
 
 This web application allows simple and analytical property managment. It is scalable and has an optimized caching system.
 
@@ -16,7 +16,7 @@ To run this project, you will need to add environment variables that can be foun
 Clone the project
 
 ```bash
-  git clone https://github.com/Fortivera/Recipe_webapp.git
+  git clone https://github.com/Fortivera/yourestate.git
 ```
 
 Go to the project directory and install dependencies
