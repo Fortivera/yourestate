@@ -18,13 +18,6 @@ export default function Registration() {
 
     const postHandler = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-
-        // const dataCollected = event.target as HTMLFormElement
-        // const formData = new FormData(dataCollected) as Iterable<[RequestData, FormDataEntryValue]>
-        // const requestData: RequestData = Object.fromEntries(formData)
-        // // const sending = fetch()
-        // console.log(requestData)
-        // await postData(requestData)
         router.push("/dashboard")
     }
     return (

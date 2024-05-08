@@ -24,14 +24,15 @@ export default function Login() {
                 <form className="flex flex-col items-center md:w-[40%] rounded-lg md:p-5 py-1 px-5 ">
                     <h1 className="text-2xl font-semibold text-center mt-6 text-[#273768]">Login</h1>
                     <div className="w-full md:mt-10 mt-5 mb-3 relative">
-                        <label className="text-sm" htmlFor="Name">
-                            <SvgNewUser width={18} height={18} className={"absolute left-3  top-4"} />
+                        <label className="relative text-sm" htmlFor="Name">
+                            <SvgNewUser width={18} height={18} className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                         </label>
                         <input defaultValue="admin" id="Name" type="text" name="name" placeholder="Username" autoComplete="given-name" required className="block w-full border rounded-lg py-2 pl-9 mt-1 focus:ring focus:ring-blue-300" />
                     </div>
+
                     <div className="w-full mb-4 relative">
                         <label className="text-sm" htmlFor="Password">
-                            <SvgPassword width={18} height={18} className={"absolute left-3 top-4"} />
+                            <SvgPassword width={18} height={18} className={"absolute left-3 top-3"} />
                         </label>
                         <input defaultValue="admin" id="Password" type="password" name="password" placeholder="Password" required className="block w-full border rounded-lg py-2 pl-9 mt-1 focus:ring focus:ring-blue-300" />
                     </div>
