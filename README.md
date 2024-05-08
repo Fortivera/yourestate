@@ -1,8 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## "RealEstate"
 
-First, run the development server:
+This web application allows simple and analytical property managment. It is scalable and has an optimized caching system.
+
+
+## Environment Variables
+
+To run this project, you will need to add environment variables that can be found in the .env.example folder.
+
+
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Fortivera/Recipe_webapp.git
+```
+
+Go to the project directory and install dependencies
+
+```bash
+  pnpm i or npm
+```
+
+Start the development server
 
 ```bash
 npm run dev
@@ -11,28 +34,29 @@ yarn dev
 # or
 pnpm dev
 ```
+## Production build
+Build and run for production
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+  pnpm build
+  pnpm start 
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Demo
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+**1) Create a property by populating the fields**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+![image](https://github.com/Fortivera/PropertyNextjs/assets/108024287/fb8bfff5-8d2e-49c9-8f8d-d1c8e7ba7b92)
+![image](https://github.com/Fortivera/PropertyNextjs/assets/108024287/1b3b1b0d-72e4-4bc5-9391-e2d02427464f)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+**2) Update or Delete your property**
 
-## Learn More
+![image](https://github.com/Fortivera/PropertyNextjs/assets/108024287/03009879-59d0-4866-b88a-07d9355605a0)
 
-To learn more about Next.js, take a look at the following resources:
+**3) Enjoy and observe your hardwork!**
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![image](https://github.com/Fortivera/PropertyNextjs/assets/108024287/aa4ff254-f415-4ef4-892e-1cf4339557e8)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Authors
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[@Anton Strelkovskyy](https://github.com/Fortivera)
