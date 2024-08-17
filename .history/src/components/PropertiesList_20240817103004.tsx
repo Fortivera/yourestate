@@ -21,7 +21,7 @@ export default function PropertiesList({ allProperties }: Props) {
     //     queryFn: getProperty,
     // })
     // if (error) return <div>Failed to load</div>
-    // const PropertiesNotFound = <p className="text-center italic pt-4 opacity-80">No properties found</p>
+    const PropertiesNotFound = <p className="text-center italic pt-4 opacity-80">No properties found</p>
     const SearchedPropertiesNotFound = <p className="text-center text-base italic pt-4 opacity-80">Searched properties not found</p>
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1).toLowerCase()
@@ -33,22 +33,21 @@ export default function PropertiesList({ allProperties }: Props) {
         setSearchData("")
     }
     const showAllProperties =
-        // allProperties && allProperties.length > 0
-        //     ?
-        allProperties.map((property: Property) => {
-            return (
-                <>
-                    <Suspense fallback={<Loading />}>
-                        <li key={property.id} className="py-[4px] last:border-b-0">
-                            <Link href={`/dashboard/${property.id}`} scroll={false}>
-                                <PropertyCard property={property} />
-                            </Link>
-                        </li>
-                    </Suspense>
-                </>
-            )
-        })
-    // : PropertiesNotFound
+        allProperties && allProperties.length > 0
+            ? allProperties.map((property: Property) => {
+                  return (
+                      <>
+                          <Suspense fallback={<Loading />}>
+                              <li key={property.id} className="py-[4px] last:border-b-0">
+                                  <Link href={`/dashboard/${property.id}`} scroll={false}>
+                                      <PropertyCard property={property} />
+                                  </Link>
+                              </li>
+                          </Suspense>
+                      </>
+                  )
+              })
+            : PropertiesNotFound
 
     const filteredProperties = allProperties && allProperties.filter((property: Property) => property.country.toLowerCase().includes(searchedData.toLowerCase()) || property.city.toLowerCase().includes(searchedData.toLowerCase()) || property.type.toLowerCase().includes(searchedData.toLowerCase()) || property.address.toLowerCase().includes(searchedData.toLowerCase()))
 
@@ -57,13 +56,15 @@ export default function PropertiesList({ allProperties }: Props) {
             ? filteredProperties.map((filteredProperty: Property) => {
                   return (
                       <>
-                          <Suspense fallback={<Loading />}>
+                          
                               <li key={filteredProperty.id} className="py-[4px] last:border-b-0">
+                                 <Suspense fallback={<Loading />}></Suspense>
                                   <Link href={`/dashboard/${filteredProperty.id}`} scroll={false}>
                                       <PropertyCard property={filteredProperty} />
                                   </Link>
+                                   </Suspense>
                               </li>
-                          </Suspense>
+                         
                       </>
                   )
               })
