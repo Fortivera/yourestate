@@ -3,8 +3,8 @@
 import { Suspense, useContext, useState } from "react"
 import Link from "next/link"
 import { ThemeContext } from "@/context/ThemeContex"
-// import { useQuery } from "@tanstack/react-query"
-// import { getProperty } from "lib/useRequestFunctions"
+import { useQuery } from "@tanstack/react-query"
+import { getProperty } from "lib/useRequestFunctions"
 import Loading from "@/app/loading"
 import { Toaster } from "react-hot-toast"
 import PropertyCard from "@/components/PropertyCard"
@@ -12,15 +12,15 @@ interface Props {
     allProperties: Property[]
 }
 
-export default function PropertiesList({ allProperties }: Props) {
+export default function PropertiesList() {
     const [searchUsed, setSearchUsed] = useState<boolean>(false)
     const [searchedData, setSearchData] = useState("")
     const { theme } = useContext(ThemeContext)
-    // const { data: allProperties, error } = useQuery({
-    //     queryKey: ["allProperties"],
-    //     queryFn: getProperty,
-    // })
-    // if (error) return <div>Failed to load</div>
+    const { data: allProperties, error } = useQuery({
+        queryKey: ["allProperties"],
+        queryFn: getProperty,
+    })
+    if (error) return <div>Failed to load</div>
     const PropertiesNotFound = <p className="text-center italic pt-4 opacity-80">No properties found</p>
     const SearchedPropertiesNotFound = <p className="text-center text-base italic pt-4 opacity-80">Searched properties not found</p>
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
