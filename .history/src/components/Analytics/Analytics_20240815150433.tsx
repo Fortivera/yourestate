@@ -1,24 +1,24 @@
 "use client"
-import Loading from "@/app/loading"
+
 import { ThemeContext } from "@/context/ThemeContex"
-// import { useQuery } from "@tanstack/react-query"
-// import { getProperty } from "lib/useRequestFunctions"
-import React, { Suspense, useContext } from "react"
+import { useQuery } from "@tanstack/react-query"
+import { getProperty } from "lib/useRequestFunctions"
+import React, { useContext } from "react"
 import { D3BarChart } from "./D3charts/D3BarChart"
 import { D3DonutPieChart } from "./D3charts/D3DonutPieChart"
 import { D3PieChart } from "./D3charts/D3PieChart"
 
-interface Props {
-    allProperties: Property[]
-}
+// interface Props {
+//     allProperties: Property[]
+// }
 
-export const Analytics = ({ allProperties }: Props) => {
+export const Analytics = () => {
     const { theme } = useContext(ThemeContext)
-    // const { data: allProperties, error } = useQuery({
-    //     queryKey: ["allProperties"],
-    //     queryFn: getProperty,
-    // })
-    // if (error) return <div>Failed to load</div>
+    const { data: allProperties, error } = useQuery({
+        queryKey: ["allProperties"],
+        queryFn: getProperty,
+    })
+    if (error) return <div>Failed to load</div>
     return (
         <>
             {/* <div className="w-full h-full">{<iframe height="100%" width="100%" title="Report Section" src="https://app.powerbi.com/view?r=eyJrIjoiZDVmOGZlMWMtN2VkYS00NmRkLWJiZDgtMGY1MzQyNTdlOWQ1IiwidCI6IjcwYWQ5MjFmLTFmZjQtNDZjNC1hMmZkLWIxNTc0MjcxODQ3NiJ9" allowFullScreen={true}></iframe>}</div> */}
@@ -29,19 +29,13 @@ export const Analytics = ({ allProperties }: Props) => {
                     <div className="w-56  rounded-sm border-l-2">Annual profit: $342423424234234</div>
                 </div> */}
                 <div className="w-full flex flex-col lg:flex-row">
-                    <Suspense fallback={<Loading />}>
-                        <D3DonutPieChart allProperties={allProperties!} />
-                    </Suspense>
+                    <D3DonutPieChart allProperties={allProperties!} />
 
-                    <Suspense fallback={<Loading />}>
-                        <D3PieChart allProperties={allProperties!} />
-                    </Suspense>
+                    <D3PieChart allProperties={allProperties!} />
                 </div>
 
                 <div className="w-full">
-                    <Suspense fallback={<Loading />}>
-                        <D3BarChart allProperties={allProperties!} />
-                    </Suspense>
+                    <D3BarChart allProperties={allProperties!} />
                 </div>
             </div>
         </>

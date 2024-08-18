@@ -1,9 +1,6 @@
 /* eslint-disable prettier/prettier */
-// components/PieChart.tsx
-// InteractivePieChart.tsx
-"use client"
 
-// Import necessary libraries
+
 import React, { useContext, useEffect, useRef } from "react"
 import * as d3 from "d3"
 import { ThemeContext } from "@/context/ThemeContex"
@@ -12,7 +9,7 @@ interface Props {
     allProperties: Property[]
 }
 
-export const D3PieChart = ({ allProperties }: Props) => {
+export const D3PieChart: React.FC<Props> = ({ allProperties }: Props) => {
     const ref = useRef<SVGSVGElement>(null)
     const { theme } = useContext(ThemeContext)
 

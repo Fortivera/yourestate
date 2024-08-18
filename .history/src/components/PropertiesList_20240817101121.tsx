@@ -20,7 +20,7 @@ export default function PropertiesList({ allProperties }: Props) {
     //     queryKey: ["allProperties"],
     //     queryFn: getProperty,
     // })
-    // if (error) return <div>Failed to load</div>
+    if (error) return <div>Failed to load</div>
     const PropertiesNotFound = <p className="text-center italic pt-4 opacity-80">No properties found</p>
     const SearchedPropertiesNotFound = <p className="text-center text-base italic pt-4 opacity-80">Searched properties not found</p>
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

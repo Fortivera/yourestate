@@ -56,13 +56,15 @@ export default function PropertiesList({ allProperties }: Props) {
             ? filteredProperties.map((filteredProperty: Property) => {
                   return (
                       <>
-                          <Suspense fallback={<Loading />}>
+                          
                               <li key={filteredProperty.id} className="py-[4px] last:border-b-0">
+                                 <Suspense fallback={<Loading />}></Suspense>
                                   <Link href={`/dashboard/${filteredProperty.id}`} scroll={false}>
                                       <PropertyCard property={filteredProperty} />
                                   </Link>
+                                   </Suspense>
                               </li>
-                          </Suspense>
+                         
                       </>
                   )
               })
