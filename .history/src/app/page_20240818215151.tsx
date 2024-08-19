@@ -6,13 +6,11 @@ import SvgNewUser from "public/static/SvgNewUser"
 import SvgPassword from "public/static/SvgPassword"
 import growthVisual from "../../public/static/growth.jpg"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { Loader2 } from "lucide-react"
+
 export default function Login() {
-    const [isSubmitting, setIsSubmitting] = useState(false)
+    const 
     const router = useRouter()
     const handleLogin = () => {
-        setIsSubmitting(true)
         router.push("/dashboard")
     }
     return (
@@ -38,13 +36,11 @@ export default function Login() {
                         </label>
                         <input defaultValue="admin" id="Password" type="password" name="password" placeholder="Password" required className="block w-full border rounded-lg py-2 pl-9 mt-1 focus:ring focus:ring-blue-300" />
                     </div>
-                    <button type="button" onClick={handleLogin} aria-label="Sign-in button" className="flex justify-center items-center bg-[#5392f7] text-white rounded-lg w-1/3 py-2 mb-4 hover:bg-[#3b83f6]">
-                        <div className="flex items-center">
-                            {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                            <span>{isSubmitting ? "Please wait" : "Log in"}</span>
-                        </div>
+                    <button type="button" onClick={handleLogin} aria-label="Sign-in button" className="flex justify-center bg-[#5392f7] text-white rounded-lg w-1/3 py-2 mb-4 hover:bg-[#3b83f6]">
+                     {isSubmitting && <Loader2 className="inline mr-2 h-4 w-4 animate-spin" />}
+                        {isSubmitting ? 'Please wait' : 'Log in'}
+                         
                     </button>
-
                     <div className="w-full mb-2 ">
                         <hr className="border-1 " />
                     </div>

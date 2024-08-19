@@ -28,6 +28,7 @@
         "d3": "^7.8.5",
         "eslint-config-next": "14.0.4",
         "eslint-plugin-n": "^15.7.0",
+        "lucide-react": "^0.428.0",
         "next": "14.0.1",
         "next-auth": "^4.24.5",
         "next-images": "^1.8.5",
