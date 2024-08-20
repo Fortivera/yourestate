@@ -18,7 +18,7 @@ export default function DashboardContent() {
     useEffect(() => {
         if (isError) {
             // Handle the error here, for example, by redirecting the user
-            router.push("/dashboard")
+            router.push("/login")
         }
     }, [isError, router])
 

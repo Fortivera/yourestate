@@ -9,7 +9,11 @@ import { useEffect } from "react"
 
 export default function DashboardContent() {
     const router = useRouter()
-    const { data, isError, isLoading } = useQuery({
+    const {
+        data,
+        isError,
+        isLoading,
+    } = useQuery({
         queryKey: ["allProperties"],
         queryFn: getProperty,
         retry: 2, // Retry twice before failing
@@ -18,7 +22,7 @@ export default function DashboardContent() {
     useEffect(() => {
         if (isError) {
             // Handle the error here, for example, by redirecting the user
-            router.push("/dashboard")
+            router.push("/login")
         }
     }, [isError, router])
 
