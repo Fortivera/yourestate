@@ -18,7 +18,6 @@ export default function DashboardContent() {
     useEffect(() => {
         if (isError) {
             // Handle the error here, for example, by redirecting the user
-            console.log("krasava:", isError)
             console.error("Error fetching data:", isError)
             router.push("/dashboard")
         }
