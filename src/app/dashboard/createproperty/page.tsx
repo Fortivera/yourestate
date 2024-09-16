@@ -36,7 +36,16 @@ export default function NewProperty() {
                 console.error(checkedData.error)
             }
         } catch (err) {
-            toast.error("The form input is incorrect!", { duration: 2500 })
+            let errorMessage = "An unknown error occurred"
+
+            if (err instanceof Error) {
+                errorMessage = err.message
+            }
+
+            console.error("Error creating property:", errorMessage)
+            toast.error(errorMessage, { duration: 2500 })
+        } finally {
+            setIsSubmitting(false)
         }
     }
     return (
@@ -81,10 +90,22 @@ async function postData(userInput: FormDataType) {
         })
         if (!response.ok) {
             const errorText = await response.text()
-            throw new Error(`Request failed with status ${response.status}: ${errorText}`)
+            let errorMessage = `Request failed with status ${response.status}`
+
+            try {
+                const errorJson = JSON.parse(errorText)
+                errorMessage = errorJson.error || errorMessage
+            } catch {
+                // Use the error text if JSON parsing fails
+                errorMessage = errorText || errorMessage
+            }
+
+            throw new Error(errorMessage)
         }
+
+        return await response.json()
     } catch (err) {
-        console.error(err)
-        alert(`We can't submit the form, due to ${err}`)
+        console.error("Error in postData:", err)
+        throw err 
     }
 }
