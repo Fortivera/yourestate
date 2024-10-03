@@ -10,12 +10,14 @@ import FormLabelsCreateProperty from "@/components/FormLabelsCreateProperty"
 import { ThemeContext } from "@/context/ThemeContex"
 import propertyTypeParser from "lib/PostRequestTypeParser"
 import { zodPropertyPostSchema } from "lib/ZodPropertySchema"
+import { useQueryClient } from "@tanstack/react-query"
 
 export default function NewProperty() {
-    // const queryClient = useQueryClient()
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
     const { theme } = useContext(ThemeContext)
     const router = useRouter()
+    const queryClient = useQueryClient() // Initialize the query client
+
     async function postHandler(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         try {
@@ -24,16 +26,17 @@ export default function NewProperty() {
             const formData = new FormData(dataCollected)
             // checking the type, then validation with zod
             const parsedData = propertyTypeParser(formData)
+
             const checkedData = zodPropertyPostSchema.safeParse(parsedData)
             if (checkedData.success) {
                 const validatedData = checkedData.data
                 await postData(validatedData)
+                await queryClient.invalidateQueries({ queryKey: ["allProperties"] })
                 toast.success("Property was added successfully!", { duration: 2500 })
-                router.refresh()
-                router.replace("/dashboard")
+                router.push("/dashboard")
             } else {
-                toast.error("Error updating property", { duration: 2500 })
-                console.error(checkedData.error)
+                toast.error("Validation failed. Please check your input.", { duration: 2500 })
+                console.error("Validation errors:", checkedData.error)
             }
         } catch (err) {
             let errorMessage = "An unknown error occurred"
@@ -48,6 +51,7 @@ export default function NewProperty() {
             setIsSubmitting(false)
         }
     }
+
     return (
         <Modal>
             <div className="flex justify-end">
@@ -66,7 +70,7 @@ export default function NewProperty() {
                                 <Link href={`/dashboard`}>Cancel</Link>
                             </button>
 
-                            <button className={`${isSubmitting ? "bg-gray-300" : "bg-indigo-200 hover:bg-indigo-300"} w-28  rounded-md py-1  shadow-md text-black`} type="submit">
+                            <button className={`${isSubmitting ? "bg-gray-300" : "bg-indigo-200 hover:bg-indigo-300"} w-28  rounded-md py-1  shadow-md text-black`} type="submit" disabled={isSubmitting}>
                                 {isSubmitting ? "Loading..." : "Submit"}
                             </button>
                         </div>
@@ -78,16 +82,17 @@ export default function NewProperty() {
 }
 
 async function postData(userInput: FormDataType) {
-    const url = `${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROPERTY_ENDPOINT}`
-    console.log(url)
+    // const url = `http://localhost:3000/api/properties`
+    const prodUrl = `https://yourestate.vercel.app/api/properties`
     try {
-        const response = await fetch(url, {
+        const response = await fetch(prodUrl, {
             method: "POST",
-            body: JSON.stringify(userInput),
             headers: {
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify(userInput),
         })
+
         if (!response.ok) {
             const errorText = await response.text()
             let errorMessage = `Request failed with status ${response.status}`
@@ -105,7 +110,7 @@ async function postData(userInput: FormDataType) {
 
         return await response.json()
     } catch (err) {
-        console.error("Error in postData:", err)
-        throw err
+        console.error(err)
+        alert(`We can't submit the form, due to ${err}`)
     }
 }
